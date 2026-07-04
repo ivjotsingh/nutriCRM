@@ -1,4 +1,4 @@
-import { type ReactNode, useEffect, useMemo, useState } from 'react'
+import { type CSSProperties, type ReactNode, useEffect, useMemo, useState } from 'react'
 import {
   Activity,
   ArrowLeft,
@@ -17,10 +17,8 @@ import {
   MessageCircle,
   Phone,
   ShieldCheck,
-  Sparkles,
   Target,
-  Utensils,
-  X
+  Utensils
 } from 'lucide-react'
 import {
   getLead,
@@ -107,11 +105,11 @@ const initialIntake: IntakePayload = {
 }
 
 const flowSteps = [
-  { label: 'Profile', icon: Phone, title: 'First, who is this for?', subtitle: 'A clean baseline helps us route safely and personalize follow-up.' },
-  { label: 'Aim', icon: Target, title: 'What change are you trying to make?', subtitle: 'Goals and body metrics shape the nutrition direction.' },
-  { label: 'Rhythm', icon: Clock, title: 'What does a normal day look like?', subtitle: 'Meal timing should fit your life instead of fighting it.' },
-  { label: 'Food', icon: ChefHat, title: 'What should the plan respect?', subtitle: 'Preferences, cravings, and dislikes keep the result realistic.' },
-  { label: 'Safety', icon: HeartPulse, title: 'Final safety screen.', subtitle: 'Health context decides whether AI should step aside.' }
+  { label: 'Profile', title: 'First, who is this for?', subtitle: 'A clean baseline helps us route safely and personalize follow-up.' },
+  { label: 'Aim', title: 'What change are you trying to make?', subtitle: 'Goals and body metrics shape the nutrition direction.' },
+  { label: 'Rhythm', title: 'What does a normal day look like?', subtitle: 'Meal timing should fit your life instead of fighting it.' },
+  { label: 'Food', title: 'What should the plan respect?', subtitle: 'Preferences, cravings, and dislikes keep the result realistic.' },
+  { label: 'Safety', title: 'Final safety screen.', subtitle: 'Health context decides whether AI should step aside.' }
 ]
 
 const disclaimerItems = [
@@ -143,7 +141,7 @@ function App() {
     <div className="app-shell">
       <header className="topbar">
         <button className="brand-button" onClick={goHome}>
-          <span className="brand-mark"><Sparkles size={18} /></span>
+          <span className="brand-mark">N</span>
           <span>NutriAlign</span>
         </button>
         <nav>
@@ -172,7 +170,6 @@ function UserFlow() {
   const completion = useMemo(() => getCompletion(intake), [intake])
   const hasRiskSignal = intake.medical_risks.length > 0 || intake.active_medication || intake.abnormal_reports || intake.age < 18
   const activeStep = flowSteps[step]
-  const StepIcon = activeStep.icon
 
   function update<K extends keyof IntakePayload>(key: K, value: IntakePayload[K]) {
     setIntake((current) => ({ ...current, [key]: value }))
@@ -248,7 +245,7 @@ function UserFlow() {
         <div className="quiz-stage" key={step}>
           <section className="quiz-card">
             <div className="question-head">
-              <div className="section-icon"><StepIcon size={24} /></div>
+              <span className="question-index">{String(step + 1).padStart(2, '0')}</span>
               <span>{activeStep.label}</span>
             </div>
             <h1>{activeStep.title}</h1>
@@ -406,7 +403,7 @@ function UserFlow() {
             {!validation.valid && <p className="hint-text">{validation.message}</p>}
           </section>
 
-          <ProfileArtwork step={step} completion={completion} intake={intake} hasRiskSignal={hasRiskSignal} />
+          <ProfileInsight step={step} completion={completion} intake={intake} hasRiskSignal={hasRiskSignal} />
         </div>
       </section>
     </main>
@@ -433,7 +430,7 @@ function QuizProgress({ step, onBack }: { step: number; onBack: () => void }) {
   )
 }
 
-function ProfileArtwork({ step, completion, intake, hasRiskSignal }: { step: number; completion: number; intake: IntakePayload; hasRiskSignal: boolean }) {
+function ProfileInsight({ step, completion, intake, hasRiskSignal }: { step: number; completion: number; intake: IntakePayload; hasRiskSignal: boolean }) {
   const focus = [
     { label: 'Identity', value: intake.name || 'New profile' },
     { label: 'Goal signal', value: intake.goals.length ? humanize(intake.goals) : 'Waiting' },
@@ -443,28 +440,39 @@ function ProfileArtwork({ step, completion, intake, hasRiskSignal }: { step: num
   ][step]
 
   return (
-    <aside className="profile-art" aria-label="Profile progress">
-      <div className="art-canvas">
-        <div className="path-line" />
-        <div className="plate-visual">
-          <span className="plate-ring" />
-          <span className="plate-food one" />
-          <span className="plate-food two" />
-          <span className="plate-food three" />
-          <span className="plate-cutlery" />
-        </div>
-        <div className="mini-chart">
-          <i style={{ height: `${42 + step * 9}%` }} />
-          <i style={{ height: `${58 + step * 5}%` }} />
-          <i style={{ height: `${72 + step * 3}%` }} />
-        </div>
+    <aside className="profile-insight" aria-label="Profile progress">
+      <div className="insight-meter" aria-hidden="true">
+        <span style={{ '--meter': `${completion}%` } as CSSProperties} />
+        <strong>{completion}%</strong>
       </div>
-      <div className="art-copy">
+      <div className="insight-copy">
         <span>{focus.label}</span>
         <strong>{focus.value}</strong>
-        <div className="art-progress"><i style={{ width: `${completion}%` }} /></div>
-        <small>{completion}% profile signal captured</small>
+        <small>{hasRiskSignal ? 'Human review signal detected' : 'Safety route is still open'}</small>
       </div>
+      <div className="insight-lines" aria-hidden="true">
+        <i />
+        <i />
+        <i />
+      </div>
+      <dl className="insight-list">
+        <div>
+          <dt>Goal</dt>
+          <dd>{humanize(intake.goals)}</dd>
+        </div>
+        <div>
+          <dt>Diet</dt>
+          <dd>{humanize(intake.diet_type)}</dd>
+        </div>
+        <div>
+          <dt>Routine</dt>
+          <dd>{intake.wake_time} wake</dd>
+        </div>
+        <div>
+          <dt>Route</dt>
+          <dd>{hasRiskSignal ? 'Dietician' : 'Pending'}</dd>
+        </div>
+      </dl>
     </aside>
   )
 }
@@ -731,7 +739,7 @@ function PlanViewer({ leadId, plan, onRestart }: { leadId: string; plan: PlanRes
     <main className="result-page">
       <section className="plan-hero">
         <div className="plan-hero-copy">
-          <div className="eyebrow"><Sparkles size={16} /> Plan ready</div>
+          <div className="eyebrow"><Check size={16} /> Plan ready</div>
           <h1>Your 7-day free nutrition plan is unlocked.</h1>
           <p>{plan.subtitle}</p>
           <div className="result-actions">
