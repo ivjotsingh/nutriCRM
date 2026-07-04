@@ -1,0 +1,60 @@
+{
+  "risk_flags": [
+    {
+      "id": "diabetes",
+      "label": "Diabetes or blood sugar condition",
+      "route": "human_dietician"
+    },
+    {
+      "id": "kidney_disease",
+      "label": "Kidney disease",
+      "route": "human_dietician"
+    },
+    {
+      "id": "pregnancy_breastfeeding",
+      "label": "Pregnancy or breastfeeding",
+      "route": "human_dietician"
+    },
+    {
+      "id": "eating_disorder",
+      "label": "Eating disorder history",
+      "route": "human_dietician"
+    },
+    {
+      "id": "serious_cardiac",
+      "label": "Serious cardiac condition",
+      "route": "human_dietician"
+    },
+    {
+      "id": "liver_disease",
+      "label": "Liver disease",
+      "route": "human_dietician"
+    },
+    {
+      "id": "active_medication",
+      "label": "Active medication requiring review",
+      "route": "human_dietician"
+    },
+    {
+      "id": "recent_surgery",
+      "label": "Recent surgery",
+      "route": "human_dietician"
+    },
+    {
+      "id": "abnormal_reports",
+      "label": "Abnormal reports needing dietician review",
+      "route": "human_dietician"
+    },
+    {
+      "id": "severe_symptoms",
+      "label": "Severe symptoms",
+      "route": "human_dietician"
+    },
+    {
+      "id": "under_18",
+      "label": "Under 18",
+      "route": "human_dietician"
+    }
+  ]
+}
+

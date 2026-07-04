@@ -1,0 +1,108 @@
+{
+  "days": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+  "slots": [
+    {
+      "key": "on_waking",
+      "label": "On Waking Up",
+      "default_time": "07:00 AM"
+    },
+    {
+      "key": "breakfast",
+      "label": "Breakfast",
+      "default_time": "09:00 AM"
+    },
+    {
+      "key": "mid_morning",
+      "label": "Mid Morning",
+      "default_time": "11:30 AM"
+    },
+    {
+      "key": "lunch",
+      "label": "Lunch",
+      "default_time": "02:00 PM",
+      "time_overrides": {
+        "Late shifts": "02:30 PM"
+      }
+    },
+    {
+      "key": "evening_snack",
+      "label": "Evening Snack",
+      "default_time": "05:00 PM"
+    },
+    {
+      "key": "dinner",
+      "label": "Dinner",
+      "default_time": "08:00 PM"
+    },
+    {
+      "key": "bedtime",
+      "label": "Bedtime",
+      "default_time": "09:30 PM"
+    }
+  ],
+  "slot_combos": {
+    "on_waking": [
+      ["fenugreek_water", "aloe_vera_juice", "soaked_almonds", "black_raisins"],
+      ["fennel_cumin_coriander_water", "gond_katira", "soaked_raisins", "brazilnut"],
+      ["jeera_water", "soaked_almonds", "black_raisins"],
+      ["fenugreek_water", "fresh_coconut_water", "soaked_almonds"],
+      ["blue_pea_tea", "soaked_raisins", "brazilnut"],
+      ["fenugreek_water", "gond_katira", "black_raisins"],
+      ["lemon_water", "soaked_almonds", "soaked_walnuts"]
+    ],
+    "breakfast": [
+      ["lemon_upma", "boiled_egg_white"],
+      ["oats_cheela", "carrot_chutney"],
+      ["millet_dal_idli", "coriander_chutney", "boiled_egg_white"],
+      ["onion_tomato_poha", "boiled_egg_white"],
+      ["namkeen_oats_dalia", "boiled_egg_white"],
+      ["mixed_vegetable_uttapam", "mint_coriander_chutney"],
+      ["vegetable_besan_cheela", "green_chutney"]
+    ],
+    "mid_morning": [
+      ["fruit_bowl", "cinnamon_powder", "roasted_pumpkin_seeds", "fresh_coconut_water", "gond_katira"],
+      ["fruit_bowl", "cinnamon_powder", "roasted_pumpkin_seeds", "lemon_water", "gond_katira"],
+      ["banana", "dried_apricots", "plain_water"],
+      ["abc_juice", "roasted_pumpkin_seeds"],
+      ["fruit_bowl", "fresh_coconut_water", "soaked_raisins"],
+      ["carrot_apple_juice", "roasted_sunflower_seeds"],
+      ["fruit_bowl", "cinnamon_powder", "lemon_water"]
+    ],
+    "lunch": [
+      ["salad", "roasted_sesame_seeds", "jowar_roti", "lobiya_dal_tadka", "ridge_gourd_sabji", "boiled_amla", "fennel_seeds"],
+      ["salad", "roasted_sesame_seeds", "millet_rice", "tur_dal_fry", "french_beans_sabji", "boiled_amla", "fennel_seeds"],
+      ["salad", "jowar_roti", "green_moong_dal_curry", "ivy_gourd_sabji", "boiled_amla", "fennel_seeds"],
+      ["salad", "jowar_roti", "masala_dal", "mixed_vegetable_stew", "boiled_amla", "fennel_seeds"],
+      ["salad", "jowar_roti", "garlic_dal", "parwal_sabji", "boiled_amla", "fennel_seeds"],
+      ["salad", "millet_rice", "mixed_dal_tadka", "bottlegourd_carrot_sabji", "boiled_amla", "fennel_seeds"],
+      ["salad", "kadhi_chawal", "mixed_vegetable_sabji", "boiled_amla", "fennel_seeds"]
+    ],
+    "evening_snack": [
+      ["hibiscus_tea", "greek_yogurt", "blueberry", "pistachio", "brazilnut"],
+      ["blue_pea_tea", "greek_yogurt", "blueberry", "pistachio"],
+      ["carrot_apple_juice", "roasted_sunflower_seeds"],
+      ["fresh_coconut_water", "soaked_almonds"],
+      ["hibiscus_tea", "sprouts_chaat"],
+      ["plain_water", "banana", "dried_apricots"],
+      ["lemon_water", "pistachio", "brazilnut"]
+    ],
+    "dinner": [
+      ["salad", "jowar_roti", "masoor_dal_with_palak", "fennel_seeds"],
+      ["salad", "tortilla_sauteed_vegetables", "grilled_tofu", "fennel_seeds"],
+      ["salad", "jowar_roti", "egg_capsicum_curry", "fennel_seeds"],
+      ["salad", "mix_sauce_vegetable_pasta", "sauteed_beans", "fennel_seeds"],
+      ["salad", "sabut_masoor_dal_khichdi", "fennel_seeds"],
+      ["salad", "rice_noodles_cooked", "boiled_egg", "fennel_seeds"],
+      ["salad", "cooked_brown_rice", "cooked_masur_dal", "garlic", "ghiya_sabzi"]
+    ],
+    "bedtime": [
+      ["chamomile_tea", "ashwagandha_powder", "soaked_walnuts", "prunes"],
+      ["chamomile_tea", "saffron", "soaked_walnuts", "prunes"],
+      ["chamomile_tea", "soaked_walnuts"],
+      ["chamomile_tea", "saffron", "prunes"],
+      ["chamomile_tea", "ashwagandha_powder", "prunes"],
+      ["chamomile_tea", "soaked_walnuts", "prunes"],
+      ["chamomile_tea", "saffron", "soaked_walnuts"]
+    ]
+  }
+}

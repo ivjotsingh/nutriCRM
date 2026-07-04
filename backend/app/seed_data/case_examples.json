@@ -1,0 +1,66 @@
+[
+  {
+    "case_id": "CASE_WOMEN_001",
+    "source_plan_type": "100 days nutrition for women",
+    "package_pattern": "Chief Nutrition Plan",
+    "age_band": "30-35",
+    "goals": ["weight_loss", "blood_sugar_control", "body_toning", "fat_burning", "blood_parameters"],
+    "profile_snapshot": {
+      "country": "India",
+      "height_cm": 166.0,
+      "weight_kg": 77.5,
+      "bmi": 28.1,
+      "diet_context": "weekly plan"
+    },
+    "useful_patterns": [
+      "On waking hydration with fenugreek water, aloe vera juice, soaked almonds, and black raisins.",
+      "Breakfast alternates Indian staples like upma, oats cheela, idli, poha, dalia, uttapam, and sandwich formats.",
+      "Lunch uses salad, roasted seeds, jowar roti or millet rice, dal, sabji, amla, and fennel seeds.",
+      "Evening snack combines herbal tea, yogurt/berries/nuts, and measured portions.",
+      "Dinner is lighter but structured with salad, grain or alternate starch, dal/protein, sabji, and fennel seeds.",
+      "Bedtime uses chamomile tea, saffron/ashwagandha patterns, soaked walnuts, and prunes."
+    ],
+    "sample_daily_totals": [1148, 1150, 1172, 1153, 1218, 1223, 856]
+  },
+  {
+    "case_id": "CASE_SPORTS_001",
+    "source_plan_type": "annual sports nutrition tennis",
+    "package_pattern": "Chief Sports Nutrition Plan",
+    "age_band": "18-20",
+    "goals": ["maintenance", "recovery", "tournament_conditioning", "stamina", "hydration", "endurance_performance"],
+    "profile_snapshot": {
+      "country": "India",
+      "height_cm": 185.4,
+      "weight_kg": 83.0,
+      "bmi": 24.1,
+      "diet_context": "weekly sports plan"
+    },
+    "useful_patterns": [
+      "Higher calorie days around training with during-training hydration and post-training recovery items.",
+      "Sports-specific additions include plain water, Chaze, sattu, raisins, banana, dried apricots, and coconut water.",
+      "Training-day plans preserve the same professional slot format while adding performance timing."
+    ],
+    "sample_daily_totals": [1842, 3000, 3073, 2951, 2962, 2946, 2984]
+  },
+  {
+    "case_id": "CASE_ADULT_001",
+    "source_plan_type": "annual adult nutrition",
+    "package_pattern": "Chief Nutrition Plan",
+    "age_band": "55-60",
+    "goals": ["weight_loss"],
+    "profile_snapshot": {
+      "country": "India",
+      "height_cm": 152.4,
+      "weight_kg": 79.0,
+      "bmi": 34.0,
+      "diet_context": "competition/option plan"
+    },
+    "useful_patterns": [
+      "Includes dietary recall, allergies/dislikes, compliance notes, symptoms, sleep, walking, and gut-health observations.",
+      "Uses regular day, detox day, breakfast option day, and lunch/dinner option structures.",
+      "Captures follow-up style notes such as 40-70 percent compliance, gut health, no weight change, water intake, pain, and fatigue."
+    ],
+    "sample_daily_totals": [1226, 875, 1268]
+  }
+]
+

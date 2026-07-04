@@ -1,0 +1,16 @@
+[project]
+name = "nutrialign-api"
+version = "0.1.0"
+description = "FastAPI backend for the NutriAlign nutrition lead-conversion product"
+requires-python = ">=3.12"
+dependencies = [
+  "fastapi[standard]>=0.128.0",
+  "httpx>=0.28.1",
+  "pytest>=9.0.2",
+  "uvicorn[standard]>=0.38.0"
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+

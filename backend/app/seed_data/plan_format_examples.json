@@ -1,0 +1,11 @@
+{
+  "renderer": {
+    "plan_title": "Nutrition Plan (Weekly)",
+    "day_heading": "Monday",
+    "daily_total_label": "Calories Total Measure",
+    "meal_header_shape": "Breakfast at 09:00 AM Portion Calories",
+    "item_shape": "FOOD NAME (preparation note) portion calories",
+    "required_fields": ["day", "total_calories", "meals", "slot", "time", "items", "portion", "calories"]
+  }
+}
+
