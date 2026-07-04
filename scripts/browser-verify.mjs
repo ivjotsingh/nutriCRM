@@ -16,6 +16,7 @@ const consoleMessages = []
 
 async function submitNormalUser(page) {
   await page.goto('http://127.0.0.1:5173/', { waitUntil: 'networkidle' })
+  await page.screenshot({ path: new URL('intake-start-desktop.png', outputDir).pathname, fullPage: true })
   await page.getByLabel('Name').fill(normalName)
   await page.getByLabel('WhatsApp / phone').fill('9999999999')
   await page.getByLabel('City').fill('Mumbai')
@@ -30,7 +31,11 @@ async function submitNormalUser(page) {
   await page.getByRole('button', { name: /^Sweet$/ }).click()
   await page.getByRole('button', { name: /^Milk$/ }).click()
   await page.getByRole('button', { name: /Continue/ }).click()
-  await page.getByRole('button', { name: /Create my 7-day plan|Create plan/ }).click()
+  await page.getByRole('button', { name: /Run safety review|Create plan/ }).click()
+  await page.getByText('AI-generated nutrition disclaimer').waitFor({ timeout: 15000 })
+  await page.screenshot({ path: new URL('normal-disclaimer-desktop.png', outputDir).pathname, fullPage: true })
+  await page.getByLabel(/I understand this is an AI-generated/).check()
+  await page.getByRole('button', { name: /Unlock my 7-day plan/ }).click()
   await page.getByText('Plan ready').waitFor({ timeout: 15000 })
   await page.screenshot({ path: new URL('normal-plan-desktop.png', outputDir).pathname, fullPage: true })
   await page.getByRole('button', { name: /Save check-in/ }).click()
@@ -53,7 +58,7 @@ async function submitRiskUser(page) {
   await page.getByRole('button', { name: /Continue/ }).click()
   await page.getByRole('button', { name: /Continue/ }).click()
   await page.getByRole('button', { name: /^Diabetes$/ }).click()
-  await page.getByRole('button', { name: /Prepare dietician brief|Create plan/ }).click()
+  await page.getByRole('button', { name: /Send for dietician review|Prepare dietician brief|Create plan/ }).click()
   await page.getByText('Expert review', { exact: true }).waitFor({ timeout: 15000 })
   if (await page.getByText('Plan ready').count()) {
     throw new Error('Risk user unexpectedly saw plan-ready state')
