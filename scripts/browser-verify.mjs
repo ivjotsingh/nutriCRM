@@ -15,6 +15,42 @@ const mobileRiskName = `Kabir Khan ${runId}`
 const chromePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
 const browser = await chromium.launch({ headless: true, executablePath: chromePath })
 const consoleMessages = []
+const apiFailures = []
+
+function watchApiResponses(page, label) {
+  page.on('response', (response) => {
+    if (response.url().includes('/api/intakes') && response.status() >= 400) {
+      apiFailures.push(`${label}: ${response.status()} ${response.url()}`)
+    }
+  })
+}
+
+async function verifyMobileValidationGuard(page) {
+  await page.goto('http://127.0.0.1:5173/', { waitUntil: 'networkidle' })
+  await page.getByLabel('Name').fill('A')
+  await page.getByLabel('WhatsApp / phone').fill('123')
+  await page.getByLabel('City').fill('P')
+  await page.getByLabel(/I agree/).check()
+
+  const profileContinue = page.getByRole('button', { name: /Continue/ })
+  if (!(await profileContinue.isDisabled())) {
+    throw new Error('Invalid short profile unexpectedly allowed Continue')
+  }
+
+  await page.getByLabel('Name').fill('Anaya Rao')
+  await page.getByLabel('WhatsApp / phone').fill('9999999')
+  await page.getByLabel('City').fill('Pune')
+  await profileContinue.click()
+  await page.getByRole('button', { name: /Weight loss/ }).click()
+  await page.getByRole('spinbutton', { name: 'Height (cm)' }).fill('100')
+
+  const aimContinue = page.getByRole('button', { name: /Continue/ })
+  if (!(await aimContinue.isDisabled())) {
+    throw new Error('Out-of-range height unexpectedly allowed Continue')
+  }
+
+  await page.screenshot({ path: new URL('mobile-validation-guard.png', outputDir).pathname, fullPage: true })
+}
 
 async function submitNormalUser(page) {
   await page.goto('http://127.0.0.1:5173/', { waitUntil: 'networkidle' })
@@ -33,6 +69,8 @@ async function submitNormalUser(page) {
   await page.getByRole('button', { name: /^Sweet$/ }).click()
   await page.getByRole('button', { name: /^Milk$/ }).click()
   await page.getByRole('button', { name: /Continue/ }).click()
+  await page.waitForTimeout(250)
+  await page.screenshot({ path: new URL('safety-ready-desktop.png', outputDir).pathname, fullPage: true })
   await page.getByRole('button', { name: /Run safety review|Create plan/ }).click()
   await page.getByText('AI-generated nutrition disclaimer').waitFor({ timeout: 15000 })
   await page.screenshot({ path: new URL('normal-disclaimer-desktop.png', outputDir).pathname, fullPage: true })
@@ -86,6 +124,8 @@ async function submitMobileNormalUser(page) {
   await page.getByRole('button', { name: /^Evening snacking$/ }).click()
   await page.getByRole('button', { name: /^Paneer$/ }).click()
   await page.getByRole('button', { name: /Continue/ }).click()
+  await page.waitForTimeout(250)
+  await page.screenshot({ path: new URL('mobile-safety-ready.png', outputDir).pathname, fullPage: true })
   await page.getByRole('button', { name: /Run safety review|Create plan/ }).click()
   await page.getByText('AI-generated nutrition disclaimer').waitFor({ timeout: 15000 })
   await page.screenshot({ path: new URL('mobile-disclaimer.png', outputDir).pathname, fullPage: true })
@@ -125,6 +165,7 @@ try {
   const page = await browser.newPage({ viewport: { width: 1440, height: 1100 } })
   page.on('console', (msg) => consoleMessages.push(`${msg.type()}: ${msg.text()}`))
   page.on('pageerror', (err) => consoleMessages.push(`pageerror: ${err.message}`))
+  watchApiResponses(page, 'desktop')
 
   await submitNormalUser(page)
   await submitRiskUser(page)
@@ -138,6 +179,8 @@ try {
   const mobile = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true })
   mobile.on('console', (msg) => consoleMessages.push(`mobile ${msg.type()}: ${msg.text()}`))
   mobile.on('pageerror', (err) => consoleMessages.push(`mobile pageerror: ${err.message}`))
+  watchApiResponses(mobile, 'mobile')
+  await verifyMobileValidationGuard(mobile)
   await submitMobileNormalUser(mobile)
   await submitMobileRiskUser(mobile)
 
@@ -145,8 +188,11 @@ try {
   if (severe.length) {
     throw new Error(`Console/runtime errors found: ${severe.join('; ')}`)
   }
+  if (apiFailures.length) {
+    throw new Error(`API failures found: ${apiFailures.join('; ')}`)
+  }
 
-  console.log(JSON.stringify({ ok: true, screenshots: outputDir.pathname, consoleMessages }, null, 2))
+  console.log(JSON.stringify({ ok: true, screenshots: outputDir.pathname, consoleMessages, apiFailures }, null, 2))
 } finally {
   await browser.close()
 }

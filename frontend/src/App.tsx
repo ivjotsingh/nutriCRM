@@ -166,16 +166,18 @@ function UserFlow() {
   const [intentBalance, setIntentBalance] = useState(2)
   const [barrierBalance, setBarrierBalance] = useState(2)
 
-  const validation = validateStep(step, intake)
+  const validation = validateStep(step, intake, intentBalance, barrierBalance)
   const completion = useMemo(() => getCompletion(intake), [intake])
   const hasRiskSignal = intake.medical_risks.length > 0 || intake.active_medication || intake.abnormal_reports || intake.age < 18
   const activeStep = flowSteps[step]
 
   function update<K extends keyof IntakePayload>(key: K, value: IntakePayload[K]) {
+    setError('')
     setIntake((current) => ({ ...current, [key]: value }))
   }
 
   function toggleList(key: 'goals' | 'cuisine_preferences' | 'cravings' | 'allergies_dislikes' | 'medical_risks', value: string) {
+    setError('')
     setIntake((current) => {
       const existing = current[key]
       return {
@@ -186,9 +188,16 @@ function UserFlow() {
   }
 
   async function handleSubmit() {
-    setLoading(true)
     setError('')
     setDisclaimerAccepted(false)
+    const fullValidation = validateAllSteps(intake, intentBalance, barrierBalance)
+    if (!fullValidation.valid) {
+      setError(fullValidation.message)
+      setStep(fullValidation.step ?? step)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      return
+    }
+    setLoading(true)
     try {
       const result = await submitIntake({
         ...intake,
@@ -586,16 +595,40 @@ function DisclosureGate({ leadId, plan, onAccept }: { leadId: string; plan: Plan
   )
 }
 
-function validateStep(step: number, intake: IntakePayload): { valid: boolean; message: string } {
+type ValidationResult = { valid: boolean; message: string; step?: number }
+
+function validateStep(step: number, intake: IntakePayload, intentBalance = 2, barrierBalance = 2): ValidationResult {
   if (step === 0) {
-    if (!intake.name || !intake.phone || !intake.city || !intake.consent) return { valid: false, message: 'Name, WhatsApp, city, and consent are required.' }
+    if (intake.name.trim().length < 2) return { valid: false, message: 'Enter a name with at least 2 characters.', step }
+    const phoneLength = intake.phone.trim().length
+    if (phoneLength < 7 || phoneLength > 20) return { valid: false, message: 'Enter a valid WhatsApp or phone number.', step }
+    if (intake.city.trim().length < 2) return { valid: false, message: 'Enter a city with at least 2 characters.', step }
+    if (!intake.consent) return { valid: false, message: 'Consent is required before creating a preview.', step }
   }
   if (step === 1) {
-    if (!intake.goals.length) return { valid: false, message: 'Choose at least one goal.' }
-    if (intake.target_weight_kg > intake.weight_kg + 20) return { valid: false, message: 'Target weight looks too far from current weight.' }
+    if (!intake.goals.length) return { valid: false, message: 'Choose at least one goal.', step }
+    if (!isInRange(intake.height_cm, 120, 230)) return { valid: false, message: 'Height must be between 120 and 230 cm.', step }
+    if (!isInRange(intake.weight_kg, 35, 220)) return { valid: false, message: 'Current weight must be between 35 and 220 kg.', step }
+    if (!isInRange(intake.target_weight_kg, 35, 220)) return { valid: false, message: 'Target weight must be between 35 and 220 kg.', step }
+    if (intake.target_weight_kg > intake.weight_kg + 20) return { valid: false, message: 'Target weight looks too far from current weight.', step }
   }
-  if (step === 2 && !intake.cuisine_preferences.length) return { valid: false, message: 'Choose at least one cuisine preference.' }
+  if (step === 2 && !intake.cuisine_preferences.length) return { valid: false, message: 'Choose at least one cuisine preference.', step }
+  if (step === 3 && buildBehavioralNote(intake.optional_note, intentBalance, barrierBalance).length > 600) {
+    return { valid: false, message: 'Keep the extra note shorter before creating the preview.', step }
+  }
   return { valid: true, message: '' }
+}
+
+function validateAllSteps(intake: IntakePayload, intentBalance: number, barrierBalance: number): ValidationResult {
+  for (let step = 0; step < flowSteps.length; step += 1) {
+    const result = validateStep(step, intake, intentBalance, barrierBalance)
+    if (!result.valid) return result
+  }
+  return { valid: true, message: '' }
+}
+
+function isInRange(value: number, min: number, max: number): boolean {
+  return Number.isFinite(value) && value >= min && value <= max
 }
 
 function getCompletion(intake: IntakePayload): number {
@@ -665,9 +698,9 @@ function NumberStepper({ label, value, min, max, onChange }: { label: string; va
     <div className="field">
       <span>{label}</span>
       <div className="stepper-control">
-        <button type="button" onClick={() => onChange(Math.max(min, Number(value) - 1))}>-</button>
-        <input value={value} type="number" min={min} max={max} onChange={(event) => onChange(Number(event.target.value))} />
-        <button type="button" onClick={() => onChange(Math.min(max, Number(value) + 1))}>+</button>
+        <button type="button" aria-label={`${label} decrease`} onClick={() => onChange(Math.max(min, Number(value) - 1))}>-</button>
+        <input aria-label={label} value={value} type="number" min={min} max={max} onChange={(event) => onChange(Number(event.target.value))} />
+        <button type="button" aria-label={`${label} increase`} onClick={() => onChange(Math.min(max, Number(value) + 1))}>+</button>
       </div>
     </div>
   )

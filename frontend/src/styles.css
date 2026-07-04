@@ -266,7 +266,7 @@ p {
 .quiz-stage {
   display: grid;
   gap: 14px;
-  animation: stageIn 260ms ease both;
+  animation: stageIn 160ms ease-out both;
 }
 
 .quiz-card,
@@ -446,8 +446,12 @@ textarea:focus {
 
 .toggle {
   width: 100%;
+  display: flex;
+  align-items: center;
   justify-content: space-between;
+  gap: 14px;
   text-align: left;
+  text-transform: none;
 }
 
 .scale-block {
@@ -606,6 +610,8 @@ textarea:focus {
 
 .error-panel p {
   margin: 6px 0 0;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
 }
 
 .profile-insight {
@@ -1219,8 +1225,8 @@ dd {
 
 @keyframes stageIn {
   from {
-    opacity: 0;
-    transform: translateY(10px);
+    opacity: 0.86;
+    transform: translateY(4px);
   }
   to {
     opacity: 1;
