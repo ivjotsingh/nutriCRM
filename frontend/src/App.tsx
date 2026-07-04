@@ -1,17 +1,22 @@
-import { useEffect, useMemo, useState } from 'react'
+import { type ReactNode, useEffect, useMemo, useState } from 'react'
 import {
   Activity,
   ArrowRight,
+  CalendarDays,
   Check,
   ChefHat,
   ClipboardList,
+  Clock,
   Download,
+  FileText,
+  Gauge,
   HeartPulse,
   LayoutDashboard,
   MessageCircle,
   Phone,
   ShieldCheck,
   Sparkles,
+  Target,
   Utensils
 } from 'lucide-react'
 import {
@@ -22,7 +27,7 @@ import {
   submitIntake,
   submitUpgradeIntent
 } from './api'
-import type { IntakePayload, LeadDetail, LeadListItem, LeadResponse, PlanResult, RiskBrief } from './types'
+import type { IntakePayload, LeadDetail, LeadListItem, LeadResponse, PlanDay, PlanResult, RiskBrief } from './types'
 
 const goals = [
   ['weight_loss', 'Weight loss'],
@@ -62,6 +67,9 @@ const displayLabels: Record<string, string> = {
   non_vegetarian: 'Non-vegetarian',
   active_medication: 'Active medication',
   abnormal_reports: 'Abnormal reports',
+  ai_plan_ready: 'AI plan ready',
+  dietician_review_recommended: 'Dietician review recommended',
+  upgrade_intent: 'Upgrade intent',
   human_dietician: 'Human dietician',
   ai_continuation: 'AI continuation',
   other_issue: 'Other issue'
@@ -95,6 +103,14 @@ const initialIntake: IntakePayload = {
   optional_note: ''
 }
 
+const flowSteps = [
+  { label: 'Identity', short: 'Start', icon: Phone },
+  { label: 'Goal', short: 'Goal', icon: Target },
+  { label: 'Routine', short: 'Routine', icon: Clock },
+  { label: 'Food', short: 'Food', icon: ChefHat },
+  { label: 'Health', short: 'Health', icon: HeartPulse }
+]
+
 function App() {
   const [route, setRoute] = useState(window.location.hash === '#admin' ? 'admin' : 'app')
   const [flowKey, setFlowKey] = useState(0)
@@ -105,16 +121,22 @@ function App() {
     return () => window.removeEventListener('hashchange', onHash)
   }, [])
 
+  function goHome() {
+    window.location.hash = ''
+    setRoute('app')
+    setFlowKey((current) => current + 1)
+  }
+
   return (
     <div className="app-shell">
       <header className="topbar">
-        <button className="brand-button" onClick={() => { window.location.hash = ''; setRoute('app'); setFlowKey((current) => current + 1) }}>
-          <Sparkles size={20} />
+        <button className="brand-button" onClick={goHome}>
+          <span className="brand-mark"><Sparkles size={18} /></span>
           <span>NutriAlign</span>
         </button>
         <nav>
           <button className="icon-button" onClick={() => { window.location.hash = 'admin'; setRoute('admin') }} title="Admin dashboard">
-            <LayoutDashboard size={19} />
+            <LayoutDashboard size={18} />
             <span>Admin</span>
           </button>
         </nav>
@@ -131,8 +153,9 @@ function UserFlow() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
-  const steps = ['Start', 'Goal', 'Routine', 'Food', 'Health']
   const validation = validateStep(step, intake)
+  const completion = useMemo(() => getCompletion(intake), [intake])
+  const hasRiskSignal = intake.medical_risks.length > 0 || intake.active_medication || intake.abnormal_reports || intake.age < 18
 
   function update<K extends keyof IntakePayload>(key: K, value: IntakePayload[K]) {
     setIntake((current) => ({ ...current, [key]: value }))
@@ -156,68 +179,82 @@ function UserFlow() {
       localStorage.setItem('nutrialign:lastLeadId', result.lead_id)
       await recordEvent('intake_submitted', result.lead_id, { result_type: result.result_type })
       setResponse(result)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Unable to submit intake')
+      setError(buildFriendlyError(err))
     } finally {
       setLoading(false)
     }
   }
 
+  if (loading) {
+    return <GeneratingView intake={intake} hasRiskSignal={hasRiskSignal} />
+  }
+
   if (response) {
     if (response.result_type === 'plan') {
-      return <PlanViewer leadId={response.lead_id} plan={response.result as PlanResult} onRestart={() => setResponse(null)} />
+      return (
+        <PlanViewer
+          leadId={response.lead_id}
+          plan={response.result as PlanResult}
+          onRestart={() => {
+            setResponse(null)
+            setStep(0)
+            setIntake(initialIntake)
+          }}
+        />
+      )
     }
     return <RiskBriefView leadId={response.lead_id} brief={response.result as RiskBrief} />
   }
 
   return (
-    <main>
-      <section className="experience-band">
-        <div className="experience-grid">
-          <div className="intro-copy">
-            <div className="eyebrow"><ShieldCheck size={16} /> Dietician-approved structure</div>
-            <h1>Get a free 7-day nutrition plan based on dietician-approved templates.</h1>
+    <main className="intake-page">
+      <section className="intake-workspace" id="intake-workspace">
+        <aside className="journey-panel">
+          <div className="journey-intro">
+            <div className="eyebrow"><ShieldCheck size={16} /> Dietician-approved preview funnel</div>
+            <h1>Get a free 7-day nutrition plan built from real dietician-style templates.</h1>
             <p>
-              Share your goal, routine, and food preferences. If your profile is low-risk, NutriAlign generates a polished
-              weekly preview. If your profile needs expert review, your brief goes to the dietician path.
+              A guided intake turns your routine, food preferences, and eligibility into either a polished weekly plan or a
+              dietician-ready nutrition brief.
             </p>
-            <div className="trust-row">
-              <span>Click-first intake</span>
-              <span>Strict health routing</span>
-              <span>Approved food library</span>
-            </div>
           </div>
-          <div className="plan-snapshot" aria-label="Diet plan preview">
-            <div className="snapshot-header">
-              <span>Nutrition Plan (Weekly)</span>
-              <strong>Day 1</strong>
-            </div>
-            <div className="snapshot-line"><span>On Waking Up</span><b>49 cal</b></div>
-            <div className="snapshot-line"><span>Breakfast</span><b>243 cal</b></div>
-            <div className="snapshot-line"><span>Lunch</span><b>276 cal</b></div>
-            <div className="snapshot-line"><span>Dinner</span><b>303 cal</b></div>
+          <div className="journey-score">
+            <span>Intake readiness</span>
+            <strong>{completion}%</strong>
+            <div className="progress-track"><i style={{ width: `${completion}%` }} /></div>
           </div>
-        </div>
-      </section>
+          <div className="journey-rail">
+            {flowSteps.map((item, index) => {
+              const Icon = item.icon
+              return (
+                <button
+                  key={item.label}
+                  className={index === step ? 'rail-step active' : index < step ? 'rail-step done' : 'rail-step'}
+                  onClick={() => index <= step && setStep(index)}
+                >
+                  <Icon size={18} />
+                  <span>
+                    <strong>{item.label}</strong>
+                    <small>{stepDescription(index, intake)}</small>
+                  </span>
+                </button>
+              )
+            })}
+          </div>
+          <LiveBrief intake={intake} hasRiskSignal={hasRiskSignal} />
+          <PlanTeaser />
+        </aside>
 
-      <section className="flow-band">
-        <div className="stepper">
-          {steps.map((label, index) => (
-            <button
-              key={label}
-              className={index === step ? 'step active' : index < step ? 'step done' : 'step'}
-              onClick={() => index <= step && setStep(index)}
-            >
-              {index < step ? <Check size={15} /> : index + 1}
-              <span>{label}</span>
-            </button>
-          ))}
-        </div>
-
-        <div className="flow-panel">
+        <section className="intake-panel">
+          <div className="panel-kicker">Step {step + 1} of {flowSteps.length}</div>
           {step === 0 && (
-            <div className="step-layout">
-              <SectionTitle icon={<Phone size={22} />} title="Basic details" subtitle="We use this for your plan, reminders, and follow-up." />
+            <QuestionBlock
+              icon={<Phone size={24} />}
+              title="Let’s personalize the preview."
+              subtitle="Start with the minimum profile details needed for a safe preview."
+            >
               <div className="field-grid">
                 <TextField label="Name" value={intake.name} onChange={(value) => update('name', value)} />
                 <TextField label="WhatsApp / phone" value={intake.phone} onChange={(value) => update('phone', value)} />
@@ -234,30 +271,36 @@ function UserFlow() {
                 <input type="checkbox" checked={intake.consent} onChange={(event) => update('consent', event.target.checked)} />
                 <span>I agree to share my health and lifestyle details for this nutrition preview and follow-up.</span>
               </label>
-            </div>
+            </QuestionBlock>
           )}
 
           {step === 1 && (
-            <div className="step-layout">
-              <SectionTitle icon={<Activity size={22} />} title="Goal and body metrics" subtitle="This shapes the calorie band and plan style." />
+            <QuestionBlock
+              icon={<Target size={24} />}
+              title="What should this plan optimize for?"
+              subtitle="Goals, height, and weight define the preview target."
+            >
               <ChipGrid label="Primary goals" options={goals} values={intake.goals} onToggle={(value) => toggleList('goals', value)} />
               <div className="field-grid three">
                 <NumberStepper label="Height (cm)" value={intake.height_cm} min={120} max={230} onChange={(value) => update('height_cm', value)} />
                 <NumberStepper label="Current weight (kg)" value={intake.weight_kg} min={35} max={220} onChange={(value) => update('weight_kg', value)} />
                 <NumberStepper label="Target weight (kg)" value={intake.target_weight_kg} min={35} max={220} onChange={(value) => update('target_weight_kg', value)} />
               </div>
-            </div>
+            </QuestionBlock>
           )}
 
           {step === 2 && (
-            <div className="step-layout">
-              <SectionTitle icon={<ClipboardList size={22} />} title="Routine" subtitle="The plan follows your actual day instead of a generic schedule." />
+            <QuestionBlock
+              icon={<Clock size={24} />}
+              title="Match the plan to your actual day."
+              subtitle="Daily rhythm drives meal slots, portions, and prep realism."
+            >
               <ChoiceGroup
                 label="Diet type"
                 options={['vegetarian', 'eggetarian', 'non_vegetarian', 'vegan', 'jain']}
                 value={intake.diet_type}
                 onChange={(value) => update('diet_type', value as IntakePayload['diet_type'])}
-                display={(value) => value.replace('_', ' ')}
+                display={humanize}
               />
               <ChipGrid label="Cuisine preference" options={cuisines.map((item) => [item, item])} values={intake.cuisine_preferences} onToggle={(value) => toggleList('cuisine_preferences', value)} />
               <div className="field-grid three">
@@ -296,21 +339,27 @@ function UserFlow() {
                 value={intake.cooking_help}
                 onChange={(value) => update('cooking_help', value)}
               />
-            </div>
+            </QuestionBlock>
           )}
 
           {step === 3 && (
-            <div className="step-layout">
-              <SectionTitle icon={<ChefHat size={22} />} title="Food preferences" subtitle="We exclude what you dislike and keep the plan practical." />
+            <QuestionBlock
+              icon={<ChefHat size={24} />}
+              title="Keep the food realistic."
+              subtitle="Preference signals keep the plan practical and familiar."
+            >
               <ChipGrid label="Cravings or friction points" options={cravings.map((item) => [item, item])} values={intake.cravings} onToggle={(value) => toggleList('cravings', value)} />
               <ChipGrid label="Allergies or dislikes" options={allergies.map((item) => [item, item])} values={intake.allergies_dislikes} onToggle={(value) => toggleList('allergies_dislikes', value)} />
               <TextAreaField label="Anything else" value={intake.optional_note} onChange={(value) => update('optional_note', value)} />
-            </div>
+            </QuestionBlock>
           )}
 
           {step === 4 && (
-            <div className="step-layout">
-              <SectionTitle icon={<HeartPulse size={22} />} title="Health suitability" subtitle="This final check decides whether AI preview is appropriate." />
+            <QuestionBlock
+              icon={<HeartPulse size={24} />}
+              title="Final suitability check."
+              subtitle="Health context decides whether this becomes a human review."
+            >
               <ChipGrid
                 label="Select any that apply"
                 options={medicalRisks}
@@ -321,33 +370,137 @@ function UserFlow() {
                 <Toggle label="I am currently on medication" checked={intake.active_medication} onChange={(value) => update('active_medication', value)} />
                 <Toggle label="I have abnormal reports needing review" checked={intake.abnormal_reports} onChange={(value) => update('abnormal_reports', value)} />
               </div>
-              <button className="secondary-button" onClick={() => setIntake((current) => ({ ...current, medical_risks: [], active_medication: false, abnormal_reports: false }))}>
+              <button className="secondary-button subtle" onClick={() => setIntake((current) => ({ ...current, medical_risks: [], active_medication: false, abnormal_reports: false }))}>
                 Clear health flags
               </button>
-            </div>
+            </QuestionBlock>
           )}
 
-          {error && <p className="error-text">{error}</p>}
+          {error && (
+            <div className="error-panel">
+              <strong>Plan creation did not complete.</strong>
+              <p>{error}</p>
+            </div>
+          )}
 
           <div className="flow-actions">
             <button className="secondary-button" disabled={step === 0 || loading} onClick={() => setStep((current) => Math.max(0, current - 1))}>
               Back
             </button>
-            {step < steps.length - 1 ? (
+            {step < flowSteps.length - 1 ? (
               <button className="primary-button" disabled={!validation.valid} onClick={() => setStep((current) => current + 1)}>
-                <span>Continue</span>
-                <ArrowRight size={18} />
+                Continue <ArrowRight size={18} />
               </button>
             ) : (
-              <button className="primary-button" disabled={loading} onClick={handleSubmit}>
+              <button className="primary-button create-button" disabled={loading} onClick={handleSubmit}>
                 <Sparkles size={18} />
-                <span>{loading ? 'Creating' : 'Create plan'}</span>
+                {hasRiskSignal ? 'Prepare dietician brief' : 'Create my 7-day plan'}
               </button>
             )}
           </div>
           {!validation.valid && <p className="hint-text">{validation.message}</p>}
-        </div>
+        </section>
       </section>
+
+      <section className="credibility-strip">
+        <Signal icon={<FileText size={18} />} label="Structured plan output" value="No freeform diet advice" />
+        <Signal icon={<ShieldCheck size={18} />} label="Safety gate" value="Risk users go human" />
+        <Signal icon={<ChefHat size={18} />} label="Food catalog" value="Approved meals only" />
+        <Signal icon={<MessageCircle size={18} />} label="Conversion layer" value="WhatsApp-ready leads" />
+      </section>
+    </main>
+  )
+}
+
+function PlanTeaser() {
+  return (
+    <div className="plan-teaser" aria-label="Diet plan preview">
+      <div className="teaser-header">
+        <span>Nutrition Plan (Weekly)</span>
+        <strong>Preview</strong>
+      </div>
+      <div className="teaser-body">
+        <div className="teaser-day">
+          <span>Monday</span>
+          <strong>1,148 cal</strong>
+        </div>
+        <div className="teaser-meals">
+          <div><span>07:00</span><strong>Fenugreek water + soaked almonds</strong></div>
+          <div><span>09:00</span><strong>Lemon upma + egg white</strong></div>
+          <div><span>14:00</span><strong>Jowar roti + dal + sabji</strong></div>
+          <div><span>20:00</span><strong>Salad + masoor dal with palak</strong></div>
+        </div>
+      </div>
+      <div className="teaser-footer">
+        <span>Validated foods only</span>
+        <span>Dietician-style format</span>
+      </div>
+    </div>
+  )
+}
+
+function Signal({ icon, label, value }: { icon: ReactNode; label: string; value: string }) {
+  return (
+    <div className="signal">
+      {icon}
+      <span>{label}</span>
+      <strong>{value}</strong>
+    </div>
+  )
+}
+
+function LiveBrief({ intake, hasRiskSignal }: { intake: IntakePayload; hasRiskSignal: boolean }) {
+  return (
+    <div className="live-brief">
+      <div>
+        <span>Live brief</span>
+        <strong>{intake.name || 'New lead'}</strong>
+      </div>
+      <dl>
+        <div><dt>Goal</dt><dd>{humanize(intake.goals)}</dd></div>
+        <div><dt>Diet</dt><dd>{humanize(intake.diet_type)}</dd></div>
+        <div><dt>Routine</dt><dd>{intake.wake_time} wake, {intake.sleep_time} sleep</dd></div>
+        <div><dt>Risk route</dt><dd>{hasRiskSignal ? 'Dietician review' : 'AI preview eligible'}</dd></div>
+      </dl>
+    </div>
+  )
+}
+
+function QuestionBlock({ icon, title, subtitle, children }: { icon: ReactNode; title: string; subtitle: string; children: ReactNode }) {
+  return (
+    <div className="question-block">
+      <div className="section-title">
+        <div className="section-icon">{icon}</div>
+        <div>
+          <h2>{title}</h2>
+          <p>{subtitle}</p>
+        </div>
+      </div>
+      <div className="question-fields">{children}</div>
+    </div>
+  )
+}
+
+function GeneratingView({ intake, hasRiskSignal }: { intake: IntakePayload; hasRiskSignal: boolean }) {
+  const checks = hasRiskSignal
+    ? ['Saving your intake', 'Building dietician-ready brief', 'Highlighting risk flags', 'Preparing follow-up CTA']
+    : ['Matching approved foods', 'Building 7-day rhythm', 'Checking dislikes and diet type', 'Validating calories and meal slots']
+
+  return (
+    <main className="generating-page">
+      <div className="generation-panel">
+        <div className="generation-loader"><Sparkles size={34} /></div>
+        <div className="eyebrow">{hasRiskSignal ? 'Preparing expert handoff' : 'Creating plan'}</div>
+        <h1>{hasRiskSignal ? 'Turning your intake into a dietician brief.' : 'Your 7-day nutrition plan is being assembled.'}</h1>
+        <p>
+          {intake.name ? `${intake.name}, ` : ''}we are using the approved food library and deterministic safety checks before showing the result.
+        </p>
+        <div className="generation-checks">
+          {checks.map((check) => (
+            <span key={check}><Check size={16} /> {check}</span>
+          ))}
+        </div>
+      </div>
     </main>
   )
 }
@@ -364,29 +517,50 @@ function validateStep(step: number, intake: IntakePayload): { valid: boolean; me
   return { valid: true, message: '' }
 }
 
+function getCompletion(intake: IntakePayload): number {
+  const checks = [
+    Boolean(intake.name),
+    Boolean(intake.phone),
+    Boolean(intake.city),
+    intake.consent,
+    intake.goals.length > 0,
+    intake.height_cm > 0,
+    intake.weight_kg > 0,
+    intake.target_weight_kg > 0,
+    Boolean(intake.diet_type),
+    intake.cuisine_preferences.length > 0,
+    Boolean(intake.wake_time),
+    Boolean(intake.sleep_time),
+    Boolean(intake.work_schedule),
+    Boolean(intake.workout_level),
+    Boolean(intake.water_intake),
+    Boolean(intake.eating_out_frequency),
+    Boolean(intake.cooking_help)
+  ]
+  return Math.round((checks.filter(Boolean).length / checks.length) * 100)
+}
+
+function stepDescription(index: number, intake: IntakePayload): string {
+  if (index === 0) return intake.name ? `${intake.name}, ${intake.city || 'city pending'}` : 'Name and WhatsApp'
+  if (index === 1) return intake.goals.length ? humanize(intake.goals) : 'Goal and metrics'
+  if (index === 2) return intake.cuisine_preferences.length ? humanize(intake.cuisine_preferences) : 'Routine and diet type'
+  if (index === 3) return intake.allergies_dislikes.length ? `${intake.allergies_dislikes.length} exclusions` : 'Cravings and exclusions'
+  return intake.medical_risks.length || intake.active_medication || intake.abnormal_reports ? 'Dietician route likely' : 'Eligibility check'
+}
+
+function buildFriendlyError(err: unknown): string {
+  const raw = err instanceof Error ? err.message : 'Unable to submit intake'
+  if (raw.includes('Failed to fetch')) {
+    return 'The frontend could not reach the backend. Confirm FastAPI is running on http://127.0.0.1:8000 and try again.'
+  }
+  return raw
+}
+
 function humanize(value: unknown): string {
   if (Array.isArray(value)) return value.length ? value.map(humanize).join(', ') : 'None'
   if (typeof value === 'boolean') return value ? 'Yes' : 'No'
   if (typeof value !== 'string') return value === undefined || value === null || value === '' ? 'None' : String(value)
   return displayLabels[value] ?? value.replaceAll('_', ' ')
-}
-
-function humanizeKey(value: string): string {
-  return value
-    .replaceAll('_', ' ')
-    .replace(/\b\w/g, (match) => match.toUpperCase())
-}
-
-function SectionTitle({ icon, title, subtitle }: { icon: React.ReactNode; title: string; subtitle: string }) {
-  return (
-    <div className="section-title">
-      <div className="section-icon">{icon}</div>
-      <div>
-        <h2>{title}</h2>
-        <p>{subtitle}</p>
-      </div>
-    </div>
-  )
 }
 
 function TextField({ label, value, onChange }: { label: string; value: string; onChange: (value: string) => void }) {
@@ -475,6 +649,7 @@ function PlanViewer({ leadId, plan, onRestart }: { leadId: string; plan: PlanRes
   const [dayIndex, setDayIndex] = useState(0)
   const activeDay = plan.days[dayIndex]
   const shareText = encodeURIComponent(`My NutriAlign 7-day plan is ready. Lead: ${leadId}`)
+  const avgCalories = Math.round(plan.days.reduce((sum, day) => sum + day.total_calories, 0) / plan.days.length)
 
   function handlePrint() {
     recordEvent('download_clicked', leadId)
@@ -483,74 +658,52 @@ function PlanViewer({ leadId, plan, onRestart }: { leadId: string; plan: PlanRes
 
   return (
     <main className="result-page">
-      <section className="result-hero">
-        <div>
+      <section className="plan-hero">
+        <div className="plan-hero-copy">
           <div className="eyebrow"><Sparkles size={16} /> Plan ready</div>
-          <h1>{plan.title}</h1>
+          <h1>Your free 7-day nutrition preview is ready.</h1>
           <p>{plan.subtitle}</p>
+          <div className="result-actions">
+            <button className="secondary-button" onClick={handlePrint}><Download size={18} /> Download PDF</button>
+            <a className="secondary-button" href={`https://wa.me/?text=${shareText}`} target="_blank" rel="noreferrer" onClick={() => recordEvent('whatsapp_clicked', leadId)}>
+              <MessageCircle size={18} /> WhatsApp
+            </a>
+          </div>
         </div>
-        <div className="result-actions">
-          <button className="secondary-button" onClick={handlePrint}><Download size={18} /> Download PDF</button>
-          <a className="secondary-button" href={`https://wa.me/?text=${shareText}`} target="_blank" rel="noreferrer" onClick={() => recordEvent('whatsapp_clicked', leadId)}>
-            <MessageCircle size={18} /> WhatsApp
-          </a>
+        <div className="plan-scoreboard">
+          <Metric icon={<CalendarDays size={18} />} label="Duration" value={`${plan.duration_days} days`} />
+          <Metric icon={<Gauge size={18} />} label="Avg calories" value={`${avgCalories}/day`} />
+          <Metric icon={<ChefHat size={18} />} label="Diet type" value={humanize(plan.profile_snapshot.diet_type)} />
+          <Metric icon={<Target size={18} />} label="Goal" value={humanize(plan.profile_snapshot.goals)} />
         </div>
       </section>
 
-      <section className="plan-shell">
-        <div className="plan-meta">
-          <Metric label="Duration" value={`${plan.duration_days} days`} />
-          <Metric label="Calorie band" value={`${plan.calorie_band.min}-${plan.calorie_band.max}`} />
-          <Metric label="Diet type" value={humanize(plan.profile_snapshot.diet_type)} />
-          <Metric label="Goal" value={humanize(plan.profile_snapshot.goals)} />
-        </div>
+      <section className="week-overview">
+        {plan.days.map((day, index) => (
+          <button key={day.day} className={index === dayIndex ? 'week-day active' : 'week-day'} onClick={() => setDayIndex(index)}>
+            <span>{day.day}</span>
+            <strong>{day.total_calories}</strong>
+            <small>{day.meals.length} slots</small>
+          </button>
+        ))}
+      </section>
 
-        <div className="day-tabs">
-          {plan.days.map((day, index) => (
-            <button key={day.day} className={index === dayIndex ? 'day-tab active' : 'day-tab'} onClick={() => setDayIndex(index)}>
-              <span>{day.day.slice(0, 3)}</span>
-              <strong>{day.total_calories}</strong>
-            </button>
-          ))}
-        </div>
-
-        <div className="plan-table-wrap">
-          <div className="plan-table-title">
-            <h2>{activeDay.day}</h2>
-            <span>{activeDay.total_calories} calories</span>
+      <section className="plan-studio">
+        <DayTimeline day={activeDay} />
+        <aside className="plan-aside">
+          <div className="aside-panel">
+            <h2>Why this feels dietician-made</h2>
+            <ul>
+              <li>Uses fixed meal slots and timings instead of a loose food list.</li>
+              <li>Respects diet type and selected exclusions before rendering.</li>
+              <li>Keeps calories inside the safe preview band.</li>
+            </ul>
           </div>
-          <table className="plan-table">
-            <thead>
-              <tr>
-                <th>Meal</th>
-                <th>Food</th>
-                <th>Portion</th>
-                <th>Calories</th>
-              </tr>
-            </thead>
-            <tbody>
-              {activeDay.meals.flatMap((meal) =>
-                meal.items.map((item, index) => (
-                  <tr key={`${meal.slot_key}-${item.food_id}-${index}`}>
-                    {index === 0 && (
-                      <td rowSpan={meal.items.length} className="meal-slot">
-                        <strong>{meal.slot}</strong>
-                        <span>{meal.time}</span>
-                      </td>
-                    )}
-                    <td>
-                      <strong>{item.name}</strong>
-                      <span>{item.preparation_note}</span>
-                    </td>
-                    <td>{item.portion}</td>
-                    <td>{item.calories}</td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
-        <p className="safety-note">{plan.safety_note}</p>
+          <div className="aside-panel muted-panel">
+            <h2>Safety note</h2>
+            <p>{plan.safety_note}</p>
+          </div>
+        </aside>
       </section>
 
       <CheckInForm leadId={leadId} />
@@ -562,23 +715,59 @@ function PlanViewer({ leadId, plan, onRestart }: { leadId: string; plan: PlanRes
   )
 }
 
+function DayTimeline({ day }: { day: PlanDay }) {
+  return (
+    <div className="day-timeline">
+      <div className="day-header">
+        <div>
+          <span>Nutrition Plan (Weekly)</span>
+          <h2>{day.day}</h2>
+        </div>
+        <strong>{day.total_calories} calories</strong>
+      </div>
+      <div className="meal-timeline">
+        {day.meals.map((meal) => (
+          <article className="meal-block" key={meal.slot_key}>
+            <div className="meal-time">
+              <strong>{meal.time}</strong>
+              <span>{meal.slot}</span>
+            </div>
+            <div className="meal-items">
+              {meal.items.map((item, index) => (
+                <div className="meal-item" key={`${meal.slot_key}-${item.food_id}-${index}`}>
+                  <div>
+                    <strong>{item.name}</strong>
+                    <p>{item.preparation_note || 'Approved catalog item.'}</p>
+                  </div>
+                  <span>{item.portion}</span>
+                  <em>{item.calories} cal</em>
+                </div>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function RiskBriefView({ leadId, brief }: { leadId: string; brief: RiskBrief }) {
   return (
     <main className="result-page">
       <section className="risk-hero">
         <div>
           <div className="eyebrow"><ShieldCheck size={16} /> Expert review</div>
-          <h1>{brief.title}</h1>
+          <h1>We’re routing this to a dietician, not generating an AI diet.</h1>
           <p>{brief.summary}</p>
         </div>
         <UpgradePanel leadId={leadId} mode="risk" compact />
       </section>
 
-      <section className="brief-grid">
+      <section className="brief-board">
         <BriefSection title="Goals and profile" data={brief.profile} />
         <BriefSection title="Routine" data={brief.routine} />
         <BriefSection title="Food context" data={brief.food_context} />
-        <div className="brief-panel">
+        <div className="brief-panel risk-panel">
           <h2>Risk flags</h2>
           <div className="flag-list">
             {brief.risk_flags.map((flag) => <span key={flag}>{flag}</span>)}
@@ -586,8 +775,11 @@ function RiskBriefView({ leadId, brief }: { leadId: string; brief: RiskBrief }) 
         </div>
       </section>
 
-      <section className="question-band">
-        <h2>Dietician handoff questions</h2>
+      <section className="handoff-panel">
+        <div>
+          <span>Prepared for the sales call</span>
+          <h2>Dietician handoff questions</h2>
+        </div>
         <ul>
           {brief.dietician_questions.map((question) => <li key={question}>{question}</li>)}
         </ul>
@@ -612,9 +804,10 @@ function BriefSection({ title, data }: { title: string; data: Record<string, unk
   )
 }
 
-function Metric({ label, value }: { label: string; value: string }) {
+function Metric({ icon, label, value }: { icon?: ReactNode; label: string; value: string }) {
   return (
     <div className="metric">
+      {icon}
       <span>{label}</span>
       <strong>{value}</strong>
     </div>
@@ -641,25 +834,26 @@ function CheckInForm({ leadId }: { leadId: string }) {
       cravings: cravingsValue,
       notes
     })
-    setStatus('Check-in saved')
+    setStatus('Check-in saved. This lead now has adherence data.')
   }
 
   return (
     <section className="checkin-band">
-      <SectionTitle icon={<Activity size={22} />} title="Daily check-in" subtitle="A short signal for adherence and upgrade timing." />
-      <div className="checkin-grid">
-        <NumberStepper label="Day" value={dayNumber} min={1} max={7} onChange={setDayNumber} />
-        <SelectField label="Adherence" value={adherence} options={['low', 'partial', 'mostly', 'complete']} onChange={setAdherence} />
-        <SelectField label="Hunger" value={hunger} options={['low', 'okay', 'high']} onChange={setHunger} />
-        <SelectField label="Energy" value={energy} options={['low', 'okay', 'good']} onChange={setEnergy} />
-        <SelectField label="Digestion" value={digestion} options={['okay', 'bloating', 'constipation', 'acidity', 'other_issue']} onChange={setDigestion} />
-        <SelectField label="Cravings" value={cravingsValue} options={['none', 'manageable', 'strong']} onChange={setCravingsValue} />
-      </div>
-      <TextAreaField label="Notes" value={notes} onChange={setNotes} />
-      <div className="flow-actions">
-        <button className="primary-button" onClick={handleSubmit}><Check size={18} /> Save check-in</button>
-        {status && <span className="success-text">{status}</span>}
-      </div>
+      <QuestionBlock icon={<Activity size={22} />} title="Daily check-in" subtitle="Capture the behavior signal that makes the upgrade conversation specific.">
+        <div className="checkin-grid">
+          <NumberStepper label="Day" value={dayNumber} min={1} max={7} onChange={setDayNumber} />
+          <SelectField label="Adherence" value={adherence} options={['low', 'partial', 'mostly', 'complete']} onChange={setAdherence} />
+          <SelectField label="Hunger" value={hunger} options={['low', 'okay', 'high']} onChange={setHunger} />
+          <SelectField label="Energy" value={energy} options={['low', 'okay', 'good']} onChange={setEnergy} />
+          <SelectField label="Digestion" value={digestion} options={['okay', 'bloating', 'constipation', 'acidity', 'other_issue']} onChange={setDigestion} />
+          <SelectField label="Cravings" value={cravingsValue} options={['none', 'manageable', 'strong']} onChange={setCravingsValue} />
+        </div>
+        <TextAreaField label="Notes" value={notes} onChange={setNotes} />
+        <div className="flow-actions">
+          <button className="primary-button" onClick={handleSubmit}><Check size={18} /> Save check-in</button>
+          {status && <span className="success-text">{status}</span>}
+        </div>
+      </QuestionBlock>
     </section>
   )
 }
@@ -684,16 +878,15 @@ function UpgradePanel({ leadId, mode, compact = false }: { leadId: string; mode:
 
   return (
     <section className={compact ? 'upgrade-panel compact' : 'upgrade-panel'}>
-      {!compact && <SectionTitle icon={<Utensils size={22} />} title="Continue your plan" subtitle="Choose the next step after the free preview." />}
+      {!compact && <QuestionBlock icon={<Utensils size={22} />} title="Continue beyond the free preview" subtitle="The plan proves quality; the upgrade unlocks continuity or human judgment."><span /></QuestionBlock>}
       <div className="upgrade-grid">
         {options.map((option) => (
           <div className="upgrade-card" key={option.plan_type}>
-            <h3>{option.label}</h3>
+            <span>{option.label}</span>
             <strong>{option.price}</strong>
             <p>{option.copy}</p>
             <button className="primary-button" onClick={() => choose(option.plan_type)}>
-              Select
-              <ArrowRight size={18} />
+              Select <ArrowRight size={18} />
             </button>
           </div>
         ))}
@@ -728,21 +921,23 @@ function AdminDashboard() {
   const stats = useMemo(() => {
     const risk = leads.filter((lead) => lead.triage_outcome === 'risk').length
     const upgrade = leads.filter((lead) => lead.upgrade_count > 0).length
-    return { total: leads.length, risk, upgrade }
+    const checkedIn = leads.filter((lead) => lead.check_in_count > 0).length
+    return { total: leads.length, risk, upgrade, checkedIn }
   }, [leads])
 
   return (
     <main className="admin-page">
       <section className="admin-hero">
         <div>
-          <div className="eyebrow"><LayoutDashboard size={16} /> Local admin</div>
+          <div className="eyebrow"><LayoutDashboard size={16} /> Local operator view</div>
           <h1>Lead review dashboard</h1>
-          <p>This local dashboard has no production authentication. Use it to inspect intake, triage, plans, check-ins, and upgrade intent.</p>
+          <p>Inspect intake quality, risk routing, generated plans, check-ins, and conversion intent. This local admin has no production authentication.</p>
         </div>
         <div className="admin-stats">
-          <Metric label="Leads" value={String(stats.total)} />
-          <Metric label="Risk routed" value={String(stats.risk)} />
-          <Metric label="Upgrade intent" value={String(stats.upgrade)} />
+          <Metric icon={<ClipboardList size={18} />} label="Leads" value={String(stats.total)} />
+          <Metric icon={<ShieldCheck size={18} />} label="Risk routed" value={String(stats.risk)} />
+          <Metric icon={<Activity size={18} />} label="Checked in" value={String(stats.checkedIn)} />
+          <Metric icon={<ArrowRight size={18} />} label="Upgrade intent" value={String(stats.upgrade)} />
         </div>
       </section>
 
@@ -750,13 +945,16 @@ function AdminDashboard() {
 
       <section className="admin-grid">
         <div className="lead-list">
-          <h2>Leads</h2>
+          <div className="list-heading">
+            <h2>Leads</h2>
+            <span>{leads.length} total</span>
+          </div>
           {leads.length === 0 && <p className="empty-text">No leads yet.</p>}
           {leads.map((lead) => (
             <button key={lead.id} className={lead.id === selectedId ? 'lead-row active' : 'lead-row'} onClick={() => setSelectedId(lead.id)}>
               <span>
                 <strong>{lead.name}</strong>
-                <small>{lead.city} - {lead.phone}</small>
+                <small>{lead.city} · {lead.phone}</small>
               </span>
               <em>{lead.triage_outcome}</em>
             </button>
@@ -769,10 +967,11 @@ function AdminDashboard() {
             <>
               <div className="detail-header">
                 <div>
+                  <span>{detail.plan_record.plan_type === 'plan' ? 'AI preview lead' : 'Dietician route lead'}</span>
                   <h2>{detail.lead.name}</h2>
-                <p>{humanize(detail.lead.status)}</p>
+                  <p>{humanize(detail.lead.status)}</p>
                 </div>
-                <span>{detail.plan_record.plan_type}</span>
+                <strong>{detail.plan_record.plan_type}</strong>
               </div>
               <div className="detail-grid">
                 <BriefSection title="Intake" data={{
@@ -793,12 +992,14 @@ function AdminDashboard() {
               {detail.plan_record.plan_type === 'plan' ? (
                 <div className="admin-plan-summary">
                   <h2>Generated plan</h2>
-                  {(detail.plan_record.content as PlanResult).days.map((day) => (
-                    <div className="admin-day" key={day.day}>
-                      <strong>{day.day}</strong>
-                      <span>{day.total_calories} calories</span>
-                    </div>
-                  ))}
+                  <div className="admin-week">
+                    {(detail.plan_record.content as PlanResult).days.map((day) => (
+                      <div className="admin-day" key={day.day}>
+                        <strong>{day.day.slice(0, 3)}</strong>
+                        <span>{day.total_calories} cal</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ) : (
                 <div className="admin-plan-summary">
@@ -812,9 +1013,9 @@ function AdminDashboard() {
                 <h2>Check-ins</h2>
                 {detail.check_ins.length === 0 && <p className="empty-text">No check-ins yet.</p>}
                 {detail.check_ins.map((checkIn) => (
-                  <div className="admin-day" key={checkIn.id}>
+                  <div className="admin-activity" key={checkIn.id}>
                     <strong>Day {checkIn.day_number}</strong>
-                    <span>{String(checkIn.payload.adherence)} adherence, {String(checkIn.payload.energy)} energy</span>
+                    <span>{humanize(checkIn.payload.adherence)} adherence · {humanize(checkIn.payload.energy)} energy</span>
                   </div>
                 ))}
               </div>
@@ -822,7 +1023,7 @@ function AdminDashboard() {
                 <h2>Upgrade intent</h2>
                 {detail.upgrade_intents.length === 0 && <p className="empty-text">No upgrade intent yet.</p>}
                 {detail.upgrade_intents.map((intent) => (
-                  <div className="admin-day" key={intent.id}>
+                  <div className="admin-activity" key={intent.id}>
                     <strong>{humanize(intent.plan_type)}</strong>
                     <span>{intent.contact_preference}</span>
                   </div>

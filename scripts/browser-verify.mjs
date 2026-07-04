@@ -30,7 +30,7 @@ async function submitNormalUser(page) {
   await page.getByRole('button', { name: /^Sweet$/ }).click()
   await page.getByRole('button', { name: /^Milk$/ }).click()
   await page.getByRole('button', { name: /Continue/ }).click()
-  await page.getByRole('button', { name: /Create plan/ }).click()
+  await page.getByRole('button', { name: /Create my 7-day plan|Create plan/ }).click()
   await page.getByText('Plan ready').waitFor({ timeout: 15000 })
   await page.screenshot({ path: new URL('normal-plan-desktop.png', outputDir).pathname, fullPage: true })
   await page.getByRole('button', { name: /Save check-in/ }).click()
@@ -53,8 +53,8 @@ async function submitRiskUser(page) {
   await page.getByRole('button', { name: /Continue/ }).click()
   await page.getByRole('button', { name: /Continue/ }).click()
   await page.getByRole('button', { name: /^Diabetes$/ }).click()
-  await page.getByRole('button', { name: /Create plan/ }).click()
-  await page.getByText('Expert review').waitFor({ timeout: 15000 })
+  await page.getByRole('button', { name: /Prepare dietician brief|Create plan/ }).click()
+  await page.getByText('Expert review', { exact: true }).waitFor({ timeout: 15000 })
   if (await page.getByText('Plan ready').count()) {
     throw new Error('Risk user unexpectedly saw plan-ready state')
   }
