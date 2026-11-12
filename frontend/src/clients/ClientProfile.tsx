@@ -35,6 +35,7 @@ import {
   Trash2,
   UserRound,
   Utensils,
+  UtensilsCrossed,
   X
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
@@ -42,6 +43,7 @@ import { addClientOption, createClientTab, getClient, getHeadToeHistory, updateC
 import { classifyBloodPressure } from './bloodPressure'
 import type { ClientBundle, ClientRecord, ColumnDef, CustomTabField, FieldDef, HeadToeSnapshot, TabDef } from './types'
 import StrategyHistory from '../strategy/StrategyHistory'
+import PlanHistory from '../plans/PlanHistory'
 import { Modal, ModalClose, Toast, formatDate, formatDateTime, programStatus, relativeDate } from './ui'
 
 type TabData = Record<string, unknown>
@@ -65,12 +67,14 @@ export default function ClientProfile({
   clientId,
   initialTab = 'basic',
   onBack,
-  onOpenStrategy
+  onOpenStrategy,
+  onOpenPlan
 }: {
   clientId: string
   initialTab?: string
   onBack: () => void
   onOpenStrategy: (strategyId: string) => void
+  onOpenPlan: (planId: string) => void
 }) {
   const [bundle, setBundle] = useState<ClientBundle | null>(null)
   const [client, setClient] = useState<ClientRecord | null>(null)
@@ -370,6 +374,9 @@ export default function ClientProfile({
           <button type="button" className="secondary-button" onClick={() => selectTab('strategy')}>
             <Target size={16} /> Strategy
           </button>
+          <button type="button" className="secondary-button" onClick={() => selectTab('plans')}>
+            <UtensilsCrossed size={16} /> Diet plan
+          </button>
           <button className="secondary-button" onClick={() => setShowTabModal(true)}>
             <Plus size={16} /> Add tab
           </button>
@@ -462,6 +469,8 @@ export default function ClientProfile({
             </div>
             {activeTab.id === 'strategy' ? (
               <span className="cf-optional-note"><ShieldCheck size={14} aria-hidden="true" /> Versioned &amp; signed</span>
+            ) : activeTab.id === 'plans' ? (
+              <span className="cf-optional-note"><FileText size={14} aria-hidden="true" /> Prints the client PDF</span>
             ) : (
               <span className="cf-optional-note"><Info size={14} aria-hidden="true" /> All fields optional</span>
             )}
@@ -499,6 +508,12 @@ export default function ClientProfile({
               clientId={client.id}
               clientName={client.name}
               onOpenStrategy={onOpenStrategy}
+            />
+          ) : activeTab.id === 'plans' ? (
+            <PlanHistory
+              clientId={client.id}
+              clientName={client.name}
+              onOpenPlan={onOpenPlan}
             />
           ) : (
             <TabForm

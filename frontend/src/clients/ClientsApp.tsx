@@ -4,6 +4,7 @@ import { createClient, listClients } from './api'
 import type { ClientRecord } from './types'
 import ClientProfile from './ClientProfile'
 import StrategyStudio from '../strategy/StrategyStudio'
+import PlanStudio from '../plans/PlanStudio'
 import { Modal, ModalClose, programStatus, relativeDate } from './ui'
 import './clients.css'
 
@@ -11,9 +12,14 @@ type ClientsRoute =
   | { view: 'directory' }
   | { view: 'client'; clientId: string; tab: string }
   | { view: 'strategy'; clientId: string; strategyId: string }
+  | { view: 'plan'; clientId: string; planId: string }
 
 function parseRoute(): ClientsRoute {
   const hash = window.location.hash
+  const plan = hash.match(/^#clients\/([^/?]+)\/plan\/([^/?]+)/)
+  if (plan) {
+    return { view: 'plan', clientId: decodeURIComponent(plan[1]), planId: decodeURIComponent(plan[2]) }
+  }
   const strategy = hash.match(/^#clients\/([^/?]+)\/strategy\/([^/?]+)/)
   if (strategy) {
     return { view: 'strategy', clientId: decodeURIComponent(strategy[1]), strategyId: decodeURIComponent(strategy[2]) }
@@ -34,6 +40,16 @@ export default function ClientsApp() {
     return () => window.removeEventListener('hashchange', onHash)
   }, [])
 
+  if (route.view === 'plan') {
+    return (
+      <PlanStudio
+        clientId={route.clientId}
+        planId={route.planId}
+        onBack={() => { window.location.hash = `clients/${route.clientId}?tab=plans` }}
+      />
+    )
+  }
+
   if (route.view === 'strategy') {
     return (
       <StrategyStudio
@@ -51,6 +67,7 @@ export default function ClientsApp() {
         initialTab={route.tab}
         onBack={() => { window.location.hash = 'clients' }}
         onOpenStrategy={(strategyId) => { window.location.hash = `clients/${route.clientId}/strategy/${strategyId}` }}
+        onOpenPlan={(planId) => { window.location.hash = `clients/${route.clientId}/plan/${planId}` }}
       />
     )
   }

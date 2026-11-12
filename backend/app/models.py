@@ -149,3 +149,24 @@ class StrategyPublishPayload(BaseModel):
 
 class StrategyRefreshPayload(BaseModel):
     scope: Literal["clinical", "body", "support", "all"] = "clinical"
+
+
+class PlanCreatePayload(BaseModel):
+    name: str = Field(default="", max_length=120)
+    template_id: str = Field(default="", max_length=80)
+    strategy_id: str = Field(default="", max_length=80)
+
+
+class PlanUpdatePayload(BaseModel):
+    name: str | None = Field(default=None, max_length=120)
+    data: dict[str, Any] | None = None
+
+
+class PlanPublishPayload(BaseModel):
+    attestation: bool = False
+    note: str = Field(default="", max_length=1000)
+
+
+class PlanTemplatePayload(BaseModel):
+    name: str = Field(default="", max_length=120)
+    description: str = Field(default="", max_length=240)

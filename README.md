@@ -28,18 +28,6 @@ npm run dev -- --host 127.0.0.1 --port 5173
 
 Open `http://127.0.0.1:5173`.
 
-## Tests And Checks
-
-```bash
-cd backend
-uv run pytest
-
-cd ../frontend
-npm run typecheck
-npm run build
-```
-
-
 ## Client Records
 
 Open `http://127.0.0.1:5173/#clients` to add clients, fill the seven core tabs, add new list values inline, and create custom tabs.
@@ -59,6 +47,33 @@ Routes:
 
 Strategy data lives in the `strategies` and `strategy_versions` SQLite tables. The full product specification is in [`docs/NutriAlign_Strategy_Creation_PRD_v1.0.docx`](docs/NutriAlign_Strategy_Creation_PRD_v1.0.docx).
 
+## Diet Plans, Preview And PDF
+
+Open a client record and choose **Diet Plans** (or the **Diet plan** shortcut in the header) to build the week the client actually eats.
+
+The studio has seven sections: Details (dates, linked strategy, PDF branding, save as template), Targets (energy, protein, macro split, per-day overrides), Week plan (seven-day board with meal slots, portions, notes, alternatives, drag-and-drop, copy day), Recommendations (superfoods and custom notes), Guidelines (37 selectable sections), Preview (the exact PDF), and Review & publish (readiness checks, guardrail acknowledgements, sign-off).
+
+- The **food catalogue** ships 104 dishes across 10 categories with per-unit calories; anything else can be added as a manual entry.
+- **Targets** are pulled from the client's published strategy in one click and stay consistent: editing protein grams or any macro percentage rebalances the other two so the split always totals 100%.
+- **Guardrails** flag dishes that conflict with the client's diet, allergies or restrictions, and a plan cannot be published until the energy variance and any guardrail conflict are acknowledged.
+- **Publishing** locks the plan, stamps the PDF *Plan Approved*, and writes an immutable version; a revision starts a new draft without touching the signed copy.
+- **The PDF** mirrors the printed plan the practice already sends: branded cover with customer and plan details, one page block per day with orange meal-slot bands (`Portion` / `Calories`), diet notes per day, a recommendations page with superfoods and the measurements guide, the general guidelines, and the disclaimer.
+
+Routes:
+
+- `#clients/{clientId}?tab=plans` — plan history for the client
+- `#clients/{clientId}/plan/{planId}` — Plan Studio
+
+Plan data lives in the `diet_plans` and `plan_versions` tables; saved templates live in `plan_templates`. The module specification is in [`docs/PLAN_CREATION.md`](docs/PLAN_CREATION.md).
+
+Regenerating the reference catalogue and template (requires the reference PDF):
+
+```bash
+cd backend
+uv run python ../scripts/parse_reference_pdf.py "<reference.pdf>" app/data/reference_plan.json
+uv run python ../scripts/generate_plan_catalog.py
+```
+
 ## Tests And Checks
 
 ```bash
@@ -70,4 +85,11 @@ npm run typecheck
 npm run build
 ```
 
-Strategy verification covers 33 backend tests (calculation formulas, prefill, publish gates, revisions, consent, refresh, low-calorie acknowledgement, interaction rules), frontend typecheck and production build, Playwright flows for create/edit/publish/revision/preview, and an axe WCAG 2.1 AA audit with zero violations on desktop and mobile.
+Verification covers 43 backend tests: strategy maths and publish gates, plus the plan module (catalogue reconciliation, reference calorie accuracy, strategy target pull, publish gates, lock and revision, vegetarian guardrail, manual meal maths, PDF content, history and duplicate). Frontend `typecheck` and production build are clean, Playwright drives the full client → plan → preview → PDF flow (35 checks), and an axe WCAG 2.1 AA audit reports zero violations across the plan history, week board, targets, review, food picker and mobile layouts.
+
+Seeding a fully-filled demo client, strategy and published plan:
+
+```bash
+cd backend
+uv run python ../scripts/seed_test_client.py
+```

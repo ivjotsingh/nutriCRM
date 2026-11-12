@@ -1,0 +1,3406 @@
+[
+  {
+    "id": "sports-tennis-7day",
+    "name": "Sports nutrition \u00b7 tennis (7 day)",
+    "description": "Training-day rotation with pre/during/post workout slots, used by the reference plan.",
+    "days": [
+      {
+        "day": "Monday",
+        "slots": [
+          {
+            "name": "On Waking Up",
+            "time": "08:00AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "KALONJI WATER",
+                "qty": 200.0,
+                "unit": "ML",
+                "portion": "200 ML",
+                "calories": 3.72,
+                "note": "overnight soak 1tsp each kalonji , seeds in 200ml , strain and drink",
+                "alternatives": []
+              },
+              {
+                "name": "BRAZILNUT",
+                "qty": 1.0,
+                "unit": "Kernel",
+                "portion": "1 Kernel",
+                "calories": 33.0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "BLACK RAISINS",
+                "qty": 5.0,
+                "unit": "Piece",
+                "portion": "5 Piece",
+                "calories": 6.0,
+                "note": "overnight soaked",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Breakfast",
+            "time": "10:00AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "BOILED EGG WHITE",
+                "qty": 3.0,
+                "unit": "Egg White",
+                "portion": "3 Egg White",
+                "calories": 51.0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "BOILED EGGS",
+                "qty": 2.0,
+                "unit": "Egg",
+                "portion": "2 Egg",
+                "calories": 160.0,
+                "note": "add salt and pepper",
+                "alternatives": []
+              },
+              {
+                "name": "MIXED VEGETABLE PARATHA",
+                "qty": 2.0,
+                "unit": "Paratha",
+                "portion": "2 Paratha",
+                "calories": 322.35,
+                "note": "medium size - use jowar flour",
+                "alternatives": []
+              },
+              {
+                "name": "COCONUT CHUTNEY",
+                "qty": 2.0,
+                "unit": "Tablespoon",
+                "portion": "2 Tablespoon",
+                "calories": 83.0,
+                "note": "30g",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Mid Morning",
+            "time": "11:30AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "FAST & UP / VEGAN COLLAGEN BUILDER",
+                "qty": 1.0,
+                "unit": "Tablet",
+                "portion": "1 Tablet",
+                "calories": 12.0,
+                "note": "7g - mix it with 150ml water",
+                "alternatives": []
+              },
+              {
+                "name": "CUT FRUITS",
+                "qty": 150.0,
+                "unit": "Grams",
+                "portion": "150 Grams",
+                "calories": 67.0,
+                "note": "1 medium size Banana, / Guava /pear / apple / pomegranate /kiwi / orange 10-12 Kala Jamun,/Lychee / round slice Pineapple/ fresh blue berries /Strawberry 12-15 ice cube size Watermelon / musk melon /Papaya",
+                "alternatives": []
+              },
+              {
+                "name": "ROASTED WATERMELON SEEDS",
+                "qty": 5.0,
+                "unit": "Grams",
+                "portion": "5 Grams",
+                "calories": 26.79,
+                "note": "1tsp",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Lunch",
+            "time": "02:00PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "REWARD MEAL",
+                "qty": 1.0,
+                "unit": "Serving",
+                "portion": "1",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Snack",
+            "time": "06:00PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "SATTU",
+                "qty": 30.0,
+                "unit": "Grams",
+                "portion": "30 Grams",
+                "calories": 129.0,
+                "note": "2tbsp - mix it with lemon water",
+                "alternatives": []
+              },
+              {
+                "name": "CORN CAPSICUM SANDWICH",
+                "qty": 1.0,
+                "unit": "Piece",
+                "portion": "1 Piece",
+                "calories": 250.57,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Dinner",
+            "time": "08:00PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "CARROT TOMATO SOUP",
+                "qty": 200.0,
+                "unit": "ML",
+                "portion": "200 ML",
+                "calories": 36.76,
+                "note": "",
+                "alternatives": [
+                  {
+                    "name": "PUMPKIN SOUP",
+                    "portion": "200 Ml",
+                    "calories": 77.62
+                  }
+                ]
+              },
+              {
+                "name": "GARLIC",
+                "qty": 1.0,
+                "unit": "Clove",
+                "portion": "1 Clove",
+                "calories": 4.0,
+                "note": "add in cooked food",
+                "alternatives": []
+              },
+              {
+                "name": "CHAPATI",
+                "qty": 3.0,
+                "unit": "Roti/Chapati",
+                "portion": "3 Roti/Chapati",
+                "calories": 256.0,
+                "note": "ragi / jowar flour + khapli wheat - 40g x 3 medium size",
+                "alternatives": []
+              },
+              {
+                "name": "CHICKEN CURRY",
+                "qty": 200.0,
+                "unit": "Grams",
+                "portion": "200 Grams",
+                "calories": 175.0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "BELL PEPPER SABJI",
+                "qty": 100.0,
+                "unit": "Gram",
+                "portion": "100 Gram",
+                "calories": 42.0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Post Dinner",
+            "time": "09:30PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "LACTOSE FREE MILK",
+                "qty": 200.0,
+                "unit": "Ml",
+                "portion": "200 Ml",
+                "calories": 118.0,
+                "note": "/ almond milk",
+                "alternatives": []
+              },
+              {
+                "name": "SAFFRON",
+                "qty": 0.25,
+                "unit": "Tsp",
+                "portion": "0.25 Tsp",
+                "calories": 0.54,
+                "note": "2 strands saffron - add it to tea",
+                "alternatives": []
+              },
+              {
+                "name": "SOAKED WALNUT",
+                "qty": 2.0,
+                "unit": "Piece (Half Of One)",
+                "portion": "2 Piece (Half Of One)",
+                "calories": 28.85,
+                "note": "1 whole",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Bedtime",
+            "time": "10:00PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "HEALTHAID / COLIPROBIO (30 BILLION) (Health Aid)",
+                "qty": 1.0,
+                "unit": "soft gels",
+                "portion": "1 soft gels",
+                "calories": 1.0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "day": "Tuesday",
+        "slots": [
+          {
+            "name": "On Waking Up",
+            "time": "06:00AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "KALONJI WATER",
+                "qty": 200.0,
+                "unit": "ML",
+                "portion": "200 ML",
+                "calories": 3.72,
+                "note": "overnight soak 1tsp each kalonji , seeds in 200ml , strain and drink",
+                "alternatives": []
+              },
+              {
+                "name": "BRAZILNUT",
+                "qty": 1.0,
+                "unit": "Kernel",
+                "portion": "1 Kernel",
+                "calories": 33.0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "BLACK RAISINS",
+                "qty": 5.0,
+                "unit": "Piece",
+                "portion": "5 Piece",
+                "calories": 6.0,
+                "note": "overnight soaked",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Pre Training",
+            "time": "06:30AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "PORRIDGE",
+                "qty": 250.0,
+                "unit": "Grams",
+                "portion": "250 Grams",
+                "calories": 241.6,
+                "note": "30g amaranth / oats + 200ml lactose free milk+ 1tsp roasted sunflower seeds + apple / banana",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "During Training",
+            "time": "07:00AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "LEMON WATER",
+                "qty": 500.0,
+                "unit": "Ml",
+                "portion": "500 Ml",
+                "calories": 2.0,
+                "note": "use 1 lemon",
+                "alternatives": []
+              },
+              {
+                "name": "CHIA SEEDS",
+                "qty": 2.5,
+                "unit": "Grams",
+                "portion": "2.5 Grams",
+                "calories": 12.0,
+                "note": "2tsp - pre soaked - add it to lemon water",
+                "alternatives": []
+              },
+              {
+                "name": "SALT",
+                "qty": 4.0,
+                "unit": "Dash",
+                "portion": "4 Dash",
+                "calories": 0,
+                "note": "3-4 pinch -add it to the lemon water",
+                "alternatives": []
+              },
+              {
+                "name": "BANANA",
+                "qty": 1.0,
+                "unit": "Small (6\" To 6-7/8\" Long)",
+                "portion": "1 Small (6\" To 6-7/8\" Long)",
+                "calories": 117.0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "During Training",
+            "time": "08:00AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "PLAIN WATER",
+                "qty": 1000.0,
+                "unit": "Ml",
+                "portion": "1000 Ml",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "1 CHAZE",
+                "qty": 1.0,
+                "unit": "Serving",
+                "portion": "1 Serving",
+                "calories": 228.0,
+                "note": "60g - add it to water",
+                "alternatives": []
+              },
+              {
+                "name": "SALT",
+                "qty": 1.0,
+                "unit": "Serving",
+                "portion": "1 Serving",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Breakfast",
+            "time": "10:00AM",
+            "note": "/ Post workout",
+            "meals": [
+              {
+                "name": "BOILED EGG WHITE",
+                "qty": 3.0,
+                "unit": "Egg White",
+                "portion": "3 Egg White",
+                "calories": 51.0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "BOILED EGGS",
+                "qty": 2.0,
+                "unit": "Egg",
+                "portion": "2 Egg",
+                "calories": 160.0,
+                "note": "add salt and pepper",
+                "alternatives": []
+              },
+              {
+                "name": "MOONG DAL DOSA",
+                "qty": 200.0,
+                "unit": "Grams",
+                "portion": "200 Grams",
+                "calories": 349.24,
+                "note": "50g x 2 medium size , must add 100g vegetables - carrot / capsicum",
+                "alternatives": []
+              },
+              {
+                "name": "COCONUT CHUTNEY",
+                "qty": 2.0,
+                "unit": "Tablespoon",
+                "portion": "2 Tablespoon",
+                "calories": 83.0,
+                "note": "30g",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "During Workout",
+            "time": "10:30AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "PLAIN WATER",
+                "qty": 500.0,
+                "unit": "Ml",
+                "portion": "500 Ml",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "SALT",
+                "qty": 2.0,
+                "unit": "Dash",
+                "portion": "2 Dash",
+                "calories": 0,
+                "note": "1-2 pinch add it to water",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Mid Morning",
+            "time": "11:30AM",
+            "note": "/ post gym",
+            "meals": [
+              {
+                "name": "FAST & UP / VEGAN COLLAGEN BUILDER",
+                "qty": 1.0,
+                "unit": "Tablet",
+                "portion": "1 Tablet",
+                "calories": 12.0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "CUT FRUITS",
+                "qty": 150.0,
+                "unit": "Grams",
+                "portion": "150 Grams",
+                "calories": 67.0,
+                "note": "1 medium size Banana, / Guava /pear / apple / pomegranate /kiwi / orange 10-12 Kala Jamun,/Lychee / round slice Pineapple/ fresh blue berries /Strawberry 12-15 ice cube size Watermelon / musk melon /Papaya",
+                "alternatives": []
+              },
+              {
+                "name": "ROASTED WATERMELON SEEDS",
+                "qty": 5.0,
+                "unit": "Grams",
+                "portion": "5 Grams",
+                "calories": 26.79,
+                "note": "1tsp",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Lunch",
+            "time": "01:00PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "SALAD",
+                "qty": 100.0,
+                "unit": "Grams",
+                "portion": "100 Grams",
+                "calories": 34.87,
+                "note": "cucumber / carrot / raddish",
+                "alternatives": []
+              },
+              {
+                "name": "DAL CHAWAL",
+                "qty": 300.0,
+                "unit": "Grams",
+                "portion": "300 Grams",
+                "calories": 339.72,
+                "note": "1:1 dal + rice",
+                "alternatives": []
+              },
+              {
+                "name": "TORI SABJI",
+                "qty": 150.0,
+                "unit": "Grams",
+                "portion": "150 Grams",
+                "calories": 52.09,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Supplement",
+            "time": "01:30PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "ACE BLEND / OMEGA 3",
+                "qty": 1.0,
+                "unit": "Capsule",
+                "portion": "1 Capsule",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "ACEBLEND / MAGNESIUM",
+                "qty": 1.0,
+                "unit": "Capsule",
+                "portion": "1 Capsule",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Beverages",
+            "time": "02:30PM",
+            "note": "/ pre workout",
+            "meals": [
+              {
+                "name": "BEETROOT JUICE",
+                "qty": 200.0,
+                "unit": "ML",
+                "portion": "200 ML",
+                "calories": 63.02,
+                "note": "use 1 medium size beetroot + 1/2 inch ginger + 3-4 mint leaves",
+                "alternatives": []
+              },
+              {
+                "name": "FRESH COCONUT WATER",
+                "qty": 100.0,
+                "unit": "Ml",
+                "portion": "100 Ml",
+                "calories": 24.0,
+                "note": "add it to juice",
+                "alternatives": []
+              },
+              {
+                "name": "PISTACHIO",
+                "qty": 10.0,
+                "unit": "Kernel",
+                "portion": "10 Kernel",
+                "calories": 43.82,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "During Workout",
+            "time": "03:00PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "LEMON WATER WITH SALT",
+                "qty": 500.0,
+                "unit": "ML",
+                "portion": "500 ML",
+                "calories": 4.55,
+                "note": "use 1 lemon + 2 pinch of salt",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Post Workout",
+            "time": "04:00PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "SATTU",
+                "qty": 30.0,
+                "unit": "Grams",
+                "portion": "30 Grams",
+                "calories": 129.0,
+                "note": "2tbsp - mix it with lemon water",
+                "alternatives": []
+              },
+              {
+                "name": "BOILED SWEET POTATOES",
+                "qty": 200.0,
+                "unit": "Grams",
+                "portion": "200 Grams",
+                "calories": 152.0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "During Training",
+            "time": "06:00PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "PLAIN WATER",
+                "qty": 500.0,
+                "unit": "Ml",
+                "portion": "500 Ml",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "1 CHAZE",
+                "qty": 0.5,
+                "unit": "Serving",
+                "portion": "0.5 Serving",
+                "calories": 114.0,
+                "note": "30g - mix it with water",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Dinner",
+            "time": "07:00PM",
+            "note": "post training",
+            "meals": [
+              {
+                "name": "CARROT TOMATO SOUP",
+                "qty": 200.0,
+                "unit": "ML",
+                "portion": "200 ML",
+                "calories": 36.76,
+                "note": "",
+                "alternatives": [
+                  {
+                    "name": "PUMPKIN SOUP",
+                    "portion": "200 Ml",
+                    "calories": 77.62
+                  }
+                ]
+              },
+              {
+                "name": "GARLIC",
+                "qty": 1.0,
+                "unit": "Clove",
+                "portion": "1 Clove",
+                "calories": 4.0,
+                "note": "add in cooked food",
+                "alternatives": []
+              },
+              {
+                "name": "CHAPATI",
+                "qty": 3.0,
+                "unit": "Roti/Chapati",
+                "portion": "3 Roti/Chapati",
+                "calories": 256.0,
+                "note": "ragi / jowar flour + khapli wheat - 40g x 3 medium size",
+                "alternatives": []
+              },
+              {
+                "name": "FISH CURRY",
+                "qty": 200.0,
+                "unit": "Grams",
+                "portion": "200 Grams",
+                "calories": 154.32,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "ZUCCHINI FRY",
+                "qty": 150.0,
+                "unit": "Grams",
+                "portion": "150 Grams",
+                "calories": 93.75,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Supplement",
+            "time": "08:30PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "ACE BLEND / OMEGA 3",
+                "qty": 1.0,
+                "unit": "Capsule",
+                "portion": "1 Capsule",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "ACEBLEND / MAGNESIUM",
+                "qty": 1.0,
+                "unit": "Capsule",
+                "portion": "1 Capsule",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Post Dinner",
+            "time": "09:30PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "LACTOSE FREE MILK",
+                "qty": 200.0,
+                "unit": "Ml",
+                "portion": "200 Ml",
+                "calories": 118.0,
+                "note": "/ almond milk",
+                "alternatives": []
+              },
+              {
+                "name": "SAFFRON",
+                "qty": 0.25,
+                "unit": "Tsp",
+                "portion": "0.25 Tsp",
+                "calories": 0.54,
+                "note": "2 strands saffron - add it to tea",
+                "alternatives": []
+              },
+              {
+                "name": "SOAKED WALNUT",
+                "qty": 2.0,
+                "unit": "Piece (Half Of One)",
+                "portion": "2 Piece (Half Of One)",
+                "calories": 28.85,
+                "note": "1 whole",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Bedtime",
+            "time": "10:00PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "HEALTHAID / COLIPROBIO (30 BILLION) (Health Aid)",
+                "qty": 1.0,
+                "unit": "soft gels",
+                "portion": "1 soft gels",
+                "calories": 1.0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "day": "Wednesday",
+        "slots": [
+          {
+            "name": "On Waking Up",
+            "time": "06:00AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "KALONJI WATER",
+                "qty": 200.0,
+                "unit": "ML",
+                "portion": "200 ML",
+                "calories": 3.72,
+                "note": "overnight soak 1tsp each kalonji , seeds in 200ml , strain and drink",
+                "alternatives": []
+              },
+              {
+                "name": "BRAZILNUT",
+                "qty": 1.0,
+                "unit": "Kernel",
+                "portion": "1 Kernel",
+                "calories": 33.0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "BLACK RAISINS",
+                "qty": 5.0,
+                "unit": "Piece",
+                "portion": "5 Piece",
+                "calories": 6.0,
+                "note": "overnight soaked",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Pre Training",
+            "time": "06:30AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "PORRIDGE",
+                "qty": 250.0,
+                "unit": "Grams",
+                "portion": "250 Grams",
+                "calories": 241.6,
+                "note": "30g amaranth / oats + 200ml lactose free milk+ 1tsp roasted sunflower seeds + apple / banana",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "During Training",
+            "time": "07:00AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "LEMON WATER",
+                "qty": 500.0,
+                "unit": "Ml",
+                "portion": "500 Ml",
+                "calories": 2.0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "CHIA SEEDS",
+                "qty": 2.5,
+                "unit": "Grams",
+                "portion": "2.5 Grams",
+                "calories": 12.0,
+                "note": "2tsp - pre soaked - add it to lemon water",
+                "alternatives": []
+              },
+              {
+                "name": "SALT",
+                "qty": 4.0,
+                "unit": "Dash",
+                "portion": "4 Dash",
+                "calories": 0,
+                "note": "3-4 pinch -add it to the lemon water",
+                "alternatives": []
+              },
+              {
+                "name": "BANANA",
+                "qty": 1.0,
+                "unit": "Small (6\" To 6-7/8\" Long)",
+                "portion": "1 Small (6\" To 6-7/8\" Long)",
+                "calories": 117.0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "During Training",
+            "time": "08:00AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "PLAIN WATER",
+                "qty": 1000.0,
+                "unit": "Ml",
+                "portion": "1000 Ml",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "1 CHAZE",
+                "qty": 1.0,
+                "unit": "Serving",
+                "portion": "1 Serving",
+                "calories": 228.0,
+                "note": "60g - add it to water",
+                "alternatives": []
+              },
+              {
+                "name": "SALT",
+                "qty": 1.0,
+                "unit": "Serving",
+                "portion": "1 Serving",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Breakfast",
+            "time": "10:00AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "BOILED EGG WHITE",
+                "qty": 3.0,
+                "unit": "Egg White",
+                "portion": "3 Egg White",
+                "calories": 51.0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "BOILED EGGS",
+                "qty": 2.0,
+                "unit": "Egg",
+                "portion": "2 Egg",
+                "calories": 160.0,
+                "note": "add salt and pepper",
+                "alternatives": []
+              },
+              {
+                "name": "QUINOA POHA",
+                "qty": 200.0,
+                "unit": "Grams",
+                "portion": "200 Grams",
+                "calories": 226.16,
+                "note": "1:1 quinoa + vegetable",
+                "alternatives": []
+              },
+              {
+                "name": "COCONUT CHUTNEY",
+                "qty": 4.0,
+                "unit": "Tablespoon",
+                "portion": "4 Tablespoon",
+                "calories": 165.04,
+                "note": "60g",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "During Workout",
+            "time": "10:30AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "PLAIN WATER",
+                "qty": 500.0,
+                "unit": "Ml",
+                "portion": "500 Ml",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "SALT",
+                "qty": 2.0,
+                "unit": "Dash",
+                "portion": "2 Dash",
+                "calories": 0,
+                "note": "1-2 pinch add it to water",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Mid Morning",
+            "time": "11:30AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "FAST & UP / VEGAN COLLAGEN BUILDER",
+                "qty": 1.0,
+                "unit": "Tablet",
+                "portion": "1 Tablet",
+                "calories": 12.0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "CUT FRUITS",
+                "qty": 150.0,
+                "unit": "Grams",
+                "portion": "150 Grams",
+                "calories": 67.0,
+                "note": "1 medium size Banana, / Guava /pear / apple / pomegranate /kiwi / orange 10-12 Kala Jamun,/Lychee / round slice Pineapple/ fresh blue berries /Strawberry 12-15 ice cube size Watermelon / musk melon /Papaya",
+                "alternatives": []
+              },
+              {
+                "name": "ROASTED WATERMELON SEEDS",
+                "qty": 5.0,
+                "unit": "Grams",
+                "portion": "5 Grams",
+                "calories": 26.79,
+                "note": "1tsp",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Lunch",
+            "time": "01:00PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "SALAD",
+                "qty": 100.0,
+                "unit": "Grams",
+                "portion": "100 Grams",
+                "calories": 34.87,
+                "note": "cucumber / carrot / raddish",
+                "alternatives": []
+              },
+              {
+                "name": "JOWAR ROTI",
+                "qty": 2.0,
+                "unit": "Roti/Bhakri",
+                "portion": "2 Roti/Bhakri",
+                "calories": 226.99,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "GHIYA CHANA DAL",
+                "qty": 300.0,
+                "unit": "Grams",
+                "portion": "300 Grams",
+                "calories": 147.12,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Supplement",
+            "time": "01:30PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "ACE BLEND / OMEGA 3",
+                "qty": 1.0,
+                "unit": "Capsule",
+                "portion": "1 Capsule",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "ACEBLEND / MAGNESIUM",
+                "qty": 1.0,
+                "unit": "Capsule",
+                "portion": "1 Capsule",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Beverages",
+            "time": "02:30PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "BEETROOT JUICE",
+                "qty": 200.0,
+                "unit": "ML",
+                "portion": "200 ML",
+                "calories": 63.02,
+                "note": "use 1 medium size beetroot + 1/2 inch ginger + 3-4 mint leaves",
+                "alternatives": []
+              },
+              {
+                "name": "FRESH COCONUT WATER",
+                "qty": 100.0,
+                "unit": "Ml",
+                "portion": "100 Ml",
+                "calories": 24.0,
+                "note": "add it to juice",
+                "alternatives": []
+              },
+              {
+                "name": "PISTACHIO",
+                "qty": 10.0,
+                "unit": "Kernel",
+                "portion": "10 Kernel",
+                "calories": 43.82,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "During Workout",
+            "time": "03:00PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "LEMON WATER WITH SALT",
+                "qty": 500.0,
+                "unit": "ML",
+                "portion": "500 ML",
+                "calories": 4.55,
+                "note": "use 1 lemon + 2 pinch of salt",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Post Workout",
+            "time": "04:00PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "SATTU",
+                "qty": 30.0,
+                "unit": "Grams",
+                "portion": "30 Grams",
+                "calories": 129.0,
+                "note": "2tbsp - mix it with lemon water",
+                "alternatives": []
+              },
+              {
+                "name": "VEGETABLE BESAN CHEELA",
+                "qty": 2.0,
+                "unit": "Piece",
+                "portion": "2 Piece",
+                "calories": 224.86,
+                "note": "medium size",
+                "alternatives": []
+              },
+              {
+                "name": "MINT CHUTNEY",
+                "qty": 4.0,
+                "unit": "Tablespoon",
+                "portion": "4 Tablespoon",
+                "calories": 26.42,
+                "note": "60g",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "During Training",
+            "time": "06:00PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "PLAIN WATER",
+                "qty": 500.0,
+                "unit": "Ml",
+                "portion": "500 Ml",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "1 CHAZE",
+                "qty": 0.5,
+                "unit": "Serving",
+                "portion": "0.5 Serving",
+                "calories": 114.0,
+                "note": "30g - mix it with water",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Dinner",
+            "time": "07:00PM",
+            "note": "post training",
+            "meals": [
+              {
+                "name": "CARROT TOMATO SOUP",
+                "qty": 200.0,
+                "unit": "ML",
+                "portion": "200 ML",
+                "calories": 36.76,
+                "note": "",
+                "alternatives": [
+                  {
+                    "name": "PUMPKIN SOUP",
+                    "portion": "200 Ml",
+                    "calories": 77.62
+                  }
+                ]
+              },
+              {
+                "name": "GARLIC",
+                "qty": 1.0,
+                "unit": "Clove",
+                "portion": "1 Clove",
+                "calories": 4.0,
+                "note": "add in cooked food",
+                "alternatives": []
+              },
+              {
+                "name": "CHAPATI",
+                "qty": 3.0,
+                "unit": "Roti/Chapati",
+                "portion": "3 Roti/Chapati",
+                "calories": 256.0,
+                "note": "ragi / jowar flour + khapli wheat - 40g x 3 medium size",
+                "alternatives": []
+              },
+              {
+                "name": "EGG WHITE BHURJI WITH ONION",
+                "qty": 200.0,
+                "unit": "Gram",
+                "portion": "200 Gram",
+                "calories": 135.2,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "GREEN BEANS IN GARLIC AND OLIVE OIL",
+                "qty": 150.0,
+                "unit": "Gram",
+                "portion": "150 Gram",
+                "calories": 71.82,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Supplement",
+            "time": "08:30PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "ACE BLEND / OMEGA 3",
+                "qty": 1.0,
+                "unit": "Capsule",
+                "portion": "1 Capsule",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "ACEBLEND / MAGNESIUM",
+                "qty": 1.0,
+                "unit": "Capsule",
+                "portion": "1 Capsule",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Post Dinner",
+            "time": "09:30PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "LACTOSE FREE MILK",
+                "qty": 200.0,
+                "unit": "Ml",
+                "portion": "200 Ml",
+                "calories": 118.0,
+                "note": "/ almond milk",
+                "alternatives": []
+              },
+              {
+                "name": "SAFFRON",
+                "qty": 0.25,
+                "unit": "Tsp",
+                "portion": "0.25 Tsp",
+                "calories": 0.54,
+                "note": "2 strands saffron - add it to tea",
+                "alternatives": []
+              },
+              {
+                "name": "SOAKED WALNUT",
+                "qty": 2.0,
+                "unit": "Piece (Half Of One)",
+                "portion": "2 Piece (Half Of One)",
+                "calories": 28.85,
+                "note": "1 whole",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Bedtime",
+            "time": "10:00PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "HEALTHAID / COLIPROBIO (30 BILLION) (Health Aid)",
+                "qty": 1.0,
+                "unit": "soft gels",
+                "portion": "1 soft gels",
+                "calories": 1.0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "day": "Thursday",
+        "slots": [
+          {
+            "name": "On Waking Up",
+            "time": "06:00AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "KALONJI WATER",
+                "qty": 200.0,
+                "unit": "ML",
+                "portion": "200 ML",
+                "calories": 3.72,
+                "note": "overnight soak 1tsp each kalonji , seeds in 200ml , strain and drink",
+                "alternatives": []
+              },
+              {
+                "name": "BRAZILNUT",
+                "qty": 1.0,
+                "unit": "Kernel",
+                "portion": "1 Kernel",
+                "calories": 33.0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "BLACK RAISINS",
+                "qty": 5.0,
+                "unit": "Piece",
+                "portion": "5 Piece",
+                "calories": 6.0,
+                "note": "overnight soaked",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Pre Training",
+            "time": "06:30AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "PORRIDGE",
+                "qty": 250.0,
+                "unit": "Grams",
+                "portion": "250 Grams",
+                "calories": 241.6,
+                "note": "30g amaranth / oats + 200ml lactose free milk+ 1tsp roasted sunflower seeds + apple / banana",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "During Training",
+            "time": "07:00AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "LEMON WATER",
+                "qty": 500.0,
+                "unit": "Ml",
+                "portion": "500 Ml",
+                "calories": 2.0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "CHIA SEEDS",
+                "qty": 2.5,
+                "unit": "Grams",
+                "portion": "2.5 Grams",
+                "calories": 12.0,
+                "note": "2tsp - pre soaked - add it to lemon water",
+                "alternatives": []
+              },
+              {
+                "name": "SALT",
+                "qty": 4.0,
+                "unit": "Dash",
+                "portion": "4 Dash",
+                "calories": 0,
+                "note": "3-4 pinch -add it to the lemon water",
+                "alternatives": []
+              },
+              {
+                "name": "BANANA",
+                "qty": 1.0,
+                "unit": "Small (6\" To 6-7/8\" Long)",
+                "portion": "1 Small (6\" To 6-7/8\" Long)",
+                "calories": 117.0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "During Training",
+            "time": "08:00AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "PLAIN WATER",
+                "qty": 1000.0,
+                "unit": "Ml",
+                "portion": "1000 Ml",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "1 CHAZE",
+                "qty": 1.0,
+                "unit": "Serving",
+                "portion": "1 Serving",
+                "calories": 228.0,
+                "note": "60g - add it to water",
+                "alternatives": []
+              },
+              {
+                "name": "SALT",
+                "qty": 1.0,
+                "unit": "Serving",
+                "portion": "1 Serving",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Breakfast",
+            "time": "10:00AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "BOILED EGG WHITE",
+                "qty": 3.0,
+                "unit": "Egg White",
+                "portion": "3 Egg White",
+                "calories": 51.0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "BOILED EGGS",
+                "qty": 2.0,
+                "unit": "Egg",
+                "portion": "2 Egg",
+                "calories": 160.0,
+                "note": "add salt and pepper",
+                "alternatives": []
+              },
+              {
+                "name": "CARROT CAPSICUM IDLI",
+                "qty": 300.0,
+                "unit": "Grams",
+                "portion": "300 Grams",
+                "calories": 252.12,
+                "note": "4 idli + 100g vegetables",
+                "alternatives": []
+              },
+              {
+                "name": "COCONUT CHUTNEY",
+                "qty": 4.0,
+                "unit": "Tablespoon",
+                "portion": "4 Tablespoon",
+                "calories": 165.04,
+                "note": "60g",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "During Workout",
+            "time": "10:30AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "PLAIN WATER",
+                "qty": 500.0,
+                "unit": "Ml",
+                "portion": "500 Ml",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "SALT",
+                "qty": 2.0,
+                "unit": "Dash",
+                "portion": "2 Dash",
+                "calories": 0,
+                "note": "1-2 pinch add it to water",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Mid Morning",
+            "time": "11:30AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "FAST & UP / VEGAN COLLAGEN BUILDER",
+                "qty": 1.0,
+                "unit": "Tablet",
+                "portion": "1 Tablet",
+                "calories": 12.0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "CUT FRUITS",
+                "qty": 150.0,
+                "unit": "Grams",
+                "portion": "150 Grams",
+                "calories": 67.0,
+                "note": "1 medium size Banana, / Guava /pear / apple / pomegranate /kiwi / orange 10-12 Kala Jamun,/Lychee / round slice Pineapple/ fresh blue berries /Strawberry 12-15 ice cube size Watermelon / musk melon /Papaya",
+                "alternatives": []
+              },
+              {
+                "name": "ROASTED WATERMELON SEEDS",
+                "qty": 5.0,
+                "unit": "Grams",
+                "portion": "5 Grams",
+                "calories": 26.79,
+                "note": "1tsp",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Lunch",
+            "time": "01:00PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "SALAD",
+                "qty": 100.0,
+                "unit": "Grams",
+                "portion": "100 Grams",
+                "calories": 34.87,
+                "note": "cucumber / carrot / raddish",
+                "alternatives": []
+              },
+              {
+                "name": "KHICHADI",
+                "qty": 300.0,
+                "unit": "Grams",
+                "portion": "300 Grams",
+                "calories": 308.1,
+                "note": "1:1 rice + dal",
+                "alternatives": []
+              },
+              {
+                "name": "BELL PEPPER SABJI",
+                "qty": 150.0,
+                "unit": "Gram",
+                "portion": "150 Gram",
+                "calories": 62.62,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Supplement",
+            "time": "01:30PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "ACE BLEND / OMEGA 3",
+                "qty": 1.0,
+                "unit": "Capsule",
+                "portion": "1 Capsule",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "ACEBLEND / MAGNESIUM",
+                "qty": 1.0,
+                "unit": "Capsule",
+                "portion": "1 Capsule",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Beverages",
+            "time": "02:30PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "BEETROOT JUICE",
+                "qty": 200.0,
+                "unit": "ML",
+                "portion": "200 ML",
+                "calories": 63.02,
+                "note": "use 1 medium size beetroot + 1/2 inch ginger + 3-4 mint leaves",
+                "alternatives": []
+              },
+              {
+                "name": "FRESH COCONUT WATER",
+                "qty": 100.0,
+                "unit": "Ml",
+                "portion": "100 Ml",
+                "calories": 24.0,
+                "note": "add it to juice",
+                "alternatives": []
+              },
+              {
+                "name": "PISTACHIO",
+                "qty": 10.0,
+                "unit": "Kernel",
+                "portion": "10 Kernel",
+                "calories": 43.82,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "During Workout",
+            "time": "03:00PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "LEMON WATER WITH SALT",
+                "qty": 500.0,
+                "unit": "ML",
+                "portion": "500 ML",
+                "calories": 4.55,
+                "note": "use 1 lemon + 2 pinch of salt",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Post Workout",
+            "time": "04:00PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "SATTU",
+                "qty": 30.0,
+                "unit": "Grams",
+                "portion": "30 Grams",
+                "calories": 129.0,
+                "note": "2tbsp - mix it with lemon water",
+                "alternatives": []
+              },
+              {
+                "name": "BOILED SWEET POTATOES",
+                "qty": 200.0,
+                "unit": "Grams",
+                "portion": "200 Grams",
+                "calories": 152.0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "During Training",
+            "time": "06:00PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "PLAIN WATER",
+                "qty": 500.0,
+                "unit": "Ml",
+                "portion": "500 Ml",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "1 CHAZE",
+                "qty": 0.5,
+                "unit": "Serving",
+                "portion": "0.5 Serving",
+                "calories": 114.0,
+                "note": "30g - mix it with water",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Dinner",
+            "time": "07:00PM",
+            "note": "post training",
+            "meals": [
+              {
+                "name": "CARROT TOMATO SOUP",
+                "qty": 200.0,
+                "unit": "ML",
+                "portion": "200 ML",
+                "calories": 36.76,
+                "note": "",
+                "alternatives": [
+                  {
+                    "name": "PUMPKIN SOUP",
+                    "portion": "200 Ml",
+                    "calories": 77.62
+                  }
+                ]
+              },
+              {
+                "name": "GARLIC",
+                "qty": 1.0,
+                "unit": "Clove",
+                "portion": "1 Clove",
+                "calories": 4.0,
+                "note": "add in cooked food",
+                "alternatives": []
+              },
+              {
+                "name": "CHAPATI",
+                "qty": 3.0,
+                "unit": "Roti/Chapati",
+                "portion": "3 Roti/Chapati",
+                "calories": 256.0,
+                "note": "ragi / jowar flour + khapli wheat - 40g x 3 medium size",
+                "alternatives": []
+              },
+              {
+                "name": "LOW FAT PANEER CURRY",
+                "qty": 200.0,
+                "unit": "Grams",
+                "portion": "200 Grams",
+                "calories": 191.72,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "VEGETABLE KORMA",
+                "qty": 150.0,
+                "unit": "Grams",
+                "portion": "150 Grams",
+                "calories": 119.81,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Supplement",
+            "time": "08:30PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "ACE BLEND / OMEGA 3",
+                "qty": 1.0,
+                "unit": "Capsule",
+                "portion": "1 Capsule",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "ACEBLEND / MAGNESIUM",
+                "qty": 1.0,
+                "unit": "Capsule",
+                "portion": "1 Capsule",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Post Dinner",
+            "time": "09:30PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "LACTOSE FREE MILK",
+                "qty": 200.0,
+                "unit": "Ml",
+                "portion": "200 Ml",
+                "calories": 118.0,
+                "note": "/ almond milk",
+                "alternatives": []
+              },
+              {
+                "name": "SAFFRON",
+                "qty": 0.25,
+                "unit": "Tsp",
+                "portion": "0.25 Tsp",
+                "calories": 0.54,
+                "note": "2 strands saffron - add it to tea",
+                "alternatives": []
+              },
+              {
+                "name": "SOAKED WALNUT",
+                "qty": 2.0,
+                "unit": "Piece (Half Of One)",
+                "portion": "2 Piece (Half Of One)",
+                "calories": 28.85,
+                "note": "1 whole",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Bedtime",
+            "time": "10:00PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "HEALTHAID / COLIPROBIO (30 BILLION) (Health Aid)",
+                "qty": 1.0,
+                "unit": "soft gels",
+                "portion": "1 soft gels",
+                "calories": 1.0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "day": "Friday",
+        "slots": [
+          {
+            "name": "On Waking Up",
+            "time": "06:00AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "KALONJI WATER",
+                "qty": 200.0,
+                "unit": "ML",
+                "portion": "200 ML",
+                "calories": 3.72,
+                "note": "overnight soak 1tsp each kalonji , seeds in 200ml , strain and drink",
+                "alternatives": []
+              },
+              {
+                "name": "BRAZILNUT",
+                "qty": 1.0,
+                "unit": "Kernel",
+                "portion": "1 Kernel",
+                "calories": 33.0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "BLACK RAISINS",
+                "qty": 5.0,
+                "unit": "Piece",
+                "portion": "5 Piece",
+                "calories": 6.0,
+                "note": "overnight soaked",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Pre Training",
+            "time": "06:30AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "PORRIDGE",
+                "qty": 250.0,
+                "unit": "Grams",
+                "portion": "250 Grams",
+                "calories": 241.6,
+                "note": "30g amaranth / oats + 200ml lactose free milk+ 1tsp roasted sunflower seeds + apple / banana",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "During Training",
+            "time": "07:00AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "LEMON WATER",
+                "qty": 500.0,
+                "unit": "Ml",
+                "portion": "500 Ml",
+                "calories": 2.0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "CHIA SEEDS",
+                "qty": 2.5,
+                "unit": "Grams",
+                "portion": "2.5 Grams",
+                "calories": 12.0,
+                "note": "2tsp - pre soaked - add it to lemon water",
+                "alternatives": []
+              },
+              {
+                "name": "SALT",
+                "qty": 4.0,
+                "unit": "Dash",
+                "portion": "4 Dash",
+                "calories": 0,
+                "note": "3-4 pinch -add it to the lemon water",
+                "alternatives": []
+              },
+              {
+                "name": "BANANA",
+                "qty": 1.0,
+                "unit": "Small (6\" To 6-7/8\" Long)",
+                "portion": "1 Small (6\" To 6-7/8\" Long)",
+                "calories": 117.0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "During Training",
+            "time": "08:00AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "PLAIN WATER",
+                "qty": 1000.0,
+                "unit": "Ml",
+                "portion": "1000 Ml",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "1 CHAZE",
+                "qty": 1.0,
+                "unit": "Serving",
+                "portion": "1 Serving",
+                "calories": 228.0,
+                "note": "60g - add it to water",
+                "alternatives": []
+              },
+              {
+                "name": "SALT",
+                "qty": 1.0,
+                "unit": "Serving",
+                "portion": "1 Serving",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Breakfast",
+            "time": "10:00AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "BOILED EGG WHITE",
+                "qty": 3.0,
+                "unit": "Egg White",
+                "portion": "3 Egg White",
+                "calories": 51.0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "BOILED EGGS",
+                "qty": 2.0,
+                "unit": "Egg",
+                "portion": "2 Egg",
+                "calories": 160.0,
+                "note": "add salt and pepper",
+                "alternatives": []
+              },
+              {
+                "name": "VEGETABLE POHA",
+                "qty": 250.0,
+                "unit": "Grams",
+                "portion": "250 Grams",
+                "calories": 332.93,
+                "note": "1:1 vegetable + poha",
+                "alternatives": []
+              },
+              {
+                "name": "COCONUT CHUTNEY",
+                "qty": 2.0,
+                "unit": "Tablespoon",
+                "portion": "2 Tablespoon",
+                "calories": 83.0,
+                "note": "30g",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "During Workout",
+            "time": "10:30AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "PLAIN WATER",
+                "qty": 500.0,
+                "unit": "Ml",
+                "portion": "500 Ml",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "SALT",
+                "qty": 2.0,
+                "unit": "Dash",
+                "portion": "2 Dash",
+                "calories": 0,
+                "note": "1-2 pinch add it to water",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Mid Morning",
+            "time": "11:30AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "FAST & UP / VEGAN COLLAGEN BUILDER",
+                "qty": 1.0,
+                "unit": "Tablet",
+                "portion": "1 Tablet",
+                "calories": 12.0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "CUT FRUITS",
+                "qty": 150.0,
+                "unit": "Grams",
+                "portion": "150 Grams",
+                "calories": 67.0,
+                "note": "1 medium size Banana, / Guava /pear / apple / pomegranate /kiwi / orange 10-12 Kala Jamun,/Lychee / round slice Pineapple/ fresh blue berries /Strawberry 12-15 ice cube size Watermelon / musk melon /Papaya",
+                "alternatives": []
+              },
+              {
+                "name": "ROASTED WATERMELON SEEDS",
+                "qty": 5.0,
+                "unit": "Grams",
+                "portion": "5 Grams",
+                "calories": 26.79,
+                "note": "1tsp",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Lunch",
+            "time": "01:00PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "SALAD",
+                "qty": 100.0,
+                "unit": "Grams",
+                "portion": "100 Grams",
+                "calories": 34.87,
+                "note": "cucumber / carrot / raddish",
+                "alternatives": []
+              },
+              {
+                "name": "CHICKEN VEGETABLE WRAP",
+                "qty": 250.0,
+                "unit": "Grams",
+                "portion": "250 Grams",
+                "calories": 351.23,
+                "note": "2 vegetable chicken wrap",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Supplement",
+            "time": "01:30PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "ACE BLEND / OMEGA 3",
+                "qty": 1.0,
+                "unit": "Capsule",
+                "portion": "1 Capsule",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "ACEBLEND / MAGNESIUM",
+                "qty": 1.0,
+                "unit": "Capsule",
+                "portion": "1 Capsule",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Beverages",
+            "time": "02:30PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "BEETROOT JUICE",
+                "qty": 200.0,
+                "unit": "ML",
+                "portion": "200 ML",
+                "calories": 63.02,
+                "note": "use 1 medium size beetroot + 1/2 inch ginger + 3-4 mint leaves",
+                "alternatives": []
+              },
+              {
+                "name": "FRESH COCONUT WATER",
+                "qty": 100.0,
+                "unit": "Ml",
+                "portion": "100 Ml",
+                "calories": 24.0,
+                "note": "add it to juice",
+                "alternatives": []
+              },
+              {
+                "name": "PISTACHIO",
+                "qty": 10.0,
+                "unit": "Kernel",
+                "portion": "10 Kernel",
+                "calories": 43.82,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "During Workout",
+            "time": "03:00PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "LEMON WATER WITH SALT",
+                "qty": 500.0,
+                "unit": "ML",
+                "portion": "500 ML",
+                "calories": 4.55,
+                "note": "use 1 lemon + 2 pinch of salt",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Post Workout",
+            "time": "04:00PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "SATTU",
+                "qty": 30.0,
+                "unit": "Grams",
+                "portion": "30 Grams",
+                "calories": 129.0,
+                "note": "2tbsp - mix it with lemon water",
+                "alternatives": []
+              },
+              {
+                "name": "PEANUT BUTTER TOAST OPEN SANDWICH",
+                "qty": 1.0,
+                "unit": "Piece",
+                "portion": "1 Piece",
+                "calories": 153.31,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "During Training",
+            "time": "06:00PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "PLAIN WATER",
+                "qty": 500.0,
+                "unit": "Ml",
+                "portion": "500 Ml",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "1 CHAZE",
+                "qty": 0.5,
+                "unit": "Serving",
+                "portion": "0.5 Serving",
+                "calories": 114.0,
+                "note": "30g - mix it with water",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Dinner",
+            "time": "07:00PM",
+            "note": "post training",
+            "meals": [
+              {
+                "name": "CARROT TOMATO SOUP",
+                "qty": 200.0,
+                "unit": "ML",
+                "portion": "200 ML",
+                "calories": 36.76,
+                "note": "",
+                "alternatives": [
+                  {
+                    "name": "PUMPKIN SOUP",
+                    "portion": "200 Ml",
+                    "calories": 77.62
+                  }
+                ]
+              },
+              {
+                "name": "GARLIC",
+                "qty": 1.0,
+                "unit": "Clove",
+                "portion": "1 Clove",
+                "calories": 4.0,
+                "note": "add in cooked food",
+                "alternatives": []
+              },
+              {
+                "name": "CHAPATI",
+                "qty": 3.0,
+                "unit": "Roti/Chapati",
+                "portion": "3 Roti/Chapati",
+                "calories": 256.0,
+                "note": "ragi / jowar flour + khapli wheat - 40g x 3 medium size",
+                "alternatives": []
+              },
+              {
+                "name": "CHICKPEA CURRY",
+                "qty": 200.0,
+                "unit": "Grams",
+                "portion": "200 Grams",
+                "calories": 195.66,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "ZUCCHINI FRY",
+                "qty": 150.0,
+                "unit": "Grams",
+                "portion": "150 Grams",
+                "calories": 93.75,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Supplement",
+            "time": "08:30PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "ACE BLEND / OMEGA 3",
+                "qty": 1.0,
+                "unit": "Capsule",
+                "portion": "1 Capsule",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "ACEBLEND / MAGNESIUM",
+                "qty": 1.0,
+                "unit": "Capsule",
+                "portion": "1 Capsule",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Post Dinner",
+            "time": "09:30PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "LACTOSE FREE MILK",
+                "qty": 200.0,
+                "unit": "Ml",
+                "portion": "200 Ml",
+                "calories": 118.0,
+                "note": "/ almond milk",
+                "alternatives": []
+              },
+              {
+                "name": "SAFFRON",
+                "qty": 0.25,
+                "unit": "Tsp",
+                "portion": "0.25 Tsp",
+                "calories": 0.54,
+                "note": "2 strands saffron - add it to tea",
+                "alternatives": []
+              },
+              {
+                "name": "SOAKED WALNUT",
+                "qty": 2.0,
+                "unit": "Piece (Half Of One)",
+                "portion": "2 Piece (Half Of One)",
+                "calories": 28.85,
+                "note": "1 whole",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Bedtime",
+            "time": "10:00PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "HEALTHAID / COLIPROBIO (30 BILLION) (Health Aid)",
+                "qty": 1.0,
+                "unit": "soft gels",
+                "portion": "1 soft gels",
+                "calories": 1.0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "day": "Saturday",
+        "slots": [
+          {
+            "name": "On Waking Up",
+            "time": "06:00AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "KALONJI WATER",
+                "qty": 200.0,
+                "unit": "ML",
+                "portion": "200 ML",
+                "calories": 3.72,
+                "note": "overnight soak 1tsp each kalonji , seeds in 200ml , strain and drink",
+                "alternatives": []
+              },
+              {
+                "name": "BRAZILNUT",
+                "qty": 1.0,
+                "unit": "Kernel",
+                "portion": "1 Kernel",
+                "calories": 33.0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "BLACK RAISINS",
+                "qty": 5.0,
+                "unit": "Piece",
+                "portion": "5 Piece",
+                "calories": 6.0,
+                "note": "overnight soaked",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Pre Training",
+            "time": "06:30AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "PORRIDGE",
+                "qty": 250.0,
+                "unit": "Grams",
+                "portion": "250 Grams",
+                "calories": 241.6,
+                "note": "30g amaranth / oats + 200ml lactose free milk+ 1tsp roasted sunflower seeds + apple / banana",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "During Training",
+            "time": "07:00AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "LEMON WATER",
+                "qty": 500.0,
+                "unit": "Ml",
+                "portion": "500 Ml",
+                "calories": 2.0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "CHIA SEEDS",
+                "qty": 2.5,
+                "unit": "Grams",
+                "portion": "2.5 Grams",
+                "calories": 12.0,
+                "note": "2tsp - pre soaked - add it to lemon water",
+                "alternatives": []
+              },
+              {
+                "name": "SALT",
+                "qty": 4.0,
+                "unit": "Dash",
+                "portion": "4 Dash",
+                "calories": 0,
+                "note": "3-4 pinch -add it to the lemon water",
+                "alternatives": []
+              },
+              {
+                "name": "BANANA",
+                "qty": 1.0,
+                "unit": "Small (6\" To 6-7/8\" Long)",
+                "portion": "1 Small (6\" To 6-7/8\" Long)",
+                "calories": 117.0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "During Training",
+            "time": "08:00AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "PLAIN WATER",
+                "qty": 1000.0,
+                "unit": "Ml",
+                "portion": "1000 Ml",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "1 CHAZE",
+                "qty": 1.0,
+                "unit": "Serving",
+                "portion": "1 Serving",
+                "calories": 228.0,
+                "note": "60g - add it to water",
+                "alternatives": []
+              },
+              {
+                "name": "SALT",
+                "qty": 1.0,
+                "unit": "Serving",
+                "portion": "1 Serving",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Breakfast",
+            "time": "10:00AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "BOILED EGG WHITE",
+                "qty": 3.0,
+                "unit": "Egg White",
+                "portion": "3 Egg White",
+                "calories": 51.0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "BOILED EGGS",
+                "qty": 2.0,
+                "unit": "Egg",
+                "portion": "2 Egg",
+                "calories": 160.0,
+                "note": "add salt and pepper",
+                "alternatives": []
+              },
+              {
+                "name": "AVOCADO HERB SALAD WRAP",
+                "qty": 200.0,
+                "unit": "Grams",
+                "portion": "200 Grams",
+                "calories": 404.8,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "During Workout",
+            "time": "10:30AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "PLAIN WATER",
+                "qty": 500.0,
+                "unit": "Ml",
+                "portion": "500 Ml",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "SALT",
+                "qty": 2.0,
+                "unit": "Dash",
+                "portion": "2 Dash",
+                "calories": 0,
+                "note": "1-2 pinch add it to water",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Mid Morning",
+            "time": "11:30AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "FAST & UP / VEGAN COLLAGEN BUILDER",
+                "qty": 1.0,
+                "unit": "Tablet",
+                "portion": "1 Tablet",
+                "calories": 12.0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "CUT FRUITS",
+                "qty": 150.0,
+                "unit": "Grams",
+                "portion": "150 Grams",
+                "calories": 67.0,
+                "note": "1 medium size Banana, / Guava /pear / apple / pomegranate /kiwi / orange 10-12 Kala Jamun,/Lychee / round slice Pineapple/ fresh blue berries /Strawberry 12-15 ice cube size Watermelon / musk melon /Papaya",
+                "alternatives": []
+              },
+              {
+                "name": "ROASTED WATERMELON SEEDS",
+                "qty": 5.0,
+                "unit": "Grams",
+                "portion": "5 Grams",
+                "calories": 26.79,
+                "note": "1tsp",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Lunch",
+            "time": "01:00PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "SALAD",
+                "qty": 100.0,
+                "unit": "Grams",
+                "portion": "100 Grams",
+                "calories": 34.87,
+                "note": "cucumber / carrot / raddish",
+                "alternatives": []
+              },
+              {
+                "name": "RAJMA CHAWAL",
+                "qty": 300.0,
+                "unit": "Grams",
+                "portion": "300 Grams",
+                "calories": 299.13,
+                "note": "1:1 rajma + chawal",
+                "alternatives": []
+              },
+              {
+                "name": "SPRING ONION SABJI",
+                "qty": 150.0,
+                "unit": "Gram",
+                "portion": "150 Gram",
+                "calories": 86.06,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Supplement",
+            "time": "01:30PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "ACE BLEND / OMEGA 3",
+                "qty": 1.0,
+                "unit": "Capsule",
+                "portion": "1 Capsule",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "ACEBLEND / MAGNESIUM",
+                "qty": 1.0,
+                "unit": "Capsule",
+                "portion": "1 Capsule",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Beverages",
+            "time": "02:30PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "BEETROOT JUICE",
+                "qty": 200.0,
+                "unit": "ML",
+                "portion": "200 ML",
+                "calories": 63.02,
+                "note": "use 1 medium size beetroot + 1/2 inch ginger + 3-4 mint leaves",
+                "alternatives": []
+              },
+              {
+                "name": "FRESH COCONUT WATER",
+                "qty": 100.0,
+                "unit": "Ml",
+                "portion": "100 Ml",
+                "calories": 24.0,
+                "note": "add it to juice",
+                "alternatives": []
+              },
+              {
+                "name": "PISTACHIO",
+                "qty": 10.0,
+                "unit": "Kernel",
+                "portion": "10 Kernel",
+                "calories": 43.82,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "During Workout",
+            "time": "03:00PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "LEMON WATER WITH SALT",
+                "qty": 500.0,
+                "unit": "ML",
+                "portion": "500 ML",
+                "calories": 4.55,
+                "note": "use 1 lemon + 2 pinch of salt",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Post Workout",
+            "time": "04:00PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "SATTU",
+                "qty": 30.0,
+                "unit": "Grams",
+                "portion": "30 Grams",
+                "calories": 129.0,
+                "note": "2tbsp - mix it with lemon water",
+                "alternatives": []
+              },
+              {
+                "name": "BOILED SWEET POTATOES",
+                "qty": 200.0,
+                "unit": "Grams",
+                "portion": "200 Grams",
+                "calories": 152.0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "During Training",
+            "time": "06:00PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "PLAIN WATER",
+                "qty": 500.0,
+                "unit": "Ml",
+                "portion": "500 Ml",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "1 CHAZE",
+                "qty": 0.5,
+                "unit": "Serving",
+                "portion": "0.5 Serving",
+                "calories": 114.0,
+                "note": "30g - mix it with water",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Dinner",
+            "time": "07:00PM",
+            "note": "post training",
+            "meals": [
+              {
+                "name": "CARROT TOMATO SOUP",
+                "qty": 200.0,
+                "unit": "ML",
+                "portion": "200 ML",
+                "calories": 36.76,
+                "note": "",
+                "alternatives": [
+                  {
+                    "name": "PUMPKIN SOUP",
+                    "portion": "200 Ml",
+                    "calories": 77.62
+                  }
+                ]
+              },
+              {
+                "name": "GARLIC",
+                "qty": 1.0,
+                "unit": "Clove",
+                "portion": "1 Clove",
+                "calories": 4.0,
+                "note": "add in cooked food",
+                "alternatives": []
+              },
+              {
+                "name": "CHAPATI",
+                "qty": 3.0,
+                "unit": "Roti/Chapati",
+                "portion": "3 Roti/Chapati",
+                "calories": 256.0,
+                "note": "ragi / jowar flour + khapli wheat - 40g x 3 medium size",
+                "alternatives": []
+              },
+              {
+                "name": "CHICKEN KORMA",
+                "qty": 200.0,
+                "unit": "Grams",
+                "portion": "200 Grams",
+                "calories": 222.8,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "STIR FRIED PUMPKIN",
+                "qty": 150.0,
+                "unit": "Gram",
+                "portion": "150 Gram",
+                "calories": 91.29,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Supplement",
+            "time": "08:30PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "ACE BLEND / OMEGA 3",
+                "qty": 1.0,
+                "unit": "Capsule",
+                "portion": "1 Capsule",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "ACEBLEND / MAGNESIUM",
+                "qty": 1.0,
+                "unit": "Capsule",
+                "portion": "1 Capsule",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Post Dinner",
+            "time": "09:30PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "LACTOSE FREE MILK",
+                "qty": 200.0,
+                "unit": "Ml",
+                "portion": "200 Ml",
+                "calories": 118.0,
+                "note": "/ almond milk",
+                "alternatives": []
+              },
+              {
+                "name": "SAFFRON",
+                "qty": 0.25,
+                "unit": "Tsp",
+                "portion": "0.25 Tsp",
+                "calories": 0.54,
+                "note": "2 strands saffron - add it to tea",
+                "alternatives": []
+              },
+              {
+                "name": "SOAKED WALNUT",
+                "qty": 2.0,
+                "unit": "Piece (Half Of One)",
+                "portion": "2 Piece (Half Of One)",
+                "calories": 28.85,
+                "note": "1 whole",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Bedtime",
+            "time": "10:00PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "HEALTHAID / COLIPROBIO (30 BILLION) (Health Aid)",
+                "qty": 1.0,
+                "unit": "soft gels",
+                "portion": "1 soft gels",
+                "calories": 1.0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "day": "Sunday",
+        "slots": [
+          {
+            "name": "On Waking Up",
+            "time": "06:00AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "KALONJI WATER",
+                "qty": 200.0,
+                "unit": "ML",
+                "portion": "200 ML",
+                "calories": 3.72,
+                "note": "overnight soak 1tsp each kalonji , seeds in 200ml , strain and drink",
+                "alternatives": []
+              },
+              {
+                "name": "BRAZILNUT",
+                "qty": 1.0,
+                "unit": "Kernel",
+                "portion": "1 Kernel",
+                "calories": 33.0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "BLACK RAISINS",
+                "qty": 5.0,
+                "unit": "Piece",
+                "portion": "5 Piece",
+                "calories": 6.0,
+                "note": "overnight soaked",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Pre Training",
+            "time": "06:30AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "PORRIDGE",
+                "qty": 250.0,
+                "unit": "Grams",
+                "portion": "250 Grams",
+                "calories": 241.6,
+                "note": "30g amaranth / oats + 200ml lactose free milk+ 1tsp roasted sunflower seeds + apple / banana",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "During Training",
+            "time": "07:00AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "LEMON WATER",
+                "qty": 500.0,
+                "unit": "Ml",
+                "portion": "500 Ml",
+                "calories": 2.0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "CHIA SEEDS",
+                "qty": 2.5,
+                "unit": "Grams",
+                "portion": "2.5 Grams",
+                "calories": 12.0,
+                "note": "2tsp - pre soaked - add it to lemon water",
+                "alternatives": []
+              },
+              {
+                "name": "SALT",
+                "qty": 4.0,
+                "unit": "Dash",
+                "portion": "4 Dash",
+                "calories": 0,
+                "note": "3-4 pinch -add it to the lemon water",
+                "alternatives": []
+              },
+              {
+                "name": "BANANA",
+                "qty": 1.0,
+                "unit": "Small (6\" To 6-7/8\" Long)",
+                "portion": "1 Small (6\" To 6-7/8\" Long)",
+                "calories": 117.0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "During Training",
+            "time": "08:00AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "PLAIN WATER",
+                "qty": 1000.0,
+                "unit": "Ml",
+                "portion": "1000 Ml",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "1 CHAZE",
+                "qty": 1.0,
+                "unit": "Serving",
+                "portion": "1 Serving",
+                "calories": 228.0,
+                "note": "60g - add it to water",
+                "alternatives": []
+              },
+              {
+                "name": "SALT",
+                "qty": 1.0,
+                "unit": "Serving",
+                "portion": "1 Serving",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Breakfast",
+            "time": "10:00AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "BOILED EGG WHITE",
+                "qty": 3.0,
+                "unit": "Egg White",
+                "portion": "3 Egg White",
+                "calories": 51.0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "BOILED EGGS",
+                "qty": 2.0,
+                "unit": "Egg",
+                "portion": "2 Egg",
+                "calories": 160.0,
+                "note": "add salt and pepper",
+                "alternatives": []
+              },
+              {
+                "name": "BANANA PEANUT BUTTER SANDWICH",
+                "qty": 3.0,
+                "unit": "Piece",
+                "portion": "3 Piece",
+                "calories": 473.97,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "During Workout",
+            "time": "10:30AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "PLAIN WATER",
+                "qty": 500.0,
+                "unit": "Ml",
+                "portion": "500 Ml",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "SALT",
+                "qty": 2.0,
+                "unit": "Dash",
+                "portion": "2 Dash",
+                "calories": 0,
+                "note": "1-2 pinch add it to water",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Mid Morning",
+            "time": "11:30AM",
+            "note": "",
+            "meals": [
+              {
+                "name": "FAST & UP / VEGAN COLLAGEN BUILDER",
+                "qty": 1.0,
+                "unit": "Tablet",
+                "portion": "1 Tablet",
+                "calories": 12.0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "CUT FRUITS",
+                "qty": 150.0,
+                "unit": "Grams",
+                "portion": "150 Grams",
+                "calories": 67.0,
+                "note": "1 medium size Banana, / Guava /pear / apple / pomegranate /kiwi / orange 10-12 Kala Jamun,/Lychee / round slice Pineapple/ fresh blue berries /Strawberry 12-15 ice cube size Watermelon / musk melon /Papaya",
+                "alternatives": []
+              },
+              {
+                "name": "ROASTED WATERMELON SEEDS",
+                "qty": 5.0,
+                "unit": "Grams",
+                "portion": "5 Grams",
+                "calories": 26.79,
+                "note": "1tsp",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Lunch",
+            "time": "01:00PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "SALAD",
+                "qty": 100.0,
+                "unit": "Grams",
+                "portion": "100 Grams",
+                "calories": 34.87,
+                "note": "cucumber / carrot / raddish",
+                "alternatives": []
+              },
+              {
+                "name": "KALA CHANA CURRY",
+                "qty": 150.0,
+                "unit": "Grams",
+                "portion": "150 Grams",
+                "calories": 146.75,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "COOKED BROWN RICE",
+                "qty": 150.0,
+                "unit": "Grams",
+                "portion": "150 Grams",
+                "calories": 155.81,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "TORI SABJI",
+                "qty": 150.0,
+                "unit": "Grams",
+                "portion": "150 Grams",
+                "calories": 52.09,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Supplement",
+            "time": "01:30PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "ACE BLEND / OMEGA 3",
+                "qty": 1.0,
+                "unit": "Capsule",
+                "portion": "1 Capsule",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "ACEBLEND / MAGNESIUM",
+                "qty": 1.0,
+                "unit": "Capsule",
+                "portion": "1 Capsule",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Beverages",
+            "time": "02:30PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "BEETROOT JUICE",
+                "qty": 200.0,
+                "unit": "ML",
+                "portion": "200 ML",
+                "calories": 63.02,
+                "note": "use 1 medium size beetroot + 1/2 inch ginger + 3-4 mint leaves",
+                "alternatives": []
+              },
+              {
+                "name": "FRESH COCONUT WATER",
+                "qty": 100.0,
+                "unit": "Ml",
+                "portion": "100 Ml",
+                "calories": 24.0,
+                "note": "add it to juice",
+                "alternatives": []
+              },
+              {
+                "name": "PISTACHIO",
+                "qty": 10.0,
+                "unit": "Kernel",
+                "portion": "10 Kernel",
+                "calories": 43.82,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "During Workout",
+            "time": "03:00PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "LEMON WATER WITH SALT",
+                "qty": 500.0,
+                "unit": "ML",
+                "portion": "500 ML",
+                "calories": 4.55,
+                "note": "use 1 lemon + 2 pinch of salt",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Post Workout",
+            "time": "04:00PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "SATTU",
+                "qty": 30.0,
+                "unit": "Grams",
+                "portion": "30 Grams",
+                "calories": 129.0,
+                "note": "2tbsp - mix it with lemon water",
+                "alternatives": []
+              },
+              {
+                "name": "BOILED SWEET POTATOES",
+                "qty": 200.0,
+                "unit": "Grams",
+                "portion": "200 Grams",
+                "calories": 152.0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "During Training",
+            "time": "06:00PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "PLAIN WATER",
+                "qty": 500.0,
+                "unit": "Ml",
+                "portion": "500 Ml",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "1 CHAZE",
+                "qty": 0.5,
+                "unit": "Serving",
+                "portion": "0.5 Serving",
+                "calories": 114.0,
+                "note": "30g - mix it with water",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Dinner",
+            "time": "07:00PM",
+            "note": "post training",
+            "meals": [
+              {
+                "name": "GARLIC",
+                "qty": 1.0,
+                "unit": "Clove",
+                "portion": "1 Clove",
+                "calories": 4.0,
+                "note": "add in cooked food",
+                "alternatives": []
+              },
+              {
+                "name": "CHAPATI",
+                "qty": 3.0,
+                "unit": "Roti/Chapati",
+                "portion": "3 Roti/Chapati",
+                "calories": 256.0,
+                "note": "ragi / jowar flour + khapli wheat - 40g x 3 medium size",
+                "alternatives": []
+              },
+              {
+                "name": "FISH CURRY",
+                "qty": 200.0,
+                "unit": "Grams",
+                "portion": "200 Grams",
+                "calories": 154.32,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "ZUCCHINI FRY",
+                "qty": 150.0,
+                "unit": "Grams",
+                "portion": "150 Grams",
+                "calories": 93.75,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Supplement",
+            "time": "08:30PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "ACE BLEND / OMEGA 3",
+                "qty": 1.0,
+                "unit": "Capsule",
+                "portion": "1 Capsule",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              },
+              {
+                "name": "ACEBLEND / MAGNESIUM",
+                "qty": 1.0,
+                "unit": "Capsule",
+                "portion": "1 Capsule",
+                "calories": 0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Post Dinner",
+            "time": "09:30PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "LACTOSE FREE MILK",
+                "qty": 200.0,
+                "unit": "Ml",
+                "portion": "200 Ml",
+                "calories": 118.0,
+                "note": "/ almond milk",
+                "alternatives": []
+              },
+              {
+                "name": "SAFFRON",
+                "qty": 0.25,
+                "unit": "Tsp",
+                "portion": "0.25 Tsp",
+                "calories": 0.54,
+                "note": "2 strands saffron - add it to tea",
+                "alternatives": []
+              },
+              {
+                "name": "SOAKED WALNUT",
+                "qty": 2.0,
+                "unit": "Piece (Half Of One)",
+                "portion": "2 Piece (Half Of One)",
+                "calories": 28.85,
+                "note": "1 whole",
+                "alternatives": []
+              }
+            ]
+          },
+          {
+            "name": "Bedtime",
+            "time": "10:00PM",
+            "note": "",
+            "meals": [
+              {
+                "name": "HEALTHAID / COLIPROBIO (30 BILLION) (Health Aid)",
+                "qty": 1.0,
+                "unit": "soft gels",
+                "portion": "1 soft gels",
+                "calories": 1.0,
+                "note": "",
+                "alternatives": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

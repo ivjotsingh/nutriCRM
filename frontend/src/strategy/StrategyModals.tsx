@@ -16,7 +16,7 @@ import {
 import type { MacroBreakdown, MacroDay, MacroRatio, Reference, StrategyDetail } from './types'
 import { Modal, ModalClose } from '../clients/ui'
 import { MacroBar } from './StrategyUI'
-import { formatDateTime, formatShortDate, numberValue } from './utils'
+import { formatDateTime, formatShortDate, numberValue, proteinRatioFor, rebalanceMacroRatio } from './utils'
 
 function previewMacros(calories: number, ratio: MacroRatio): MacroBreakdown {
   const choKcal = (calories * ratio.cho) / 100
@@ -86,7 +86,18 @@ export function MacroDayModal({
   }
 
   function patchRatio(key: keyof MacroRatio, value: number) {
-    setDraft((current) => current ? { ...current, ratio: { ...current.ratio, [key]: value } } : current)
+    setDraft((current) => current ? { ...current, ratio: rebalanceMacroRatio(current.ratio, key, value) } : current)
+  }
+
+  /** Energy and protein guardrail both drive the split; fat % is preserved. */
+  function patchEnergyOrProtein(changes: Partial<MacroDay>) {
+    setDraft((current) => {
+      if (!current) return current
+      const next = { ...current, ...changes }
+      const nextCalories = numberValue(next.calories)
+      const proteinRatio = proteinRatioFor(next.protein_target, nextCalories, targetWeight, next.ratio.fat)
+      return proteinRatio ? { ...next, ratio: proteinRatio } : next
+    })
   }
 
   return (
@@ -123,11 +134,18 @@ export function MacroDayModal({
         <div className="st-modal-grid">
           <label className="st-field">
             <span className="st-label">Calorie required (kcal)</span>
-            <input type="number" min={0} step="10" value={calories || ''} onChange={(event) => patch({ calories: numberValue(event.target.value) })} autoFocus />
+            <input
+              type="number"
+              min={0}
+              step="10"
+              value={calories || ''}
+              onChange={(event) => patchEnergyOrProtein({ calories: numberValue(event.target.value) })}
+              autoFocus
+            />
           </label>
           <label className="st-field">
             <span className="st-label">Protein target (g/kg)</span>
-            <select value={draft.protein_target} onChange={(event) => patch({ protein_target: event.target.value })}>
+            <select value={draft.protein_target} onChange={(event) => patchEnergyOrProtein({ protein_target: event.target.value })}>
               {reference.protein_targets.map((range) => <option key={range}>{range}</option>)}
             </select>
           </label>

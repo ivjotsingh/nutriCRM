@@ -557,4 +557,5 @@ CORE_TABS: list[dict[str, Any]] = [
     {"id": "forms", "label": "Forms", "description": "Food habits and behaviour questionnaire.", "icon": "clipboard", "fields": FORMS_FIELDS},
     {"id": "headtoe", "label": "Head-to-Toe", "description": "System-by-system screening with a Yes/No gate and multi-select findings.", "icon": "heart", "fields": HEADTOE_FIELDS},
     {"id": "strategy", "label": "Strategy", "description": "Create, revise, and publish this client's nutrition strategy.", "icon": "target", "fields": []},
+    {"id": "plans", "label": "Diet Plans", "description": "Build the seven-day plan, preview and download the branded PDF.", "icon": "utensils", "fields": []},
 ]

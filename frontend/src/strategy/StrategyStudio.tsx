@@ -533,8 +533,8 @@ export default function StrategyStudio({
               <button type="button" className="st-link" onClick={() => setModal('formula')}><Calculator size={12} /> Formula</button>
             </div>
             <div className="st-side-calories">
-              <strong>{derived.calories.calories ? derived.calories.calories.toLocaleString() : '—'}</strong>
-              <span>kcal / day</span>
+              <strong>{derived.totals.avg_calories ? derived.totals.avg_calories.toLocaleString() : '—'}</strong>
+              <span>kcal / day average</span>
             </div>
             <MacroBar cho={derived.totals.avg_cho * 4} pro={derived.totals.avg_protein * 4} fat={derived.totals.avg_fat * 9} />
             <div className="st-side-macro-labels">

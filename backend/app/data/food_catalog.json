@@ -1,0 +1,1565 @@
+{
+  "units": [
+    {
+      "unit": "ML",
+      "grams": 1.0
+    },
+    {
+      "unit": "Ml",
+      "grams": 1.0
+    },
+    {
+      "unit": "Gram",
+      "grams": 1.0
+    },
+    {
+      "unit": "Grams",
+      "grams": 1.0
+    },
+    {
+      "unit": "Tsp",
+      "grams": 5.0
+    },
+    {
+      "unit": "Tablespoon",
+      "grams": 15.0
+    },
+    {
+      "unit": "Tbsp",
+      "grams": 15.0
+    },
+    {
+      "unit": "Cup",
+      "grams": 150.0
+    },
+    {
+      "unit": "Katori",
+      "grams": 100.0
+    },
+    {
+      "unit": "Bowl",
+      "grams": 200.0
+    },
+    {
+      "unit": "Glass",
+      "grams": 250.0
+    },
+    {
+      "unit": "Kernel",
+      "grams": 1.2
+    },
+    {
+      "unit": "Clove",
+      "grams": 3.0
+    },
+    {
+      "unit": "Egg",
+      "grams": 50.0
+    },
+    {
+      "unit": "Egg White",
+      "grams": 33.0
+    },
+    {
+      "unit": "Piece",
+      "grams": 50.0
+    },
+    {
+      "unit": "Roti/Chapati",
+      "grams": 40.0
+    },
+    {
+      "unit": "Roti/Bhakri",
+      "grams": 60.0
+    },
+    {
+      "unit": "Paratha",
+      "grams": 80.0
+    },
+    {
+      "unit": "Capsule",
+      "grams": 1.0
+    },
+    {
+      "unit": "Tablet",
+      "grams": 1.5
+    },
+    {
+      "unit": "soft gels",
+      "grams": 1.0
+    },
+    {
+      "unit": "Serving",
+      "grams": 30.0
+    },
+    {
+      "unit": "Dash",
+      "grams": 0.5
+    },
+    {
+      "unit": "Small (6\" To 6-7/8\" Long)",
+      "grams": 90.0
+    },
+    {
+      "unit": "Piece (Half Of One)",
+      "grams": 2.0
+    },
+    {
+      "unit": "Slice",
+      "grams": 30.0
+    }
+  ],
+  "categories": [
+    "Beverages",
+    "Condiments",
+    "Dairy",
+    "Fruit",
+    "Grains & starches",
+    "Nuts, seeds & dried fruit",
+    "Other",
+    "Protein",
+    "Supplements",
+    "Vegetables"
+  ],
+  "dishes": [
+    {
+      "id": "beetroot-juice",
+      "name": "BEETROOT JUICE",
+      "category": "Beverages",
+      "unit": "ML",
+      "grams": 1.0,
+      "kcal": 0.3151,
+      "protein": 0.01,
+      "carbs": 0.07,
+      "fat": 0.0,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "black-coffee",
+      "name": "BLACK COFFEE",
+      "category": "Beverages",
+      "unit": "Cup",
+      "grams": 150.0,
+      "kcal": 5.0,
+      "protein": 0.38,
+      "carbs": 0.88,
+      "fat": 0.0,
+      "diet": [],
+      "source": "catalogue"
+    },
+    {
+      "id": "carrot-tomato-soup",
+      "name": "CARROT TOMATO SOUP",
+      "category": "Beverages",
+      "unit": "ML",
+      "grams": 1.0,
+      "kcal": 0.1838,
+      "protein": 0.01,
+      "carbs": 0.03,
+      "fat": 0.0,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "fresh-coconut-water",
+      "name": "FRESH COCONUT WATER",
+      "category": "Beverages",
+      "unit": "Ml",
+      "grams": 1.0,
+      "kcal": 0.24,
+      "protein": 0.01,
+      "carbs": 0.01,
+      "fat": 0.02,
+      "diet": [
+        "nuts"
+      ],
+      "source": "reference"
+    },
+    {
+      "id": "green-tea",
+      "name": "GREEN TEA",
+      "category": "Beverages",
+      "unit": "Cup",
+      "grams": 150.0,
+      "kcal": 3.0,
+      "protein": 0.0,
+      "carbs": 0.75,
+      "fat": 0.0,
+      "diet": [],
+      "source": "catalogue"
+    },
+    {
+      "id": "kalonji-water",
+      "name": "KALONJI WATER",
+      "category": "Beverages",
+      "unit": "ML",
+      "grams": 1.0,
+      "kcal": 0.0186,
+      "protein": 0.0,
+      "carbs": 0.0,
+      "fat": 0.0,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "lemon-water",
+      "name": "LEMON WATER",
+      "category": "Beverages",
+      "unit": "Ml",
+      "grams": 1.0,
+      "kcal": 0.004,
+      "protein": 0.0,
+      "carbs": 0.0,
+      "fat": 0.0,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "lemon-water-with-salt",
+      "name": "LEMON WATER WITH SALT",
+      "category": "Beverages",
+      "unit": "ML",
+      "grams": 1.0,
+      "kcal": 0.0091,
+      "protein": 0.0,
+      "carbs": 0.0,
+      "fat": 0.0,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "plain-water",
+      "name": "PLAIN WATER",
+      "category": "Beverages",
+      "unit": "Ml",
+      "grams": 1.0,
+      "kcal": 0.0,
+      "protein": 0.0,
+      "carbs": 0.0,
+      "fat": 0.0,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "roasted-watermelon-seeds",
+      "name": "ROASTED WATERMELON SEEDS",
+      "category": "Beverages",
+      "unit": "Grams",
+      "grams": 1.0,
+      "kcal": 5.358,
+      "protein": 0.17,
+      "carbs": 0.13,
+      "fat": 0.46,
+      "diet": [
+        "nuts"
+      ],
+      "source": "reference"
+    },
+    {
+      "id": "tomato-soup",
+      "name": "TOMATO SOUP",
+      "category": "Beverages",
+      "unit": "ML",
+      "grams": 200.0,
+      "kcal": 55.0,
+      "protein": 1.3,
+      "carbs": 7.58,
+      "fat": 2.17,
+      "diet": [],
+      "source": "catalogue"
+    },
+    {
+      "id": "dark-chocolate",
+      "name": "DARK CHOCOLATE",
+      "category": "Condiments",
+      "unit": "Grams",
+      "grams": 10.0,
+      "kcal": 55.0,
+      "protein": 0.83,
+      "carbs": 4.7,
+      "fat": 3.65,
+      "diet": [],
+      "source": "catalogue"
+    },
+    {
+      "id": "garlic",
+      "name": "GARLIC",
+      "category": "Condiments",
+      "unit": "Clove",
+      "grams": 3.0,
+      "kcal": 4.0,
+      "protein": 0.22,
+      "carbs": 0.67,
+      "fat": 0.04,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "ghee",
+      "name": "GHEE",
+      "category": "Condiments",
+      "unit": "Tsp",
+      "grams": 5.0,
+      "kcal": 45.0,
+      "protein": 0.0,
+      "carbs": 0.0,
+      "fat": 5.0,
+      "diet": [
+        "dairy"
+      ],
+      "source": "catalogue"
+    },
+    {
+      "id": "saffron",
+      "name": "SAFFRON",
+      "category": "Condiments",
+      "unit": "Tsp",
+      "grams": 5.0,
+      "kcal": 2.16,
+      "protein": 0.0,
+      "carbs": 0.0,
+      "fat": 0.0,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "salt",
+      "name": "SALT",
+      "category": "Condiments",
+      "unit": "Dash",
+      "grams": 0.5,
+      "kcal": 0.0,
+      "protein": 0.0,
+      "carbs": 0.0,
+      "fat": 0.0,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "buttermilk",
+      "name": "BUTTERMILK",
+      "category": "Dairy",
+      "unit": "Glass",
+      "grams": 250.0,
+      "kcal": 98.0,
+      "protein": 8.0,
+      "carbs": 12.0,
+      "fat": 2.0,
+      "diet": [
+        "dairy"
+      ],
+      "source": "catalogue"
+    },
+    {
+      "id": "curd",
+      "name": "CURD",
+      "category": "Dairy",
+      "unit": "Katori",
+      "grams": 150.0,
+      "kcal": 90.0,
+      "protein": 5.08,
+      "carbs": 7.12,
+      "fat": 4.58,
+      "diet": [
+        "dairy"
+      ],
+      "source": "catalogue"
+    },
+    {
+      "id": "lactose-free-milk",
+      "name": "LACTOSE FREE MILK",
+      "category": "Dairy",
+      "unit": "Ml",
+      "grams": 1.0,
+      "kcal": 0.59,
+      "protein": 0.03,
+      "carbs": 0.04,
+      "fat": 0.03,
+      "diet": [
+        "dairy"
+      ],
+      "source": "reference"
+    },
+    {
+      "id": "apple",
+      "name": "APPLE",
+      "category": "Fruit",
+      "unit": "Piece",
+      "grams": 150.0,
+      "kcal": 78.0,
+      "protein": 0.37,
+      "carbs": 18.51,
+      "fat": 0.28,
+      "diet": [],
+      "source": "catalogue"
+    },
+    {
+      "id": "banana",
+      "name": "BANANA",
+      "category": "Fruit",
+      "unit": "Small (6\" To 6-7/8\" Long)",
+      "grams": 90.0,
+      "kcal": 117.0,
+      "protein": 1.75,
+      "carbs": 26.31,
+      "fat": 0.53,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "cut-fruits",
+      "name": "CUT FRUITS",
+      "category": "Fruit",
+      "unit": "Grams",
+      "grams": 1.0,
+      "kcal": 0.4467,
+      "protein": 0.01,
+      "carbs": 0.1,
+      "fat": 0.0,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "mixed-fruit-bowl",
+      "name": "MIXED FRUIT BOWL",
+      "category": "Fruit",
+      "unit": "Grams",
+      "grams": 200.0,
+      "kcal": 120.0,
+      "protein": 1.16,
+      "carbs": 27.97,
+      "fat": 0.39,
+      "diet": [],
+      "source": "catalogue"
+    },
+    {
+      "id": "banana-peanut-butter-sandwich",
+      "name": "BANANA PEANUT BUTTER SANDWICH",
+      "category": "Grains & starches",
+      "unit": "Piece",
+      "grams": 50.0,
+      "kcal": 157.99,
+      "protein": 4.62,
+      "carbs": 25.65,
+      "fat": 4.1,
+      "diet": [
+        "dairy",
+        "nuts"
+      ],
+      "source": "reference"
+    },
+    {
+      "id": "boiled-sweet-potatoes",
+      "name": "BOILED SWEET POTATOES",
+      "category": "Grains & starches",
+      "unit": "Grams",
+      "grams": 1.0,
+      "kcal": 0.76,
+      "protein": 0.01,
+      "carbs": 0.17,
+      "fat": 0.0,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "brown-rice",
+      "name": "BROWN RICE",
+      "category": "Grains & starches",
+      "unit": "Cup",
+      "grams": 150.0,
+      "kcal": 216.0,
+      "protein": 5.0,
+      "carbs": 44.96,
+      "fat": 1.8,
+      "diet": [],
+      "source": "catalogue"
+    },
+    {
+      "id": "carrot-capsicum-idli",
+      "name": "CARROT CAPSICUM IDLI",
+      "category": "Grains & starches",
+      "unit": "Grams",
+      "grams": 1.0,
+      "kcal": 0.8404,
+      "protein": 0.02,
+      "carbs": 0.14,
+      "fat": 0.02,
+      "diet": [
+        "gluten"
+      ],
+      "source": "reference"
+    },
+    {
+      "id": "chapati",
+      "name": "CHAPATI",
+      "category": "Grains & starches",
+      "unit": "Roti/Chapati",
+      "grams": 40.0,
+      "kcal": 85.3333,
+      "protein": 2.49,
+      "carbs": 13.85,
+      "fat": 2.22,
+      "diet": [
+        "gluten"
+      ],
+      "source": "reference"
+    },
+    {
+      "id": "cooked-brown-rice",
+      "name": "COOKED BROWN RICE",
+      "category": "Grains & starches",
+      "unit": "Grams",
+      "grams": 1.0,
+      "kcal": 1.0387,
+      "protein": 0.02,
+      "carbs": 0.23,
+      "fat": 0.0,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "corn-capsicum-sandwich",
+      "name": "CORN CAPSICUM SANDWICH",
+      "category": "Grains & starches",
+      "unit": "Piece",
+      "grams": 50.0,
+      "kcal": 250.57,
+      "protein": 7.32,
+      "carbs": 40.68,
+      "fat": 6.51,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "curd-rice",
+      "name": "CURD RICE",
+      "category": "Grains & starches",
+      "unit": "Katori",
+      "grams": 200.0,
+      "kcal": 245.0,
+      "protein": 5.98,
+      "carbs": 41.83,
+      "fat": 5.98,
+      "diet": [
+        "dairy"
+      ],
+      "source": "catalogue"
+    },
+    {
+      "id": "idli",
+      "name": "IDLI",
+      "category": "Grains & starches",
+      "unit": "Piece",
+      "grams": 50.0,
+      "kcal": 58.0,
+      "protein": 1.65,
+      "carbs": 12.38,
+      "fat": 0.21,
+      "diet": [
+        "gluten"
+      ],
+      "source": "catalogue"
+    },
+    {
+      "id": "jowar-roti",
+      "name": "JOWAR ROTI",
+      "category": "Grains & starches",
+      "unit": "Roti/Bhakri",
+      "grams": 60.0,
+      "kcal": 113.495,
+      "protein": 3.32,
+      "carbs": 18.42,
+      "fat": 2.95,
+      "diet": [
+        "gluten"
+      ],
+      "source": "reference"
+    },
+    {
+      "id": "khichadi",
+      "name": "KHICHADI",
+      "category": "Grains & starches",
+      "unit": "Grams",
+      "grams": 1.0,
+      "kcal": 1.027,
+      "protein": 0.06,
+      "carbs": 0.06,
+      "fat": 0.06,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "oats-with-milk",
+      "name": "OATS WITH MILK",
+      "category": "Grains & starches",
+      "unit": "Katori",
+      "grams": 250.0,
+      "kcal": 220.0,
+      "protein": 8.22,
+      "carbs": 32.9,
+      "fat": 6.17,
+      "diet": [
+        "dairy"
+      ],
+      "source": "catalogue"
+    },
+    {
+      "id": "paneer-wrap",
+      "name": "PANEER WRAP",
+      "category": "Grains & starches",
+      "unit": "Piece",
+      "grams": 150.0,
+      "kcal": 320.0,
+      "protein": 14.09,
+      "carbs": 34.21,
+      "fat": 14.09,
+      "diet": [
+        "dairy"
+      ],
+      "source": "catalogue"
+    },
+    {
+      "id": "peanut-butter-toast-open-sandwich",
+      "name": "PEANUT BUTTER TOAST OPEN SANDWICH",
+      "category": "Grains & starches",
+      "unit": "Piece",
+      "grams": 50.0,
+      "kcal": 153.31,
+      "protein": 4.48,
+      "carbs": 24.89,
+      "fat": 3.98,
+      "diet": [
+        "dairy",
+        "nuts"
+      ],
+      "source": "reference"
+    },
+    {
+      "id": "porridge",
+      "name": "PORRIDGE",
+      "category": "Grains & starches",
+      "unit": "Grams",
+      "grams": 1.0,
+      "kcal": 0.9664,
+      "protein": 0.03,
+      "carbs": 0.17,
+      "fat": 0.02,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "quinoa-poha",
+      "name": "QUINOA POHA",
+      "category": "Grains & starches",
+      "unit": "Grams",
+      "grams": 1.0,
+      "kcal": 1.1308,
+      "protein": 0.02,
+      "carbs": 0.25,
+      "fat": 0.0,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "roti-chapati",
+      "name": "ROTI / CHAPATI",
+      "category": "Grains & starches",
+      "unit": "Roti/Chapati",
+      "grams": 40.0,
+      "kcal": 106.0,
+      "protein": 3.01,
+      "carbs": 20.09,
+      "fat": 1.51,
+      "diet": [
+        "gluten"
+      ],
+      "source": "catalogue"
+    },
+    {
+      "id": "steamed-rice",
+      "name": "STEAMED RICE",
+      "category": "Grains & starches",
+      "unit": "Cup",
+      "grams": 150.0,
+      "kcal": 195.0,
+      "protein": 4.14,
+      "carbs": 43.45,
+      "fat": 0.52,
+      "diet": [],
+      "source": "catalogue"
+    },
+    {
+      "id": "upma",
+      "name": "UPMA",
+      "category": "Grains & starches",
+      "unit": "Grams",
+      "grams": 200.0,
+      "kcal": 240.0,
+      "protein": 4.94,
+      "carbs": 39.51,
+      "fat": 6.91,
+      "diet": [],
+      "source": "catalogue"
+    },
+    {
+      "id": "vegetable-khichdi",
+      "name": "VEGETABLE KHICHDI",
+      "category": "Grains & starches",
+      "unit": "Katori",
+      "grams": 200.0,
+      "kcal": 230.0,
+      "protein": 8.07,
+      "carbs": 40.35,
+      "fat": 4.04,
+      "diet": [],
+      "source": "catalogue"
+    },
+    {
+      "id": "almonds",
+      "name": "ALMONDS",
+      "category": "Nuts, seeds & dried fruit",
+      "unit": "Piece",
+      "grams": 1.2,
+      "kcal": 7.0,
+      "protein": 0.24,
+      "carbs": 0.24,
+      "fat": 0.56,
+      "diet": [
+        "nuts"
+      ],
+      "source": "catalogue"
+    },
+    {
+      "id": "black-raisins",
+      "name": "BLACK RAISINS",
+      "category": "Nuts, seeds & dried fruit",
+      "unit": "Piece",
+      "grams": 50.0,
+      "kcal": 1.2,
+      "protein": 0.01,
+      "carbs": 0.29,
+      "fat": 0.0,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "brazilnut",
+      "name": "BRAZILNUT",
+      "category": "Nuts, seeds & dried fruit",
+      "unit": "Kernel",
+      "grams": 1.2,
+      "kcal": 33.0,
+      "protein": 1.04,
+      "carbs": 0.78,
+      "fat": 2.86,
+      "diet": [
+        "nuts"
+      ],
+      "source": "reference"
+    },
+    {
+      "id": "chia-seeds",
+      "name": "CHIA SEEDS",
+      "category": "Nuts, seeds & dried fruit",
+      "unit": "Grams",
+      "grams": 1.0,
+      "kcal": 4.8,
+      "protein": 0.15,
+      "carbs": 0.11,
+      "fat": 0.42,
+      "diet": [
+        "nuts"
+      ],
+      "source": "reference"
+    },
+    {
+      "id": "peanut-butter",
+      "name": "PEANUT BUTTER",
+      "category": "Nuts, seeds & dried fruit",
+      "unit": "Tablespoon",
+      "grams": 16.0,
+      "kcal": 95.0,
+      "protein": 3.8,
+      "carbs": 2.85,
+      "fat": 7.6,
+      "diet": [
+        "dairy",
+        "nuts"
+      ],
+      "source": "catalogue"
+    },
+    {
+      "id": "pistachio",
+      "name": "PISTACHIO",
+      "category": "Nuts, seeds & dried fruit",
+      "unit": "Kernel",
+      "grams": 1.2,
+      "kcal": 4.382,
+      "protein": 0.14,
+      "carbs": 0.1,
+      "fat": 0.38,
+      "diet": [
+        "nuts"
+      ],
+      "source": "reference"
+    },
+    {
+      "id": "roasted-makhana",
+      "name": "ROASTED MAKHANA",
+      "category": "Nuts, seeds & dried fruit",
+      "unit": "Piece",
+      "grams": 0.5,
+      "kcal": 2.0,
+      "protein": 0.04,
+      "carbs": 0.3,
+      "fat": 0.07,
+      "diet": [],
+      "source": "catalogue"
+    },
+    {
+      "id": "soaked-walnut",
+      "name": "SOAKED WALNUT",
+      "category": "Nuts, seeds & dried fruit",
+      "unit": "Piece (Half Of One)",
+      "grams": 2.0,
+      "kcal": 14.425,
+      "protein": 0.45,
+      "carbs": 0.34,
+      "fat": 1.25,
+      "diet": [
+        "nuts"
+      ],
+      "source": "reference"
+    },
+    {
+      "id": "walnut-kernels",
+      "name": "WALNUT KERNELS",
+      "category": "Nuts, seeds & dried fruit",
+      "unit": "Piece",
+      "grams": 2.0,
+      "kcal": 13.0,
+      "protein": 0.28,
+      "carbs": 0.26,
+      "fat": 1.21,
+      "diet": [
+        "nuts"
+      ],
+      "source": "catalogue"
+    },
+    {
+      "id": "reward-meal",
+      "name": "REWARD MEAL",
+      "category": "Other",
+      "unit": "Serving",
+      "grams": 30.0,
+      "kcal": 0.0,
+      "protein": 0.0,
+      "carbs": 0.0,
+      "fat": 0.0,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "boiled-egg-white",
+      "name": "BOILED EGG WHITE",
+      "category": "Protein",
+      "unit": "Egg White",
+      "grams": 33.0,
+      "kcal": 17.0,
+      "protein": 3.85,
+      "carbs": 0.24,
+      "fat": 0.07,
+      "diet": [
+        "egg"
+      ],
+      "source": "reference"
+    },
+    {
+      "id": "boiled-eggs",
+      "name": "BOILED EGGS",
+      "category": "Protein",
+      "unit": "Egg",
+      "grams": 50.0,
+      "kcal": 80.0,
+      "protein": 6.69,
+      "carbs": 0.57,
+      "fat": 5.66,
+      "diet": [
+        "egg"
+      ],
+      "source": "reference"
+    },
+    {
+      "id": "chana-masala",
+      "name": "CHANA MASALA",
+      "category": "Protein",
+      "unit": "Katori",
+      "grams": 150.0,
+      "kcal": 190.0,
+      "protein": 9.87,
+      "carbs": 27.64,
+      "fat": 4.44,
+      "diet": [],
+      "source": "catalogue"
+    },
+    {
+      "id": "chicken-curry",
+      "name": "CHICKEN CURRY",
+      "category": "Protein",
+      "unit": "Grams",
+      "grams": 1.0,
+      "kcal": 0.875,
+      "protein": 0.14,
+      "carbs": 0.01,
+      "fat": 0.03,
+      "diet": [
+        "meat"
+      ],
+      "source": "reference"
+    },
+    {
+      "id": "chicken-salad",
+      "name": "CHICKEN SALAD",
+      "category": "Protein",
+      "unit": "Grams",
+      "grams": 200.0,
+      "kcal": 240.0,
+      "protein": 30.9,
+      "carbs": 8.24,
+      "fat": 9.27,
+      "diet": [
+        "meat"
+      ],
+      "source": "catalogue"
+    },
+    {
+      "id": "chickpea-curry",
+      "name": "CHICKPEA CURRY",
+      "category": "Protein",
+      "unit": "Grams",
+      "grams": 1.0,
+      "kcal": 0.9783,
+      "protein": 0.06,
+      "carbs": 0.06,
+      "fat": 0.06,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "dal-chawal",
+      "name": "DAL CHAWAL",
+      "category": "Protein",
+      "unit": "Grams",
+      "grams": 1.0,
+      "kcal": 1.1324,
+      "protein": 0.07,
+      "carbs": 0.18,
+      "fat": 0.02,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "egg-bhurji",
+      "name": "EGG BHURJI",
+      "category": "Protein",
+      "unit": "Egg",
+      "grams": 50.0,
+      "kcal": 90.0,
+      "protein": 5.93,
+      "carbs": 0.99,
+      "fat": 6.92,
+      "diet": [
+        "egg"
+      ],
+      "source": "catalogue"
+    },
+    {
+      "id": "egg-white-bhurji-with-onion",
+      "name": "EGG WHITE BHURJI WITH ONION",
+      "category": "Protein",
+      "unit": "Gram",
+      "grams": 1.0,
+      "kcal": 0.676,
+      "protein": 0.15,
+      "carbs": 0.01,
+      "fat": 0.0,
+      "diet": [
+        "egg"
+      ],
+      "source": "reference"
+    },
+    {
+      "id": "fish-curry",
+      "name": "FISH CURRY",
+      "category": "Protein",
+      "unit": "Grams",
+      "grams": 1.0,
+      "kcal": 0.7716,
+      "protein": 0.12,
+      "carbs": 0.01,
+      "fat": 0.03,
+      "diet": [
+        "fish"
+      ],
+      "source": "reference"
+    },
+    {
+      "id": "ghiya-chana-dal",
+      "name": "GHIYA CHANA DAL",
+      "category": "Protein",
+      "unit": "Grams",
+      "grams": 1.0,
+      "kcal": 0.4904,
+      "protein": 0.03,
+      "carbs": 0.08,
+      "fat": 0.01,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "grilled-chicken-breast",
+      "name": "GRILLED CHICKEN BREAST",
+      "category": "Protein",
+      "unit": "Grams",
+      "grams": 100.0,
+      "kcal": 165.0,
+      "protein": 32.7,
+      "carbs": 0.0,
+      "fat": 3.8,
+      "diet": [
+        "meat"
+      ],
+      "source": "catalogue"
+    },
+    {
+      "id": "grilled-fish",
+      "name": "GRILLED FISH",
+      "category": "Protein",
+      "unit": "Grams",
+      "grams": 100.0,
+      "kcal": 136.0,
+      "protein": 26.99,
+      "carbs": 0.0,
+      "fat": 3.11,
+      "diet": [
+        "fish"
+      ],
+      "source": "catalogue"
+    },
+    {
+      "id": "kala-chana-curry",
+      "name": "KALA CHANA CURRY",
+      "category": "Protein",
+      "unit": "Grams",
+      "grams": 1.0,
+      "kcal": 0.9783,
+      "protein": 0.06,
+      "carbs": 0.16,
+      "fat": 0.01,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "low-fat-paneer-curry",
+      "name": "LOW FAT PANEER CURRY",
+      "category": "Protein",
+      "unit": "Grams",
+      "grams": 1.0,
+      "kcal": 0.9586,
+      "protein": 0.06,
+      "carbs": 0.01,
+      "fat": 0.07,
+      "diet": [
+        "dairy"
+      ],
+      "source": "reference"
+    },
+    {
+      "id": "moong-dal",
+      "name": "MOONG DAL",
+      "category": "Protein",
+      "unit": "Katori",
+      "grams": 150.0,
+      "kcal": 143.0,
+      "protein": 9.0,
+      "carbs": 20.0,
+      "fat": 3.0,
+      "diet": [],
+      "source": "catalogue"
+    },
+    {
+      "id": "moong-dal-dosa",
+      "name": "MOONG DAL DOSA",
+      "category": "Protein",
+      "unit": "Grams",
+      "grams": 1.0,
+      "kcal": 1.7462,
+      "protein": 0.1,
+      "carbs": 0.28,
+      "fat": 0.03,
+      "diet": [
+        "gluten"
+      ],
+      "source": "reference"
+    },
+    {
+      "id": "paneer-bhurji",
+      "name": "PANEER BHURJI",
+      "category": "Protein",
+      "unit": "Grams",
+      "grams": 100.0,
+      "kcal": 250.0,
+      "protein": 18.0,
+      "carbs": 4.0,
+      "fat": 18.0,
+      "diet": [
+        "dairy"
+      ],
+      "source": "catalogue"
+    },
+    {
+      "id": "rajma-chawal",
+      "name": "RAJMA CHAWAL",
+      "category": "Protein",
+      "unit": "Grams",
+      "grams": 1.0,
+      "kcal": 0.9971,
+      "protein": 0.06,
+      "carbs": 0.16,
+      "fat": 0.01,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "rajma-curry",
+      "name": "RAJMA CURRY",
+      "category": "Protein",
+      "unit": "Katori",
+      "grams": 150.0,
+      "kcal": 180.0,
+      "protein": 9.2,
+      "carbs": 26.59,
+      "fat": 4.09,
+      "diet": [],
+      "source": "catalogue"
+    },
+    {
+      "id": "sambar",
+      "name": "SAMBAR",
+      "category": "Protein",
+      "unit": "Katori",
+      "grams": 150.0,
+      "kcal": 130.0,
+      "protein": 6.29,
+      "carbs": 16.77,
+      "fat": 4.19,
+      "diet": [],
+      "source": "catalogue"
+    },
+    {
+      "id": "sattu",
+      "name": "SATTU",
+      "category": "Protein",
+      "unit": "Grams",
+      "grams": 1.0,
+      "kcal": 4.3,
+      "protein": 0.25,
+      "carbs": 0.69,
+      "fat": 0.06,
+      "diet": [
+        "gluten"
+      ],
+      "source": "reference"
+    },
+    {
+      "id": "sprout-salad",
+      "name": "SPROUT SALAD",
+      "category": "Protein",
+      "unit": "Grams",
+      "grams": 150.0,
+      "kcal": 165.0,
+      "protein": 12.22,
+      "carbs": 24.44,
+      "fat": 2.04,
+      "diet": [],
+      "source": "catalogue"
+    },
+    {
+      "id": "toor-dal",
+      "name": "TOOR DAL",
+      "category": "Protein",
+      "unit": "Katori",
+      "grams": 150.0,
+      "kcal": 160.0,
+      "protein": 9.0,
+      "carbs": 22.0,
+      "fat": 4.0,
+      "diet": [],
+      "source": "catalogue"
+    },
+    {
+      "id": "1-chaze",
+      "name": "1 CHAZE",
+      "category": "Supplements",
+      "unit": "Serving",
+      "grams": 30.0,
+      "kcal": 228.0,
+      "protein": 22.62,
+      "carbs": 18.1,
+      "fat": 7.24,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "ace-blend-omega-3",
+      "name": "ACE BLEND / OMEGA 3",
+      "category": "Supplements",
+      "unit": "Capsule",
+      "grams": 1.0,
+      "kcal": 0.0,
+      "protein": 0.0,
+      "carbs": 0.0,
+      "fat": 0.0,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "aceblend-magnesium",
+      "name": "ACEBLEND / MAGNESIUM",
+      "category": "Supplements",
+      "unit": "Capsule",
+      "grams": 1.0,
+      "kcal": 0.0,
+      "protein": 0.0,
+      "carbs": 0.0,
+      "fat": 0.0,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "fast-up-vegan-collagen-builder",
+      "name": "FAST & UP / VEGAN COLLAGEN BUILDER",
+      "category": "Supplements",
+      "unit": "Tablet",
+      "grams": 1.5,
+      "kcal": 12.0,
+      "protein": 1.19,
+      "carbs": 0.95,
+      "fat": 0.38,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "healthaid-coliprobio-30-billion-health-aid",
+      "name": "HEALTHAID / COLIPROBIO (30 BILLION) (Health Aid)",
+      "category": "Supplements",
+      "unit": "soft gels",
+      "grams": 1.0,
+      "kcal": 1.0,
+      "protein": 0.1,
+      "carbs": 0.08,
+      "fat": 0.03,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "multivitamin",
+      "name": "MULTIVITAMIN",
+      "category": "Supplements",
+      "unit": "Tablet",
+      "grams": 1.5,
+      "kcal": 0.0,
+      "protein": 0.0,
+      "carbs": 0.0,
+      "fat": 0.0,
+      "diet": [],
+      "source": "catalogue"
+    },
+    {
+      "id": "whey-protein",
+      "name": "WHEY PROTEIN",
+      "category": "Supplements",
+      "unit": "Serving",
+      "grams": 30.0,
+      "kcal": 120.0,
+      "protein": 24.51,
+      "carbs": 2.04,
+      "fat": 1.53,
+      "diet": [],
+      "source": "catalogue"
+    },
+    {
+      "id": "avocado-herb-salad-wrap",
+      "name": "AVOCADO HERB SALAD WRAP",
+      "category": "Vegetables",
+      "unit": "Grams",
+      "grams": 1.0,
+      "kcal": 2.024,
+      "protein": 0.06,
+      "carbs": 0.33,
+      "fat": 0.05,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "bell-pepper-sabji",
+      "name": "BELL PEPPER SABJI",
+      "category": "Vegetables",
+      "unit": "Gram",
+      "grams": 1.0,
+      "kcal": 0.4187,
+      "protein": 0.02,
+      "carbs": 0.07,
+      "fat": 0.0,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "chicken-korma",
+      "name": "CHICKEN KORMA",
+      "category": "Vegetables",
+      "unit": "Grams",
+      "grams": 1.0,
+      "kcal": 1.114,
+      "protein": 0.17,
+      "carbs": 0.01,
+      "fat": 0.04,
+      "diet": [
+        "meat"
+      ],
+      "source": "reference"
+    },
+    {
+      "id": "chicken-vegetable-wrap",
+      "name": "CHICKEN VEGETABLE WRAP",
+      "category": "Vegetables",
+      "unit": "Grams",
+      "grams": 1.0,
+      "kcal": 1.4049,
+      "protein": 0.22,
+      "carbs": 0.01,
+      "fat": 0.05,
+      "diet": [
+        "meat"
+      ],
+      "source": "reference"
+    },
+    {
+      "id": "coconut-chutney",
+      "name": "COCONUT CHUTNEY",
+      "category": "Vegetables",
+      "unit": "Tablespoon",
+      "grams": 15.0,
+      "kcal": 41.404,
+      "protein": 1.3,
+      "carbs": 0.98,
+      "fat": 3.59,
+      "diet": [
+        "nuts"
+      ],
+      "source": "reference"
+    },
+    {
+      "id": "green-beans-in-garlic-and-olive-oil",
+      "name": "GREEN BEANS IN GARLIC AND OLIVE OIL",
+      "category": "Vegetables",
+      "unit": "Gram",
+      "grams": 1.0,
+      "kcal": 0.4788,
+      "protein": 0.03,
+      "carbs": 0.08,
+      "fat": 0.01,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "lauki-sabji",
+      "name": "LAUKI SABJI",
+      "category": "Vegetables",
+      "unit": "Grams",
+      "grams": 150.0,
+      "kcal": 55.0,
+      "protein": 1.53,
+      "carbs": 7.16,
+      "fat": 2.25,
+      "diet": [],
+      "source": "catalogue"
+    },
+    {
+      "id": "mint-chutney",
+      "name": "MINT CHUTNEY",
+      "category": "Vegetables",
+      "unit": "Tablespoon",
+      "grams": 15.0,
+      "kcal": 6.605,
+      "protein": 0.21,
+      "carbs": 0.52,
+      "fat": 0.41,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "mixed-vegetable-paratha",
+      "name": "MIXED VEGETABLE PARATHA",
+      "category": "Vegetables",
+      "unit": "Paratha",
+      "grams": 80.0,
+      "kcal": 161.175,
+      "protein": 4.71,
+      "carbs": 26.16,
+      "fat": 4.19,
+      "diet": [
+        "gluten"
+      ],
+      "source": "reference"
+    },
+    {
+      "id": "mixed-vegetable-sabji",
+      "name": "MIXED VEGETABLE SABJI",
+      "category": "Vegetables",
+      "unit": "Grams",
+      "grams": 150.0,
+      "kcal": 95.0,
+      "protein": 3.06,
+      "carbs": 9.19,
+      "fat": 5.11,
+      "diet": [],
+      "source": "catalogue"
+    },
+    {
+      "id": "palak-paneer",
+      "name": "PALAK PANEER",
+      "category": "Vegetables",
+      "unit": "Katori",
+      "grams": 150.0,
+      "kcal": 230.0,
+      "protein": 11.24,
+      "carbs": 7.16,
+      "fat": 17.38,
+      "diet": [
+        "dairy"
+      ],
+      "source": "catalogue"
+    },
+    {
+      "id": "salad",
+      "name": "SALAD",
+      "category": "Vegetables",
+      "unit": "Grams",
+      "grams": 1.0,
+      "kcal": 0.3487,
+      "protein": 0.02,
+      "carbs": 0.06,
+      "fat": 0.0,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "spring-onion-sabji",
+      "name": "SPRING ONION SABJI",
+      "category": "Vegetables",
+      "unit": "Gram",
+      "grams": 1.0,
+      "kcal": 0.5737,
+      "protein": 0.03,
+      "carbs": 0.1,
+      "fat": 0.01,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "stir-fried-pumpkin",
+      "name": "STIR FRIED PUMPKIN",
+      "category": "Vegetables",
+      "unit": "Gram",
+      "grams": 1.0,
+      "kcal": 0.6086,
+      "protein": 0.03,
+      "carbs": 0.1,
+      "fat": 0.01,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "tori-sabji",
+      "name": "TORI SABJI",
+      "category": "Vegetables",
+      "unit": "Grams",
+      "grams": 1.0,
+      "kcal": 0.3473,
+      "protein": 0.02,
+      "carbs": 0.06,
+      "fat": 0.0,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "vegetable-besan-cheela",
+      "name": "VEGETABLE BESAN CHEELA",
+      "category": "Vegetables",
+      "unit": "Piece",
+      "grams": 50.0,
+      "kcal": 112.43,
+      "protein": 6.52,
+      "carbs": 17.92,
+      "fat": 1.63,
+      "diet": [
+        "gluten"
+      ],
+      "source": "reference"
+    },
+    {
+      "id": "vegetable-korma",
+      "name": "VEGETABLE KORMA",
+      "category": "Vegetables",
+      "unit": "Grams",
+      "grams": 1.0,
+      "kcal": 0.7987,
+      "protein": 0.04,
+      "carbs": 0.13,
+      "fat": 0.01,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "vegetable-poha",
+      "name": "VEGETABLE POHA",
+      "category": "Vegetables",
+      "unit": "Grams",
+      "grams": 1.0,
+      "kcal": 1.3317,
+      "protein": 0.03,
+      "carbs": 0.3,
+      "fat": 0.0,
+      "diet": [],
+      "source": "reference"
+    },
+    {
+      "id": "vegetable-salad",
+      "name": "VEGETABLE SALAD",
+      "category": "Vegetables",
+      "unit": "Grams",
+      "grams": 150.0,
+      "kcal": 45.0,
+      "protein": 1.89,
+      "carbs": 8.41,
+      "fat": 0.42,
+      "diet": [],
+      "source": "catalogue"
+    },
+    {
+      "id": "zucchini-fry",
+      "name": "ZUCCHINI FRY",
+      "category": "Vegetables",
+      "unit": "Grams",
+      "grams": 1.0,
+      "kcal": 0.625,
+      "protein": 0.04,
+      "carbs": 0.11,
+      "fat": 0.01,
+      "diet": [],
+      "source": "reference"
+    }
+  ]
+}

@@ -155,6 +155,42 @@ def init_db() -> None:
               created_at TEXT NOT NULL,
               FOREIGN KEY (strategy_id) REFERENCES strategies(id)
             );
+
+            CREATE TABLE IF NOT EXISTS diet_plans (
+              id TEXT PRIMARY KEY,
+              client_id TEXT NOT NULL,
+              name TEXT NOT NULL DEFAULT '',
+              status TEXT NOT NULL DEFAULT 'draft',
+              version INTEGER NOT NULL DEFAULT 0,
+              strategy_id TEXT NOT NULL DEFAULT '',
+              data_json TEXT NOT NULL DEFAULT '{}',
+              created_at TEXT NOT NULL,
+              updated_at TEXT NOT NULL,
+              published_at TEXT NOT NULL DEFAULT '',
+              FOREIGN KEY (client_id) REFERENCES clients(id)
+            );
+
+            CREATE INDEX IF NOT EXISTS idx_diet_plans_client
+              ON diet_plans (client_id, updated_at DESC);
+
+            CREATE TABLE IF NOT EXISTS plan_templates (
+              id TEXT PRIMARY KEY,
+              name TEXT NOT NULL,
+              description TEXT NOT NULL DEFAULT '',
+              days_json TEXT NOT NULL,
+              created_at TEXT NOT NULL
+            );
+
+            CREATE TABLE IF NOT EXISTS plan_versions (
+              id TEXT PRIMARY KEY,
+              plan_id TEXT NOT NULL,
+              client_id TEXT NOT NULL,
+              version INTEGER NOT NULL,
+              data_json TEXT NOT NULL,
+              note TEXT NOT NULL DEFAULT '',
+              created_at TEXT NOT NULL,
+              FOREIGN KEY (plan_id) REFERENCES diet_plans(id)
+            );
             """
         )
         columns = {row["name"] for row in conn.execute("PRAGMA table_info(clients)").fetchall()}

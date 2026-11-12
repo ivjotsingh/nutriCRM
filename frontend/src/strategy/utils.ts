@@ -87,3 +87,34 @@ export function percent(value: number, total: number): number {
 export function joinList(values: string[], fallback = '—'): string {
   return values.length ? values.join(' · ') : fallback
 }
+
+/** Rebalance a macro ratio so the three percentages always total 100. */
+export function rebalanceMacroRatio(
+  ratio: { cho: number; pro: number; fat: number },
+  changed: 'cho' | 'pro' | 'fat',
+  value: number
+): { cho: number; pro: number; fat: number } {
+  const next = Math.max(0, Math.min(100, Math.round(value)))
+  const others = (['cho', 'pro', 'fat'] as const).filter((key) => key !== changed)
+  const remaining = 100 - next
+  const sum = Math.max(0, numberValue(ratio[others[0]])) + Math.max(0, numberValue(ratio[others[1]]))
+  const first = sum <= 0 ? Math.round(remaining / 2) : Math.round((Math.max(0, numberValue(ratio[others[0]])) / sum) * remaining)
+  return { ...ratio, [changed]: next, [others[0]]: first, [others[1]]: remaining - first } as { cho: number; pro: number; fat: number }
+}
+
+/** Protein percentage implied by a g/kg guardrail at a given energy intake. */
+export function proteinRatioFor(
+  label: string,
+  calories: number,
+  weight: number,
+  fatPercent: number
+): { cho: number; pro: number; fat: number } | null {
+  if (!calories || !weight) return null
+  const numbers = label.match(/\d+(?:\.\d+)?/g)?.map(Number) ?? [1.2, 1.4]
+  const low = numbers[0] ?? 1.2
+  const high = numbers[1] ?? low + 0.2
+  const mid = ((low + high) / 2) * weight
+  const pro = Math.max(5, Math.min(60, Math.round(((mid * 4) / calories) * 100)))
+  const fat = Math.max(5, Math.min(60, Math.round(fatPercent)))
+  return { cho: Math.max(0, 100 - pro - fat), pro, fat }
+}

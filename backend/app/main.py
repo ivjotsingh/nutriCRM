@@ -2,11 +2,14 @@ from __future__ import annotations
 
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import Response
 
 from app import clients as client_store
 from app import db
+from app import plan_reference
+from app import plans as plan_store
 from app import strategies as strategy_store
 from app.models import (
     ApiLeadResponse,
@@ -16,12 +19,17 @@ from app.models import (
     ClientTabPayload,
     ClientUpdatePayload,
     IntakePayload,
+    PlanCreatePayload,
+    PlanPublishPayload,
+    PlanTemplatePayload,
+    PlanUpdatePayload,
     StrategyCreatePayload,
     StrategyPublishPayload,
     StrategyRefreshPayload,
     StrategyUpdatePayload,
     UpgradeIntentPayload,
 )
+from app.plan_pdf import build_pdf
 from app.planner import generate_plan
 from app.seed import case_examples, food_catalog, meal_templates, plan_format_examples, triage_rules
 from app.triage import build_risk_brief, evaluate_triage
@@ -264,6 +272,145 @@ def delete_strategy(client_id: str, strategy_id: str) -> None:
         strategy_store.delete_strategy(client_id, strategy_id)
     except Exception as exc:  # noqa: BLE001
         raise _strategy_http_error(exc) from exc
+
+
+@app.get("/api/plan-reference")
+def plan_reference_payload() -> dict:
+    return plan_reference.reference()
+
+
+@app.get("/api/plan-catalog")
+def plan_catalog() -> dict:
+    return plan_reference.catalog()
+
+
+def _plan_http_error(exc: Exception) -> HTTPException:
+    if isinstance(exc, plan_store.PlanNotFound):
+        return HTTPException(status_code=404, detail=str(exc))
+    if isinstance(exc, plan_store.PlanLocked):
+        return HTTPException(status_code=409, detail=str(exc))
+    if isinstance(exc, plan_store.PlanValidationError):
+        return HTTPException(
+            status_code=409,
+            detail={"message": "Plan is not ready to publish", "blockers": exc.blockers, "readiness": exc.readiness},
+        )
+    if isinstance(exc, ValueError):
+        return HTTPException(status_code=400, detail=str(exc))
+    return HTTPException(status_code=500, detail="Plan request failed")
+
+
+@app.get("/api/clients/{client_id}/plans")
+def list_plans(client_id: str) -> dict:
+    result = plan_store.plan_history(client_id)
+    if result is None:
+        raise HTTPException(status_code=404, detail="Client not found")
+    return result
+
+
+@app.post("/api/clients/{client_id}/plans")
+def create_plan(client_id: str, payload: PlanCreatePayload) -> dict:
+    try:
+        detail = plan_store.create_plan(
+            client_id,
+            name=payload.name,
+            template_id=payload.template_id,
+            strategy_id=payload.strategy_id,
+        )
+    except Exception as exc:  # noqa: BLE001
+        raise _plan_http_error(exc) from exc
+    if detail is None:
+        raise HTTPException(status_code=404, detail="Client not found")
+    return detail
+
+
+@app.get("/api/clients/{client_id}/plans/{plan_id}")
+def get_plan(client_id: str, plan_id: str) -> dict:
+    try:
+        detail = plan_store.get_plan(client_id, plan_id)
+    except Exception as exc:  # noqa: BLE001
+        raise _plan_http_error(exc) from exc
+    if detail is None:
+        raise HTTPException(status_code=404, detail="Client not found")
+    return detail
+
+
+@app.patch("/api/clients/{client_id}/plans/{plan_id}")
+def update_plan(client_id: str, plan_id: str, payload: PlanUpdatePayload) -> dict:
+    try:
+        return plan_store.update_plan(client_id, plan_id, name=payload.name, data=payload.data)
+    except Exception as exc:  # noqa: BLE001
+        raise _plan_http_error(exc) from exc
+
+
+@app.post("/api/clients/{client_id}/plans/{plan_id}/publish")
+def publish_plan(client_id: str, plan_id: str, payload: PlanPublishPayload) -> dict:
+    try:
+        return plan_store.publish_plan(client_id, plan_id, attestation=payload.attestation, note=payload.note)
+    except Exception as exc:  # noqa: BLE001
+        raise _plan_http_error(exc) from exc
+
+
+@app.post("/api/clients/{client_id}/plans/{plan_id}/revisions")
+def create_plan_revision(client_id: str, plan_id: str) -> dict:
+    try:
+        return plan_store.create_revision(client_id, plan_id)
+    except Exception as exc:  # noqa: BLE001
+        raise _plan_http_error(exc) from exc
+
+
+@app.post("/api/clients/{client_id}/plans/{plan_id}/duplicate")
+def duplicate_plan(client_id: str, plan_id: str) -> dict:
+    try:
+        return plan_store.duplicate_plan(client_id, plan_id)
+    except Exception as exc:  # noqa: BLE001
+        raise _plan_http_error(exc) from exc
+
+
+@app.post("/api/clients/{client_id}/plans/{plan_id}/template")
+def save_plan_template(client_id: str, plan_id: str, payload: PlanTemplatePayload) -> dict:
+    try:
+        return plan_store.save_as_template(client_id, plan_id, payload.name, payload.description)
+    except Exception as exc:  # noqa: BLE001
+        raise _plan_http_error(exc) from exc
+
+
+@app.get("/api/clients/{client_id}/plans/{plan_id}/versions")
+def plan_versions(client_id: str, plan_id: str) -> dict:
+    try:
+        return {"versions": plan_store.plan_versions(client_id, plan_id)}
+    except Exception as exc:  # noqa: BLE001
+        raise _plan_http_error(exc) from exc
+
+
+@app.delete("/api/clients/{client_id}/plans/{plan_id}", status_code=204)
+def delete_plan(client_id: str, plan_id: str) -> None:
+    try:
+        plan_store.delete_plan(client_id, plan_id)
+    except Exception as exc:  # noqa: BLE001
+        raise _plan_http_error(exc) from exc
+
+
+@app.get("/api/clients/{client_id}/plans/{plan_id}/pdf")
+def plan_pdf(client_id: str, plan_id: str, version: int | None = None, download: bool = Query(default=False)) -> Response:
+    try:
+        plan_data, bundle = plan_store.load_for_pdf(client_id, plan_id, version)
+    except Exception as exc:  # noqa: BLE001
+        raise _plan_http_error(exc) from exc
+    client_name = (bundle.get("client") or {}).get("name") or "client"
+    title = (plan_data.get("meta") or {}).get("title") or "Diet plan"
+    raw_name = f"{client_name} - {title}.pdf".replace("/", "-")
+    filename = "".join(char if 32 <= ord(char) < 127 else "-" for char in raw_name)
+    filename = " ".join(filename.split())
+    payload = build_pdf(plan_data, bundle)
+    disposition = "attachment" if download else "inline"
+    return Response(
+        content=payload,
+        media_type="application/pdf",
+        headers={
+            "Content-Disposition": f'{disposition}; filename="{filename}"',
+            "Cache-Control": "no-store",
+        },
+    )
 
 
 @app.get("/api/leads")
