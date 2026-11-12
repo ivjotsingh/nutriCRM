@@ -131,3 +131,21 @@ class ClientTabPayload(BaseModel):
     label: str = Field(min_length=1, max_length=60)
     description: str = Field(default="", max_length=200)
     fields: list[CustomTabFieldPayload] = Field(min_length=1)
+
+
+class StrategyCreatePayload(BaseModel):
+    name: str = Field(default="", max_length=120)
+
+
+class StrategyUpdatePayload(BaseModel):
+    name: str | None = Field(default=None, max_length=120)
+    data: dict[str, Any] | None = None
+
+
+class StrategyPublishPayload(BaseModel):
+    attestation: bool = False
+    note: str = Field(default="", max_length=1000)
+
+
+class StrategyRefreshPayload(BaseModel):
+    scope: Literal["clinical", "body", "support", "all"] = "clinical"

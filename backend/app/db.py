@@ -128,6 +128,33 @@ def init_db() -> None:
               created_at TEXT NOT NULL,
               FOREIGN KEY (client_id) REFERENCES clients(id)
             );
+
+            CREATE TABLE IF NOT EXISTS strategies (
+              id TEXT PRIMARY KEY,
+              client_id TEXT NOT NULL,
+              name TEXT NOT NULL DEFAULT '',
+              status TEXT NOT NULL DEFAULT 'draft',
+              version INTEGER NOT NULL DEFAULT 0,
+              data_json TEXT NOT NULL DEFAULT '{}',
+              created_at TEXT NOT NULL,
+              updated_at TEXT NOT NULL,
+              published_at TEXT NOT NULL DEFAULT '',
+              FOREIGN KEY (client_id) REFERENCES clients(id)
+            );
+
+            CREATE INDEX IF NOT EXISTS idx_strategies_client
+              ON strategies (client_id, updated_at DESC);
+
+            CREATE TABLE IF NOT EXISTS strategy_versions (
+              id TEXT PRIMARY KEY,
+              strategy_id TEXT NOT NULL,
+              client_id TEXT NOT NULL,
+              version INTEGER NOT NULL,
+              data_json TEXT NOT NULL,
+              note TEXT NOT NULL DEFAULT '',
+              created_at TEXT NOT NULL,
+              FOREIGN KEY (strategy_id) REFERENCES strategies(id)
+            );
             """
         )
         columns = {row["name"] for row in conn.execute("PRAGMA table_info(clients)").fetchall()}

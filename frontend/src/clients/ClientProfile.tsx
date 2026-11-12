@@ -25,6 +25,8 @@ import {
   Plus,
   Printer,
   Save,
+  ShieldCheck,
+  Target,
   Trash2,
   UserRound,
   Utensils,
@@ -33,6 +35,7 @@ import {
 import type { LucideIcon } from 'lucide-react'
 import { addClientOption, createClientTab, getClient, getHeadToeHistory, updateClient } from './api'
 import type { ClientBundle, ClientRecord, ColumnDef, CustomTabField, FieldDef, HeadToeSnapshot, TabDef } from './types'
+import StrategyHistory from '../strategy/StrategyHistory'
 import { Modal, ModalClose, Toast, formatDate, formatDateTime, programStatus, relativeDate } from './ui'
 
 type TabData = Record<string, unknown>
@@ -48,14 +51,25 @@ const TAB_ICONS: Record<string, LucideIcon> = {
   file: FileText,
   clipboard: ClipboardList,
   droplet: Droplet,
-  layers: Layers
+  layers: Layers,
+  target: Target
 }
 
-export default function ClientProfile({ clientId, onBack }: { clientId: string; onBack: () => void }) {
+export default function ClientProfile({
+  clientId,
+  initialTab = 'basic',
+  onBack,
+  onOpenStrategy
+}: {
+  clientId: string
+  initialTab?: string
+  onBack: () => void
+  onOpenStrategy: (strategyId: string) => void
+}) {
   const [bundle, setBundle] = useState<ClientBundle | null>(null)
   const [client, setClient] = useState<ClientRecord | null>(null)
   const [data, setData] = useState<Record<string, TabData>>({})
-  const [activeTabId, setActiveTabId] = useState('basic')
+  const [activeTabId, setActiveTabId] = useState(initialTab)
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [dirty, setDirty] = useState(false)
@@ -78,7 +92,7 @@ export default function ClientProfile({ clientId, onBack }: { clientId: string; 
     setBundle(null)
     setClient(null)
     setData({})
-    setActiveTabId('basic')
+    setActiveTabId(initialTab)
     setDirty(false)
     setSavedAt('')
     setError('')
@@ -103,7 +117,7 @@ export default function ClientProfile({ clientId, onBack }: { clientId: string; 
     return () => {
       cancelled = true
     }
-  }, [clientId])
+  }, [clientId, initialTab])
 
   useEffect(() => {
     if (loading) return
@@ -347,6 +361,9 @@ export default function ClientProfile({ clientId, onBack }: { clientId: string; 
           </span>
         </div>
         <div className="profile-actions">
+          <button type="button" className="secondary-button" onClick={() => selectTab('strategy')}>
+            <Target size={16} /> Strategy
+          </button>
           <button className="secondary-button" onClick={() => setShowTabModal(true)}>
             <Plus size={16} /> Add tab
           </button>
@@ -437,7 +454,11 @@ export default function ClientProfile({ clientId, onBack }: { clientId: string; 
               </div>
               {activeTab.description && <p>{activeTab.description}</p>}
             </div>
-            <span className="cf-optional-note"><Info size={14} aria-hidden="true" /> All fields optional</span>
+            {activeTab.id === 'strategy' ? (
+              <span className="cf-optional-note"><ShieldCheck size={14} aria-hidden="true" /> Versioned &amp; signed</span>
+            ) : (
+              <span className="cf-optional-note"><Info size={14} aria-hidden="true" /> All fields optional</span>
+            )}
           </div>
 
           {activeTab.id === 'headtoe' && (
@@ -467,14 +488,22 @@ export default function ClientProfile({ clientId, onBack }: { clientId: string; 
             </div>
           )}
 
-          <TabForm
-            tab={activeTab}
-            values={tabData(activeTab.id)}
-            client={client}
-            options={bundle.options}
-            onChange={updateField}
-            onAddOption={addOption}
-          />
+          {activeTab.id === 'strategy' ? (
+            <StrategyHistory
+              clientId={client.id}
+              clientName={client.name}
+              onOpenStrategy={onOpenStrategy}
+            />
+          ) : (
+            <TabForm
+              tab={activeTab}
+              values={tabData(activeTab.id)}
+              client={client}
+              options={bundle.options}
+              onChange={updateField}
+              onAddOption={addOption}
+            />
+          )}
         </section>
       )}
 

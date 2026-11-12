@@ -3,25 +3,56 @@ import { AlertCircle, ArrowRight, Loader2, Plus, Search, UserRound, Users, X } f
 import { createClient, listClients } from './api'
 import type { ClientRecord } from './types'
 import ClientProfile from './ClientProfile'
+import StrategyStudio from '../strategy/StrategyStudio'
 import { Modal, ModalClose, programStatus, relativeDate } from './ui'
 import './clients.css'
 
-function clientIdFromHash(): string {
-  const match = window.location.hash.match(/^#clients\/(.+)$/)
-  return match ? decodeURIComponent(match[1]) : ''
+type ClientsRoute =
+  | { view: 'directory' }
+  | { view: 'client'; clientId: string; tab: string }
+  | { view: 'strategy'; clientId: string; strategyId: string }
+
+function parseRoute(): ClientsRoute {
+  const hash = window.location.hash
+  const strategy = hash.match(/^#clients\/([^/?]+)\/strategy\/([^/?]+)/)
+  if (strategy) {
+    return { view: 'strategy', clientId: decodeURIComponent(strategy[1]), strategyId: decodeURIComponent(strategy[2]) }
+  }
+  const client = hash.match(/^#clients\/([^/?]+)(?:\?tab=([^&]+))?/)
+  if (client) {
+    return { view: 'client', clientId: decodeURIComponent(client[1]), tab: client[2] ? decodeURIComponent(client[2]) : 'basic' }
+  }
+  return { view: 'directory' }
 }
 
 export default function ClientsApp() {
-  const [clientId, setClientId] = useState(clientIdFromHash)
+  const [route, setRoute] = useState<ClientsRoute>(parseRoute)
 
   useEffect(() => {
-    const onHash = () => setClientId(clientIdFromHash())
+    const onHash = () => setRoute(parseRoute())
     window.addEventListener('hashchange', onHash)
     return () => window.removeEventListener('hashchange', onHash)
   }, [])
 
-  if (clientId) {
-    return <ClientProfile clientId={clientId} onBack={() => { window.location.hash = 'clients' }} />
+  if (route.view === 'strategy') {
+    return (
+      <StrategyStudio
+        clientId={route.clientId}
+        strategyId={route.strategyId}
+        onBack={() => { window.location.hash = `clients/${route.clientId}?tab=strategy` }}
+      />
+    )
+  }
+
+  if (route.view === 'client') {
+    return (
+      <ClientProfile
+        clientId={route.clientId}
+        initialTab={route.tab}
+        onBack={() => { window.location.hash = 'clients' }}
+        onOpenStrategy={(strategyId) => { window.location.hash = `clients/${route.clientId}/strategy/${strategyId}` }}
+      />
+    )
   }
 
   return <ClientDirectory onOpen={(id) => { window.location.hash = `clients/${id}` }} />

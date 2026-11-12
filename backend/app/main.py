@@ -7,6 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app import clients as client_store
 from app import db
+from app import strategies as strategy_store
 from app.models import (
     ApiLeadResponse,
     CheckInPayload,
@@ -15,6 +16,10 @@ from app.models import (
     ClientTabPayload,
     ClientUpdatePayload,
     IntakePayload,
+    StrategyCreatePayload,
+    StrategyPublishPayload,
+    StrategyRefreshPayload,
+    StrategyUpdatePayload,
     UpgradeIntentPayload,
 )
 from app.planner import generate_plan
@@ -152,6 +157,113 @@ def create_client_tab(client_id: str, payload: ClientTabPayload) -> dict:
     if not tab:
         raise HTTPException(status_code=404, detail="Client not found")
     return {"tab": tab}
+
+
+def _strategy_http_error(exc: Exception) -> HTTPException:
+    if isinstance(exc, strategy_store.StrategyNotFound):
+        return HTTPException(status_code=404, detail=str(exc))
+    if isinstance(exc, strategy_store.StrategyLocked):
+        return HTTPException(status_code=409, detail=str(exc))
+    if isinstance(exc, strategy_store.StrategyValidationError):
+        return HTTPException(
+            status_code=409,
+            detail={
+                "message": "Strategy is not ready to publish",
+                "blockers": exc.blockers,
+                "readiness": exc.readiness,
+            },
+        )
+    if isinstance(exc, ValueError):
+        return HTTPException(status_code=400, detail=str(exc))
+    return HTTPException(status_code=500, detail="Strategy request failed")
+
+
+@app.get("/api/clients/{client_id}/strategies")
+def list_strategies(client_id: str) -> dict:
+    result = strategy_store.list_strategies(client_id)
+    if result is None:
+        raise HTTPException(status_code=404, detail="Client not found")
+    return {"strategies": result}
+
+
+@app.post("/api/clients/{client_id}/strategies")
+def create_strategy(client_id: str, payload: StrategyCreatePayload) -> dict:
+    try:
+        detail = strategy_store.create_strategy(client_id, payload.name)
+    except Exception as exc:  # noqa: BLE001 - mapped to an API error below
+        raise _strategy_http_error(exc) from exc
+    if detail is None:
+        raise HTTPException(status_code=404, detail="Client not found")
+    return detail
+
+
+@app.get("/api/clients/{client_id}/strategies/{strategy_id}")
+def get_strategy(client_id: str, strategy_id: str) -> dict:
+    try:
+        detail = strategy_store.get_strategy(client_id, strategy_id)
+    except Exception as exc:  # noqa: BLE001
+        raise _strategy_http_error(exc) from exc
+    if detail is None:
+        raise HTTPException(status_code=404, detail="Client not found")
+    return detail
+
+
+@app.patch("/api/clients/{client_id}/strategies/{strategy_id}")
+def update_strategy(client_id: str, strategy_id: str, payload: StrategyUpdatePayload) -> dict:
+    try:
+        return strategy_store.update_strategy(
+            client_id,
+            strategy_id,
+            name=payload.name,
+            data=payload.data,
+        )
+    except Exception as exc:  # noqa: BLE001
+        raise _strategy_http_error(exc) from exc
+
+
+@app.post("/api/clients/{client_id}/strategies/{strategy_id}/publish")
+def publish_strategy(client_id: str, strategy_id: str, payload: StrategyPublishPayload) -> dict:
+    try:
+        return strategy_store.publish_strategy(
+            client_id,
+            strategy_id,
+            attestation=payload.attestation,
+            note=payload.note,
+        )
+    except Exception as exc:  # noqa: BLE001
+        raise _strategy_http_error(exc) from exc
+
+
+@app.post("/api/clients/{client_id}/strategies/{strategy_id}/revisions")
+def create_strategy_revision(client_id: str, strategy_id: str) -> dict:
+    try:
+        return strategy_store.create_revision(client_id, strategy_id)
+    except Exception as exc:  # noqa: BLE001
+        raise _strategy_http_error(exc) from exc
+
+
+@app.post("/api/clients/{client_id}/strategies/{strategy_id}/refresh")
+def refresh_strategy(client_id: str, strategy_id: str, payload: StrategyRefreshPayload) -> dict:
+    try:
+        return strategy_store.refresh_strategy(client_id, strategy_id, payload.scope)
+    except Exception as exc:  # noqa: BLE001
+        raise _strategy_http_error(exc) from exc
+
+
+@app.get("/api/clients/{client_id}/strategies/{strategy_id}/versions")
+def strategy_versions(client_id: str, strategy_id: str) -> dict:
+    try:
+        return {"versions": strategy_store.strategy_versions(client_id, strategy_id)}
+    except Exception as exc:  # noqa: BLE001
+        raise _strategy_http_error(exc) from exc
+
+
+@app.delete("/api/clients/{client_id}/strategies/{strategy_id}", status_code=204)
+def delete_strategy(client_id: str, strategy_id: str) -> None:
+    try:
+        strategy_store.delete_strategy(client_id, strategy_id)
+    except Exception as exc:  # noqa: BLE001
+        raise _strategy_http_error(exc) from exc
 
 
 @app.get("/api/leads")

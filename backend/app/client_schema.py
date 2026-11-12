@@ -541,6 +541,7 @@ CORE_TABS: list[dict[str, Any]] = [
     {"id": "recall", "label": "24hr Recall", "description": "A repeatable log of meals and drinks.", "icon": "clock", "fields": RECALL_FIELDS},
     {"id": "fuv", "label": "FUV", "description": "Follow-up visit notes.", "icon": "file", "fields": FUV_FIELDS},
     {"id": "blood", "label": "Blood Report", "description": "Blood parameters, reference ranges, and deranged markers.", "icon": "droplet", "fields": BLOOD_FIELDS},
+    {"id": "strategy", "label": "Strategy", "description": "Create, revise, and publish this client's nutrition strategy.", "icon": "target", "fields": []},
     {"id": "forms", "label": "Forms", "description": "Food habits and behaviour questionnaire.", "icon": "clipboard", "fields": FORMS_FIELDS},
     {"id": "headtoe", "label": "Head-to-Toe", "description": "System-by-system screening with a Yes/No gate and multi-select findings.", "icon": "heart", "fields": HEADTOE_FIELDS},
 ]

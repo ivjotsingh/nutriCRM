@@ -10,3 +10,4 @@ tmp/
 backend/nutrialign.db
 backend/*.db
 frontend/.vite/
+.uv-cache/
