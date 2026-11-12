@@ -218,6 +218,7 @@ export interface RdaRow {
   energy_per_kg?: number
   protein_per_kg?: number
   energy_note?: string
+  note?: string
 }
 
 export interface Reference {
@@ -232,6 +233,7 @@ export interface Reference {
   ideal_weight_methods: { value: string; label: string; detail: string }[]
   life_stages: string[]
   rda_rows: RdaRow[]
+  rda_edition: string
   food_strategy_options: string[]
   other_goal_options: string[]
   next_phase_options: string[]

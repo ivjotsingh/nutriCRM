@@ -510,7 +510,7 @@ export function TargetsSection({ data, detail, reference, derived, locked, updat
           {[
             { value: 'thumb', title: 'Thumb rule', detail: 'Target weight × activity factor', icon: Flame },
             { value: 'bmr', title: 'BMR + activity', detail: 'Katch or Mifflin, then goal adjustment', icon: Activity },
-            { value: 'rda', title: 'RDA chart', detail: 'Practice energy reference for age and sex', icon: ClipboardCheck }
+            { value: 'rda', title: 'RDA chart', detail: 'ICMR-NIN 2020 energy for age and sex', icon: ClipboardCheck }
           ].map((option) => {
             const Icon = option.icon
             const selected = body.calorie_method === option.value
@@ -1167,7 +1167,7 @@ export function ReviewSection({
     <div className="st-section">
       <SectionHeader
         eyebrow="07 · Review"
-        title={detail.strategy.status === 'archived' ? 'This version is archived and locked' : published ? 'This strategy is signed and locked' : 'Read it once more, then sign it'}
+        title={detail.strategy.status === 'archived' ? 'This version is archived and locked' : published ? 'This strategy is published and locked' : 'Read it once more, then publish it'}
         lede="The checklist is the publish gate. Fix anything unresolved, record the clinical sign-off, and send the plan to the client."
         actions={
           published ? (
@@ -1188,7 +1188,7 @@ export function ReviewSection({
           </div>
           <div>
             <span className="st-eyebrow">Publish readiness</span>
-            <h3>{readiness.can_publish ? 'Ready to sign' : `${readiness.blockers.length} item${readiness.blockers.length === 1 ? '' : 's'} need attention`}</h3>
+            <h3>{readiness.can_publish ? 'Ready to publish' : `${readiness.blockers.length} item${readiness.blockers.length === 1 ? '' : 's'} need attention`}</h3>
             <p>{readiness.required_passed} of {readiness.required_total} required checks complete.</p>
           </div>
         </div>
@@ -1210,8 +1210,8 @@ export function ReviewSection({
             checked={Boolean(data.governance.reviewed_clinical)}
             onChange={(value) => update(['governance', 'reviewed_clinical'], value)}
             title="I reviewed the clinical context, labs, and food guardrails"
-            description="Conditions, medications, allergies, and deranged parameters are current as of this strategy."
-            badge="Required"
+            description="Conditions, medications, allergies, and deranged parameters are current as of this strategy. Recommended before publishing; enforced when NUTRIALIGN_REQUIRE_SIGNOFF is enabled."
+            badge="Recommended"
             disabled={locked}
           />
           {macroWarning && (

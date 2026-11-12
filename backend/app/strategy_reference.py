@@ -103,29 +103,36 @@ IDEAL_WEIGHT_METHODS = [
 # Practice RDA chart. ``activity`` is only used for adults; children rows ignore
 # it. Pregnancy and lactation rows replace the standard women's row.
 RDA_ROWS: list[dict[str, Any]] = [
-    {"group": "Man", "category": "Sedentary", "sex": "Male", "age_min": 18, "age_max": 120, "activity": "Sedentary", "body_weight_kg": 60, "energy_kcal": 2320, "protein_g": 60},
-    {"group": "Man", "category": "Moderate", "sex": "Male", "age_min": 18, "age_max": 120, "activity": "Moderate", "body_weight_kg": 60, "energy_kcal": 2730, "protein_g": 60},
-    {"group": "Man", "category": "Heavy", "sex": "Male", "age_min": 18, "age_max": 120, "activity": "Heavy", "body_weight_kg": 60, "energy_kcal": 3490, "protein_g": 60},
-    {"group": "Women", "category": "Sedentary", "sex": "Female", "age_min": 18, "age_max": 120, "activity": "Sedentary", "body_weight_kg": 55, "energy_kcal": 1900, "protein_g": 55},
-    {"group": "Women", "category": "Moderate", "sex": "Female", "age_min": 18, "age_max": 120, "activity": "Moderate", "body_weight_kg": 55, "energy_kcal": 2230, "protein_g": 55},
-    {"group": "Women", "category": "Heavy", "sex": "Female", "age_min": 18, "age_max": 120, "activity": "Heavy", "body_weight_kg": 55, "energy_kcal": 2850, "protein_g": 55},
-    {"group": "Women", "category": "Pregnant", "sex": "Female", "age_min": 18, "age_max": 50, "activity": "Life stage", "body_weight_kg": 55, "energy_kcal": 2250, "protein_g": 78, "energy_note": "1,900 + 350 kcal"},
-    {"group": "Women", "category": "Lactation < 6 months", "sex": "Female", "age_min": 18, "age_max": 50, "activity": "Life stage", "body_weight_kg": 55, "energy_kcal": 2500, "protein_g": 74, "energy_note": "1,900 + 600 kcal"},
-    {"group": "Women", "category": "Lactation 6–12 months", "sex": "Female", "age_min": 18, "age_max": 50, "activity": "Life stage", "body_weight_kg": 55, "energy_kcal": 2420, "protein_g": 68, "energy_note": "1,900 + 520 kcal"},
-    {"group": "Infants", "category": "0–6 months", "sex": "Any", "age_min": 0, "age_max": 0, "activity": "Any", "body_weight_kg": 5.4, "energy_kcal": 0, "protein_g": 0, "energy_per_kg": 92, "protein_per_kg": 1.16},
-    {"group": "Infants", "category": "6–12 months", "sex": "Any", "age_min": 1, "age_max": 1, "activity": "Any", "body_weight_kg": 8.4, "energy_kcal": 0, "protein_g": 0, "energy_per_kg": 80, "protein_per_kg": 1.69},
-    {"group": "Children", "category": "1–3 years", "sex": "Any", "age_min": 1, "age_max": 3, "activity": "Any", "body_weight_kg": 12.9, "energy_kcal": 1060, "protein_g": 16.7},
-    {"group": "Children", "category": "4–6 years", "sex": "Any", "age_min": 4, "age_max": 6, "activity": "Any", "body_weight_kg": 18, "energy_kcal": 1350, "protein_g": 20.1},
-    {"group": "Children", "category": "7–9 years", "sex": "Any", "age_min": 7, "age_max": 9, "activity": "Any", "body_weight_kg": 25.1, "energy_kcal": 1690, "protein_g": 29.5},
-    {"group": "Boys", "category": "10–12 years", "sex": "Male", "age_min": 10, "age_max": 12, "activity": "Any", "body_weight_kg": 34.3, "energy_kcal": 2190, "protein_g": 39.9},
-    {"group": "Girls", "category": "10–12 years", "sex": "Female", "age_min": 10, "age_max": 12, "activity": "Any", "body_weight_kg": 35, "energy_kcal": 2010, "protein_g": 40.4},
-    {"group": "Boys", "category": "13–15 years", "sex": "Male", "age_min": 13, "age_max": 15, "activity": "Any", "body_weight_kg": 47.6, "energy_kcal": 2750, "protein_g": 54.3},
-    {"group": "Girls", "category": "13–15 years", "sex": "Female", "age_min": 13, "age_max": 15, "activity": "Any", "body_weight_kg": 46.6, "energy_kcal": 2330, "protein_g": 51.9},
-    {"group": "Boys", "category": "16–17 years", "sex": "Male", "age_min": 16, "age_max": 17, "activity": "Any", "body_weight_kg": 55.4, "energy_kcal": 3020, "protein_g": 61.5},
-    {"group": "Girls", "category": "16–17 years", "sex": "Female", "age_min": 16, "age_max": 17, "activity": "Any", "body_weight_kg": 52.1, "energy_kcal": 2440, "protein_g": 55.5},
+    # ICMR-NIN 2020 RDA/EER summary. Energy is the estimated energy
+    # requirement (EER); protein is the RDA (g/day) at the reference body
+    # weight. The 2024 Dietary Guidelines for Indians are food-based guidance
+    # and do not replace this RDA table.
+    {"group": "Man", "category": "Sedentary", "sex": "Male", "age_min": 18, "age_max": 59, "activity": "Sedentary", "body_weight_kg": 65, "energy_kcal": 2110, "protein_g": 54},
+    {"group": "Man", "category": "Moderate", "sex": "Male", "age_min": 18, "age_max": 59, "activity": "Moderate", "body_weight_kg": 65, "energy_kcal": 2710, "protein_g": 54},
+    {"group": "Man", "category": "Heavy", "sex": "Male", "age_min": 18, "age_max": 59, "activity": "Heavy", "body_weight_kg": 65, "energy_kcal": 3470, "protein_g": 54},
+    {"group": "Man", "category": "Sedentary", "sex": "Male", "age_min": 60, "age_max": 120, "activity": "Sedentary", "body_weight_kg": 65, "energy_kcal": 1700, "protein_g": 54, "note": "Older adult; sedentary reference."},
+    {"group": "Women", "category": "Sedentary", "sex": "Female", "age_min": 18, "age_max": 59, "activity": "Sedentary", "body_weight_kg": 55, "energy_kcal": 1660, "protein_g": 46},
+    {"group": "Women", "category": "Moderate", "sex": "Female", "age_min": 18, "age_max": 59, "activity": "Moderate", "body_weight_kg": 55, "energy_kcal": 2130, "protein_g": 46},
+    {"group": "Women", "category": "Heavy", "sex": "Female", "age_min": 18, "age_max": 59, "activity": "Heavy", "body_weight_kg": 55, "energy_kcal": 2720, "protein_g": 46},
+    {"group": "Women", "category": "Sedentary", "sex": "Female", "age_min": 60, "age_max": 120, "activity": "Sedentary", "body_weight_kg": 55, "energy_kcal": 1500, "protein_g": 45.7, "note": "Older adult; sedentary reference."},
+    {"group": "Women", "category": "Pregnant (2nd trimester)", "sex": "Female", "age_min": 18, "age_max": 50, "activity": "Life stage", "body_weight_kg": 65, "energy_kcal": 2010, "protein_g": 55.5, "energy_note": "1,660 + 350 kcal"},
+    {"group": "Women", "category": "Pregnant (3rd trimester)", "sex": "Female", "age_min": 18, "age_max": 50, "activity": "Life stage", "body_weight_kg": 65, "energy_kcal": 2010, "protein_g": 68.0, "energy_note": "1,660 + 350 kcal"},
+    {"group": "Women", "category": "Lactation < 6 months", "sex": "Female", "age_min": 18, "age_max": 50, "activity": "Life stage", "body_weight_kg": 55, "energy_kcal": 2260, "protein_g": 63.0, "energy_note": "1,660 + 600 kcal"},
+    {"group": "Women", "category": "Lactation 6–12 months", "sex": "Female", "age_min": 18, "age_max": 50, "activity": "Life stage", "body_weight_kg": 55, "energy_kcal": 2180, "protein_g": 59.0, "energy_note": "1,660 + 520 kcal"},
+    {"group": "Infants", "category": "0–6 months", "sex": "Any", "age_min": 0, "age_max": 0, "activity": "Any", "body_weight_kg": 5.8, "energy_kcal": 530, "protein_g": 8.0},
+    {"group": "Infants", "category": "6–12 months", "sex": "Any", "age_min": 1, "age_max": 1, "activity": "Any", "body_weight_kg": 8.5, "energy_kcal": 660, "protein_g": 10.5},
+    {"group": "Children", "category": "1–3 years", "sex": "Any", "age_min": 1, "age_max": 3, "activity": "Any", "body_weight_kg": 12.9, "energy_kcal": 1110, "protein_g": 12.5},
+    {"group": "Children", "category": "4–6 years", "sex": "Any", "age_min": 4, "age_max": 6, "activity": "Any", "body_weight_kg": 18.3, "energy_kcal": 1360, "protein_g": 16.0},
+    {"group": "Children", "category": "7–9 years", "sex": "Any", "age_min": 7, "age_max": 9, "activity": "Any", "body_weight_kg": 25.3, "energy_kcal": 1700, "protein_g": 23.0},
+    {"group": "Boys", "category": "10–12 years", "sex": "Male", "age_min": 10, "age_max": 12, "activity": "Any", "body_weight_kg": 34.9, "energy_kcal": 2220, "protein_g": 32.0},
+    {"group": "Girls", "category": "10–12 years", "sex": "Female", "age_min": 10, "age_max": 12, "activity": "Any", "body_weight_kg": 36.4, "energy_kcal": 2060, "protein_g": 33.0},
+    {"group": "Boys", "category": "13–15 years", "sex": "Male", "age_min": 13, "age_max": 15, "activity": "Any", "body_weight_kg": 50.5, "energy_kcal": 2860, "protein_g": 45.0},
+    {"group": "Girls", "category": "13–15 years", "sex": "Female", "age_min": 13, "age_max": 15, "activity": "Any", "body_weight_kg": 49.6, "energy_kcal": 2400, "protein_g": 43.0},
+    {"group": "Boys", "category": "16–18 years", "sex": "Male", "age_min": 16, "age_max": 18, "activity": "Any", "body_weight_kg": 64.4, "energy_kcal": 3320, "protein_g": 55.0},
+    {"group": "Girls", "category": "16–18 years", "sex": "Female", "age_min": 16, "age_max": 18, "activity": "Any", "body_weight_kg": 55.7, "energy_kcal": 2500, "protein_g": 46.0},
 ]
 
-LIFE_STAGES = ["Not pregnant", "Pregnant", "Lactation < 6 months", "Lactation 6–12 months"]
+LIFE_STAGES = ["Not pregnant", "Pregnant (2nd trimester)", "Pregnant (3rd trimester)", "Lactation < 6 months", "Lactation 6–12 months"]
 
 FOOD_STRATEGY_OPTIONS = [
     "Low oil & low spice meals",
@@ -480,12 +487,14 @@ FORMULA_NOTES: dict[str, str] = {
     "mifflin": "Mifflin-St Jeor fallback: BMR = (10 × weight) + (6.25 × height) − (5 × age) + 5 for men or − 161 for women.",
     "tdee": "TDEE = BMR × activity factor: sedentary 1.2, light 1.375, moderate 1.55, very active 1.725, athlete 1.9.",
     "thumb": "Thumb rule calories = target weight × activity factor, plus an optional workout allowance, rounded to the nearest 100 kcal. Factors by goal: loss 20/25/30, maintenance 25/30/35, gain 30/35/40 kcal/kg for sedentary/moderate/heavy activity.",
-    "rda": "RDA mode uses the practice RDA chart supplied with the brief (ICMR reference body weights, energy, and protein, including 1–18 year rows for boys and girls). The chart is shown in the RDA reference dialog. Confirm the edition your practice has adopted before publishing.",
+    "rda": "RDA mode uses the ICMR-NIN 2020 Recommended Dietary Allowances, the latest RDA edition (the 2024 Dietary Guidelines for Indians are food-based guidance, not a replacement RDA table). Energy values are estimated energy requirements; protein is the RDA at the reference body weight. The table is shown in the RDA dialog.",
     "macro": "Macro grams = calories × ratio % ÷ 4 for carbohydrate and protein, ÷ 9 for fat. Grams are rounded down to whole numbers, matching the practice reference table.",
     "protein": "Protein target is a clinical guardrail in g/kg of target body weight. The ratio sets the planned protein; the guardrail checks whether the plan lands inside the selected range.",
     "ideal_weight": "Devine: 45.5 kg (women) or 50 kg (men) at 5 ft, plus 2.3 kg per inch above 5 ft. BMI 22: 22 × height (m)².",
     "calorie_floor": "Very-low-calorie plans need clinical justification. NutriAlign warns below 1,200 kcal for women and 1,500 kcal for men, and blocks a deficit for children or pregnancy.",
 }
+
+RDA_EDITION = "ICMR-NIN 2020"
 
 REFERENCE: dict[str, Any] = {
     "diets": DIETS,
@@ -499,6 +508,7 @@ REFERENCE: dict[str, Any] = {
     "ideal_weight_methods": IDEAL_WEIGHT_METHODS,
     "life_stages": LIFE_STAGES,
     "rda_rows": RDA_ROWS,
+    "rda_edition": RDA_EDITION,
     "food_strategy_options": FOOD_STRATEGY_OPTIONS,
     "other_goal_options": OTHER_GOAL_OPTIONS,
     "next_phase_options": NEXT_PHASE_OPTIONS,

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 import uuid
 from typing import Any
 
@@ -10,6 +11,11 @@ from .clients import get_client_bundle
 from .db import _now, add_event, connect
 from .strategy_engine import build_derived, build_prefill, client_context
 from .strategy_reference import REFERENCE
+
+
+def signoff_required() -> bool:
+    """Prototype default: sign-off is optional. Set NUTRIALIGN_REQUIRE_SIGNOFF=1 for strict mode."""
+    return os.environ.get("NUTRIALIGN_REQUIRE_SIGNOFF", "").strip().lower() in {"1", "true", "yes", "on"}
 
 
 class StrategyNotFound(Exception):
@@ -85,7 +91,7 @@ def _load(client_id: str, strategy_id: str) -> dict[str, Any]:
 def _detail(bundle: dict[str, Any], record: dict[str, Any]) -> dict[str, Any]:
     context = client_context(bundle)
     client = bundle["client"]
-    derived = build_derived(record["data"], context, client)
+    derived = build_derived(record["data"], context, client, signoff_required=signoff_required())
     return {
         "strategy": record,
         "client": client,
@@ -109,7 +115,7 @@ def list_strategies(client_id: str) -> list[dict[str, Any]] | None:
     context = client_context(bundle)
     for row in rows:
         record = _row_dict(row)
-        derived = build_derived(record["data"], context, bundle["client"])
+        derived = build_derived(record["data"], context, bundle["client"], signoff_required=signoff_required())
         result.append(_summary(record, derived))
     return result
 
@@ -242,10 +248,15 @@ def publish_strategy(
     if record["status"] != "draft":
         raise StrategyLocked("This strategy is already published. Create a revision instead.")
     bundle = _require_client(client_id)
-    derived = build_derived(record["data"], client_context(bundle), bundle["client"])
+    derived = build_derived(
+        record["data"],
+        client_context(bundle),
+        bundle["client"],
+        signoff_required=signoff_required(),
+    )
     readiness = derived["readiness"]
     blockers = list(readiness["blockers"])
-    if not attestation:
+    if signoff_required() and not attestation:
         blockers.append(
             {
                 "id": "attestation",

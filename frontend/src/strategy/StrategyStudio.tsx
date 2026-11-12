@@ -553,7 +553,7 @@ export default function StrategyStudio({
           <div className="st-side-card readiness">
             <div className="st-side-readiness">
               <Ring value={readiness.score} size={54} />
-              <div><span className="st-eyebrow">Publish readiness</span><strong>{detail.strategy.status === 'published' ? 'Signed & locked' : detail.strategy.status === 'archived' ? 'Archived version' : readiness.can_publish ? 'Ready to sign' : `${readiness.blockers.length} open item${readiness.blockers.length === 1 ? '' : 's'}`}</strong></div>
+              <div><span className="st-eyebrow">Publish readiness</span><strong>{detail.strategy.status === 'published' ? 'Signed & locked' : detail.strategy.status === 'archived' ? 'Archived version' : readiness.can_publish ? 'Ready to publish' : `${readiness.blockers.length} open item${readiness.blockers.length === 1 ? '' : 's'}`}</strong></div>
             </div>
             {readiness.blockers.length > 0 ? (
               <ul className="st-side-blockers">

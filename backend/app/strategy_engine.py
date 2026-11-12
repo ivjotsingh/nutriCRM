@@ -204,14 +204,19 @@ def rda_lookup(
     life_stage: str = "Not pregnant",
     weight_kg: float = 0.0,
 ) -> dict[str, Any] | None:
-    """Return the practice RDA row for a person, including per-kg infant scaling."""
+    """Return the ICMR-NIN 2020 row for a person."""
     if age < 0:
         return None
     life = _text(life_stage)
     if age >= 18 and sex == "Female" and life not in {"", "Not pregnant"}:
-        category = "Lactation < 6 months" if life.startswith("Lactation <") else life
-        if life.startswith("Lactation 6"):
+        if life.startswith("Lactation <"):
+            category = "Lactation < 6 months"
+        elif life.startswith("Lactation 6"):
             category = "Lactation 6–12 months"
+        elif life.startswith("Pregnant"):
+            category = "Pregnant (3rd trimester)" if "3rd" in life else "Pregnant (2nd trimester)"
+        else:
+            category = life
         for row in RDA_ROWS:
             if row.get("group") == "Women" and row.get("category") == category:
                 return _rda_row_payload(row, weight_kg, life)
@@ -230,9 +235,24 @@ def rda_lookup(
         return _rda_row_payload(row, weight_kg, life)
     group = "Man" if sex == "Male" else "Women"
     band = rda_activity(activity)
-    for row in RDA_ROWS:
-        if row.get("group") == group and row.get("category") == band:
-            return _rda_row_payload(row, weight_kg, life)
+    matches = [
+        row
+        for row in RDA_ROWS
+        if row.get("group") == group
+        and row.get("age_min", 0) <= age <= row.get("age_max", 120)
+        and row.get("category") == band
+    ]
+    if not matches and age >= 60:
+        # The 2020 elderly table provides a sedentary reference only.
+        matches = [
+            row
+            for row in RDA_ROWS
+            if row.get("group") == group
+            and row.get("age_min", 0) >= 60
+            and row.get("category") == "Sedentary"
+        ]
+    if matches:
+        return _rda_row_payload(matches[0], weight_kg, life)
     return None
 
 
@@ -244,6 +264,8 @@ def _rda_row_payload(row: dict[str, Any], weight_kg: float, life: str) -> dict[s
         payload["energy_kcal"] = round(_num(row.get("energy_per_kg")) * used_weight)
         payload["protein_g"] = round(_num(row.get("protein_per_kg")) * used_weight, 1)
     payload["label"] = f"{row.get('group')} · {row.get('category')}"
+    if row.get("age_min", 0) >= 60:
+        payload["label"] += " · 60+"
     if life and life != "Not pregnant" and row.get("group") == "Women":
         payload["label"] += f" · {life}"
     return payload
@@ -618,7 +640,12 @@ def supplement_totals(data: dict[str, Any], calories: float) -> dict[str, Any]:
 # --------------------------------------------------------------------------- derived payload
 
 
-def build_derived(data: dict[str, Any], context: dict[str, Any] | None = None, client: dict[str, Any] | None = None) -> dict[str, Any]:
+def build_derived(
+    data: dict[str, Any],
+    context: dict[str, Any] | None = None,
+    client: dict[str, Any] | None = None,
+    signoff_required: bool = False,
+) -> dict[str, Any]:
     context = context or {}
     client = client or {}
     body = data.get("body") or {}
@@ -813,7 +840,7 @@ def build_derived(data: dict[str, Any], context: dict[str, Any] | None = None, c
         "goal_mode": goal_mode,
         "age": age,
         "warnings": warnings,
-    })
+    }, signoff_required=signoff_required)
 
     return {
         "age": age,
@@ -848,6 +875,7 @@ def build_readiness(
     context: dict[str, Any],
     client: dict[str, Any],
     metrics: dict[str, Any],
+    signoff_required: bool = False,
 ) -> dict[str, Any]:
     meta = data.get("meta") or {}
     body = data.get("body") or {}
@@ -876,7 +904,7 @@ def build_readiness(
     goals_ok = bool(_list(clinical.get("goals")))
     add("goals", "Client goals captured", goals_ok, "Add at least one clinical goal.", "clinical")
     reviewed = bool(governance.get("reviewed_clinical"))
-    add("clinical_review", "Clinical context reviewed", reviewed, "Confirm the conditions, labs, and food guardrails are current.", "review")
+    add("clinical_review", "Clinical context reviewed", reviewed, "Confirm the conditions, labs, and food guardrails are current.", "review", required=signoff_required)
     week_ok = len(week) == 7 and all(day.get("complete") for day in week)
     add("week", "Full macro week", week_ok, "All seven days need a calorie target and a ratio that totals 100%.", "macros")
     delivery_ok = bool(_text(meta.get("delivery_at")))

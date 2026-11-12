@@ -125,7 +125,8 @@ def test_patch_recalculates_week_and_supports_macro_overrides(tmp_path, monkeypa
     assert updated["derived"]["calories"]["calories"] == 2200
 
 
-def test_publish_is_blocked_until_clinical_review_and_attestation(tmp_path, monkeypatch):
+def test_publish_is_blocked_when_strict_signoff_is_enabled(tmp_path, monkeypatch):
+    monkeypatch.setenv("NUTRIALIGN_REQUIRE_SIGNOFF", "1")
     client = _client(tmp_path, monkeypatch)
     client_id = _create_client(client)
     detail = _create_strategy(client, client_id)
@@ -242,3 +243,24 @@ def test_refresh_pulls_latest_clinical_record_without_touching_published(tmp_pat
     )
     assert refreshed.status_code == 200
     assert "PCOS" in refreshed.json()["strategy"]["data"]["clinical"]["conditions"]
+
+
+def test_publish_is_optional_by_default_without_signoff_or_attestation(tmp_path, monkeypatch):
+    monkeypatch.delenv("NUTRIALIGN_REQUIRE_SIGNOFF", raising=False)
+    client = _client(tmp_path, monkeypatch)
+    client_id = _create_client(client)
+    detail = _create_strategy(client, client_id)
+    strategy_id = detail["strategy"]["id"]
+    data = detail["strategy"]["data"]
+    data["governance"]["reviewed_clinical"] = False
+    data["governance"]["acknowledged_interactions"] = True
+    data["meta"]["delivery_at"] = "2026-12-20T10:00"
+    patched = client.patch(f"/api/clients/{client_id}/strategies/{strategy_id}", json={"data": data})
+    assert patched.status_code == 200
+    published = client.post(
+        f"/api/clients/{client_id}/strategies/{strategy_id}/publish",
+        json={"attestation": False},
+    )
+    assert published.status_code == 200, published.text
+    assert published.json()["strategy"]["status"] == "published"
+    assert published.json()["strategy"]["version"] == 1

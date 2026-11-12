@@ -104,19 +104,24 @@ def test_macro_split_matches_2000_kcal_reference_row():
 def test_rda_practice_chart_lookup():
     women = rda_lookup(64, "Female", "Sedentary")
     assert women is not None
-    assert women["energy_kcal"] == 1900
-    assert women["protein_g"] == 55
+    assert women["energy_kcal"] == 1500
+    assert women["protein_g"] == 45.7
+    adult = rda_lookup(30, "Female", "Moderate")
+    assert adult is not None
+    assert adult["energy_kcal"] == 2130
+    assert adult["protein_g"] == 46
     child = rda_lookup(8, "Male", "Sedentary")
     assert child is not None
-    assert child["energy_kcal"] == 1690
-    assert child["protein_g"] == 29.5
-    pregnancy = rda_lookup(30, "Female", "Sedentary", "Pregnant")
+    assert child["energy_kcal"] == 1700
+    assert child["protein_g"] == 23.0
+    pregnancy = rda_lookup(30, "Female", "Sedentary", "Pregnant (2nd trimester)")
     assert pregnancy is not None
-    assert pregnancy["energy_kcal"] == 2250
-    assert pregnancy["protein_g"] == 78
+    assert pregnancy["energy_kcal"] == 2010
+    assert pregnancy["protein_g"] == 55.5
     infant = rda_lookup(0, "Female", "Sedentary", "Not pregnant", 6)
     assert infant is not None
-    assert infant["energy_kcal"] == 552
+    assert infant["energy_kcal"] == 530
+    assert infant["protein_g"] == 8.0
 
 
 def test_protein_range_is_per_target_weight():
@@ -174,6 +179,7 @@ def test_readiness_blocks_without_consent_and_review():
         {},
         {"consent": False},
         {"week": [], "warnings": [], "calories": 0},
+        signoff_required=True,
     )
     assert readiness["can_publish"] is False
     ids = {item["id"] for item in readiness["blockers"]}

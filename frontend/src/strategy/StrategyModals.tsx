@@ -226,6 +226,11 @@ export function RdaModal({
 }) {
   if (!open) return null
   const current = detail.derived.rda
+  const ageLabel = (row: Reference['rda_rows'][number]) => {
+    if (row.group === 'Infants') return '0–1'
+    if (row.age_min >= 60) return '60+'
+    return `${row.age_min}–${row.age_max}`
+  }
   const groups: Record<string, Reference['rda_rows']> = {}
   for (const row of reference.rda_rows) {
     groups[row.group] = [...(groups[row.group] ?? []), row]
@@ -238,8 +243,8 @@ export function RdaModal({
           <span className="st-eyebrow">Reference table</span>
           <h2 id="rda-title">RDA data</h2>
           <p>
-            Recommended dietary allowance for energy and protein, by age, sex, body weight, and activity.
-            NutriAlign highlights the row that matches this client.
+            ICMR-NIN 2020 recommended dietary allowances for energy and protein, by age, sex, body weight,
+            and activity. NutriAlign highlights the row that matches this client.
           </p>
         </div>
         <ModalClose onClose={onClose} />
@@ -255,17 +260,18 @@ export function RdaModal({
           <table className="st-data-table st-rda-table">
             <caption className="st-visually-hidden">RDA reference table</caption>
             <thead>
-              <tr><th>Group</th><th>Category</th><th>Body weight (kg)</th><th>Energy (kcal)</th><th>Protein (g)</th></tr>
+              <tr><th>Group</th><th>Age</th><th>Category</th><th>Body weight (kg)</th><th>Energy (kcal)</th><th>Protein (g)</th></tr>
             </thead>
             {Object.entries(groups).map(([group, rows]) => (
               <tbody key={group}>
-                <tr className="st-rda-group"><td colSpan={5}>{group}</td></tr>
+                <tr className="st-rda-group"><td colSpan={6}>{group}</td></tr>
                 {rows.map((row) => {
-                  const matched = current?.group === row.group && current?.category === row.category
+                  const matched = current?.group === row.group && current?.category === row.category && current?.age_min === row.age_min
                   return (
-                    <tr key={`${group}-${row.category}`} className={matched ? 'matched' : undefined}>
+                    <tr key={`${group}-${row.category}-${row.age_min}-${row.age_max}`} className={matched ? 'matched' : undefined}>
                       <td>{row.group}</td>
-                      <td>{row.category}{row.energy_note ? <small className="st-cell-note">{row.energy_note}</small> : null}</td>
+                      <td className="st-num">{ageLabel(row)}</td>
+                      <td>{row.category}{row.energy_note ? <small className="st-cell-note">{row.energy_note}</small> : null}{row.note ? <small className="st-cell-note">{row.note}</small> : null}</td>
                       <td className="st-num">{row.body_weight_kg}</td>
                       <td className="st-num">{row.energy_per_kg ? `${row.energy_per_kg}/kg` : row.energy_kcal.toLocaleString()}</td>
                       <td className="st-num">{row.protein_per_kg ? `${row.protein_per_kg}/kg` : row.protein_g}</td>
@@ -279,8 +285,10 @@ export function RdaModal({
         <div className="st-note-block">
           <Info size={15} />
           <p>
-            This is the practice RDA chart supplied with the brief. In RDA mode, the reference energy is adjusted by the goal mode
-            for adults; children and pregnancy are never put in deficit. Confirm the edition your practice uses before publishing.
+            This is the ICMR-NIN 2020 RDA table, the latest RDA edition. The 2024 Dietary Guidelines for Indians are
+            food-based guidance and do not replace this RDA table. Energy is the estimated energy requirement; protein
+            is the RDA at the reference body weight. In RDA mode, adult energy is adjusted by the goal mode; children and
+            pregnancy are never put in deficit.
           </p>
         </div>
       </div>
@@ -396,7 +404,7 @@ export function PublishModal({
 
   if (!open) return null
   const blockers = readiness.blockers
-  const ready = readiness.can_publish && attestation
+  const ready = readiness.can_publish
 
   return (
     <Modal open={open} onClose={onClose} labelledBy="publish-title" className="st-modal-wide">
@@ -441,8 +449,8 @@ export function PublishModal({
           <input type="checkbox" checked={attestation} onChange={(event) => setAttestation(event.target.checked)} />
           <span className="st-checkbox" aria-hidden="true">{attestation && <Check size={13} />}</span>
           <span>
-            <strong>I reviewed this plan and take clinical responsibility for publishing it.</strong>
-            <small>The version is immutable. The previous published strategy, if any, is archived.</small>
+            <strong>Record clinical sign-off for this version <em className="st-optional">Optional in this prototype</em></strong>
+            <small>Recorded with the published version when provided. The version is immutable; the previous published strategy is archived.</small>
           </span>
         </label>
 
