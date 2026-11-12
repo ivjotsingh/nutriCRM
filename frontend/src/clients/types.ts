@@ -1,4 +1,4 @@
-export type FieldType = 'text' | 'textarea' | 'number' | 'date' | 'time' | 'select' | 'multiselect' | 'checkbox' | 'section' | 'repeatable'
+export type FieldType = 'text' | 'textarea' | 'number' | 'date' | 'time' | 'select' | 'multiselect' | 'combo' | 'checkbox' | 'section' | 'repeatable'
 
 export interface ColumnDef {
   id: string

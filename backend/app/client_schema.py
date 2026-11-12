@@ -226,7 +226,7 @@ MEDICAL_FIELDS = [
         "conditions",
         "Medical conditions",
         [
-            column("disease", "Condition", "select", options=CONDITIONS, width=210),
+            column("disease", "Condition", "combo", options=CONDITIONS, width=210, placeholder="e.g. Diabetes"),
             column("since", "Since (year)", "text", placeholder="2016 or 20 years back", width=170),
             column("severity", "Severity", "text", placeholder="e.g. mild", width=150),
             column("frequency", "Frequency", "text", placeholder="e.g. on medication", width=170),
@@ -256,7 +256,12 @@ MEDICAL_FIELDS = [
     ),
     section("screening", "Screening"),
     field("cancer", "Cancer diagnosis or treatment", field_type="select", options=YES_NO),
-    field("blood_pressure", "Blood pressure", placeholder="e.g. 120/80"),
+    field(
+        "blood_pressure",
+        "Blood pressure",
+        placeholder="e.g. 120/80",
+        help_text="Enter systolic/diastolic. The ACC/AHA category appears as you type.",
+    ),
     field("energy", "Energy levels (fatigue, weakness)", field_type="select", options=YES_NO_UNSURE),
     field("recurrent_infections", "Recurrent infections in last 6–12 months", field_type="select", options=YES_NO_UNSURE),
     field("screening_notes", "Screening notes", field_type="textarea", span=3),
@@ -324,6 +329,14 @@ DIETARY_FIELDS = [
             column("frequency", "Frequency", "select", options=FREQUENCIES, width=150),
         ],
         add_label="Add supplement",
+    ),
+    field(
+        "medication_notes",
+        "Medication and supplement notes",
+        field_type="textarea",
+        span=3,
+        placeholder="e.g. adherence, side effects, timing issues, refill dates, or changes to discuss with the doctor",
+        help_text="Free notes for the practitioner. Saved with the client record.",
     ),
 ]
 
@@ -541,7 +554,7 @@ CORE_TABS: list[dict[str, Any]] = [
     {"id": "recall", "label": "24hr Recall", "description": "A repeatable log of meals and drinks.", "icon": "clock", "fields": RECALL_FIELDS},
     {"id": "fuv", "label": "FUV", "description": "Follow-up visit notes.", "icon": "file", "fields": FUV_FIELDS},
     {"id": "blood", "label": "Blood Report", "description": "Blood parameters, reference ranges, and deranged markers.", "icon": "droplet", "fields": BLOOD_FIELDS},
-    {"id": "strategy", "label": "Strategy", "description": "Create, revise, and publish this client's nutrition strategy.", "icon": "target", "fields": []},
     {"id": "forms", "label": "Forms", "description": "Food habits and behaviour questionnaire.", "icon": "clipboard", "fields": FORMS_FIELDS},
     {"id": "headtoe", "label": "Head-to-Toe", "description": "System-by-system screening with a Yes/No gate and multi-select findings.", "icon": "heart", "fields": HEADTOE_FIELDS},
+    {"id": "strategy", "label": "Strategy", "description": "Create, revise, and publish this client's nutrition strategy.", "icon": "target", "fields": []},
 ]

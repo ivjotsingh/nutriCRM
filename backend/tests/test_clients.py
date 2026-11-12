@@ -44,8 +44,19 @@ def test_client_can_be_created_with_only_required_fields(tmp_path, monkeypatch):
     assert body["tabs"][0]["id"] == "basic"
     assert any(tab["id"] == "forms" for tab in body["tabs"])
     assert any(tab["id"] == "headtoe" for tab in body["tabs"])
+    tab_ids = [tab["id"] for tab in body["tabs"]]
+    assert tab_ids.index("strategy") > tab_ids.index("headtoe")
     headtoe = next(tab for tab in body["tabs"] if tab["id"] == "headtoe")
     assert any(field["id"] == "htt_head_neck_gate" for field in headtoe["fields"])
+
+    medical = next(tab for tab in body["tabs"] if tab["id"] == "medical")
+    conditions = next(field for field in medical["fields"] if field["id"] == "conditions")
+    assert conditions["columns"][0]["type"] == "combo"
+    assert "Diabetes" in conditions["columns"][0]["options"]
+
+    dietary = next(tab for tab in body["tabs"] if tab["id"] == "dietary")
+    notes = next(field for field in dietary["fields"] if field["id"] == "medication_notes")
+    assert notes["type"] == "textarea"
 
 
 def test_client_creation_allows_no_consent_and_empty_fields(tmp_path, monkeypatch):

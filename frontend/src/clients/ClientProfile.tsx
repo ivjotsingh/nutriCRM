@@ -1,11 +1,16 @@
 import {
+  type CSSProperties,
   type FormEvent,
   type KeyboardEvent as ReactKeyboardEvent,
   type ReactNode,
+  type RefObject,
+  useLayoutEffect,
   useEffect,
+  useId,
   useRef,
   useState
 } from 'react'
+import { createPortal } from 'react-dom'
 import {
   Activity,
   AlertCircle,
@@ -34,6 +39,7 @@ import {
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { addClientOption, createClientTab, getClient, getHeadToeHistory, updateClient } from './api'
+import { classifyBloodPressure } from './bloodPressure'
 import type { ClientBundle, ClientRecord, ColumnDef, CustomTabField, FieldDef, HeadToeSnapshot, TabDef } from './types'
 import StrategyHistory from '../strategy/StrategyHistory'
 import { Modal, ModalClose, Toast, formatDate, formatDateTime, programStatus, relativeDate } from './ui'
@@ -1026,7 +1032,7 @@ function FieldControl({
       />
     )
   }
-  return (
+  const input = (
     <input
       type={field.type === 'number' ? 'number' : field.type === 'date' ? 'date' : field.type === 'time' ? 'time' : 'text'}
       value={String(value ?? '')}
@@ -1034,6 +1040,39 @@ function FieldControl({
       placeholder={field.placeholder}
       inputMode={field.type === 'number' ? 'decimal' : undefined}
     />
+  )
+  if (field.id === 'blood_pressure') {
+    return (
+      <span className="cf-bp-field">
+        {input}
+        <BloodPressureHint value={value} />
+      </span>
+    )
+  }
+  return input
+}
+
+function BloodPressureHint({ value }: { value: unknown }) {
+  const result = classifyBloodPressure(value)
+  if (result.status === 'empty') return null
+  if (result.status === 'invalid') {
+    return (
+      <span className="cf-bp-readout invalid" role="status">
+        <Info size={13} aria-hidden="true" />
+        <span>{result.message}</span>
+      </span>
+    )
+  }
+
+  const reading = result.reading
+  const measured = `${reading.systolic}/${reading.diastolic ?? '—'} mmHg`
+  return (
+    <span className={`cf-bp-readout ${reading.tone}`} role="status" aria-live="polite">
+      <span className="cf-bp-badge">{reading.category}</span>
+      <span className="cf-bp-measure">{measured}</span>
+      <span className="cf-bp-reference">{reading.reference} · {reading.source}</span>
+      <span className="cf-bp-guidance">{reading.guidance}</span>
+    </span>
   )
 }
 
@@ -1153,6 +1192,19 @@ function CellControl({
   onChange: (value: unknown) => void
   onAddOption: (category: string, value: string) => Promise<void>
 }) {
+  if (column.type === 'combo') {
+    return (
+      <ComboField
+        label={column.label}
+        value={value}
+        options={options}
+        category={category}
+        placeholder={column.placeholder || 'Type to search or add new'}
+        onChange={onChange}
+        onAddOption={onAddOption}
+      />
+    )
+  }
   if (column.type === 'select') {
     return (
       <ChoiceField
@@ -1181,6 +1233,61 @@ function CellControl({
   )
 }
 
+function useFloatingPanel(
+  open: boolean,
+  anchorRef: RefObject<HTMLElement | null>,
+  panelRef: RefObject<HTMLDivElement | null>,
+  minWidth = 300
+): CSSProperties {
+  const [style, setStyle] = useState<CSSProperties>({ visibility: 'hidden' })
+
+  useLayoutEffect(() => {
+    if (!open) return
+    const anchor = anchorRef.current
+    if (!anchor) return
+    let frame = 0
+
+    function place() {
+      frame = 0
+      const node = anchorRef.current
+      if (!node) return
+      const rect = node.getBoundingClientRect()
+      const margin = 10
+      const width = Math.min(Math.max(rect.width, minWidth), window.innerWidth - margin * 2)
+      const spaceBelow = window.innerHeight - rect.bottom - margin
+      const spaceAbove = rect.top - margin
+      const below = spaceBelow >= 240 || spaceBelow >= spaceAbove
+      const maxHeight = Math.max(80, Math.min(380, below ? spaceBelow : spaceAbove))
+      const left = Math.min(Math.max(margin, rect.left), Math.max(margin, window.innerWidth - width - margin))
+      setStyle({
+        position: 'fixed',
+        left,
+        width,
+        maxHeight,
+        top: below ? rect.bottom + 6 : 'auto',
+        bottom: below ? 'auto' : window.innerHeight - rect.top + 6,
+        visibility: 'visible'
+      })
+    }
+
+    function schedule() {
+      if (frame) return
+      frame = window.requestAnimationFrame(place)
+    }
+
+    place()
+    window.addEventListener('scroll', schedule, true)
+    window.addEventListener('resize', schedule)
+    return () => {
+      window.removeEventListener('scroll', schedule, true)
+      window.removeEventListener('resize', schedule)
+      if (frame) window.cancelAnimationFrame(frame)
+    }
+  }, [open, anchorRef, panelRef, minWidth])
+
+  return style
+}
+
 function ChoiceField({
   label,
   value,
@@ -1207,6 +1314,8 @@ function ChoiceField({
   const [adding, setAdding] = useState(false)
   const [addError, setAddError] = useState('')
   const rootRef = useRef<HTMLDivElement>(null)
+  const popoverRef = useRef<HTMLDivElement>(null)
+  const panelStyle = useFloatingPanel(open, rootRef, popoverRef, 320)
   const selected = multi
     ? (Array.isArray(value) ? value.map(String) : [])
     : value ? [String(value)] : []
@@ -1214,7 +1323,9 @@ function ChoiceField({
   useEffect(() => {
     if (!open) return
     function onPointerDown(event: MouseEvent) {
-      if (rootRef.current && !rootRef.current.contains(event.target as Node)) setOpen(false)
+      const target = event.target as Node
+      if (rootRef.current?.contains(target) || popoverRef.current?.contains(target)) return
+      setOpen(false)
     }
     document.addEventListener('mousedown', onPointerDown)
     return () => document.removeEventListener('mousedown', onPointerDown)
@@ -1281,8 +1392,8 @@ function ChoiceField({
         </span>
         <ChevronDown size={15} aria-hidden="true" />
       </button>
-      {open && (
-        <div className="cf-popover">
+      {open && createPortal(
+        <div className="cf-popover" ref={popoverRef} style={panelStyle}>
           <input
             className="cf-search"
             value={query}
@@ -1328,7 +1439,210 @@ function ChoiceField({
           {multi && selected.length > 0 && (
             <button type="button" className="cf-clear-options" onClick={() => onChange([])}>Clear selection</button>
           )}
-        </div>
+        </div>,
+        document.body
+      )}
+    </div>
+  )
+}
+
+function ComboField({
+  label,
+  value,
+  options,
+  category,
+  placeholder,
+  onChange,
+  onAddOption
+}: {
+  label: string
+  value: unknown
+  options: string[]
+  category: string
+  placeholder: string
+  onChange: (value: unknown) => void
+  onAddOption: (category: string, value: string) => Promise<void>
+}) {
+  const text = String(value ?? '')
+  const [draft, setDraft] = useState(text)
+  const [open, setOpen] = useState(false)
+  const [query, setQuery] = useState('')
+  const [adding, setAdding] = useState(false)
+  const [error, setError] = useState('')
+  const rootRef = useRef<HTMLDivElement>(null)
+  const popoverRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
+  const persistedRef = useRef<Set<string>>(new Set())
+  const listId = useId()
+  const panelStyle = useFloatingPanel(open, rootRef, popoverRef, 300)
+  const search = query.trim()
+  const trimmed = draft.trim()
+  const filtered = options.filter((option) => option.toLowerCase().includes(search.toLowerCase()))
+  const exact = options.find((option) => option.toLowerCase() === search.toLowerCase())
+  const canAdd = Boolean(search) && !exact
+
+  useEffect(() => {
+    if (!open) setDraft(text)
+  }, [open, text])
+
+  useEffect(() => {
+    if (!open) return
+    function onPointerDown(event: MouseEvent) {
+      const target = event.target as Node
+      if (rootRef.current?.contains(target) || popoverRef.current?.contains(target)) return
+      setOpen(false)
+    }
+    function onFocusIn(event: FocusEvent) {
+      const target = event.target as Node
+      if (rootRef.current?.contains(target) || popoverRef.current?.contains(target)) return
+      setOpen(false)
+    }
+    document.addEventListener('mousedown', onPointerDown)
+    document.addEventListener('focusin', onFocusIn)
+    return () => {
+      document.removeEventListener('mousedown', onPointerDown)
+      document.removeEventListener('focusin', onFocusIn)
+    }
+  }, [open])
+
+  async function persistOption(next: string) {
+    const clean = next.trim()
+    if (!clean) return
+    const key = clean.toLowerCase()
+    if (options.some((option) => option.toLowerCase() === key) || persistedRef.current.has(key) || adding) return
+    persistedRef.current.add(key)
+    setAdding(true)
+    setError('')
+    try {
+      await onAddOption(category, clean)
+    } catch {
+      persistedRef.current.delete(key)
+      setError('New value could not be saved to the shared list. The typed value is still kept in this record.')
+    } finally {
+      setAdding(false)
+    }
+  }
+
+  function choose(option: string) {
+    onChange(option)
+    setDraft(option)
+    setOpen(false)
+    setQuery('')
+    setError('')
+  }
+
+  function commitDraft() {
+    const match = options.find((option) => option.toLowerCase() === trimmed.toLowerCase())
+    if (match) {
+      if (match !== text) onChange(match)
+    } else if (trimmed) {
+      onChange(trimmed)
+      void persistOption(trimmed)
+    } else if (text) {
+      onChange('')
+    }
+    setOpen(false)
+    setQuery('')
+  }
+
+  return (
+    <div className="cf-combo">
+      <div className="cf-combo-control" ref={rootRef}>
+        <input
+          ref={inputRef}
+          value={draft}
+          onChange={(event) => {
+            setDraft(event.target.value)
+            setQuery(event.target.value)
+            setOpen(true)
+            setError('')
+          }}
+          onFocus={() => {
+            setDraft(text)
+            setQuery('')
+            setOpen(true)
+          }}
+          onClick={() => setOpen(true)}
+          onBlur={commitDraft}
+          onKeyDown={(event) => {
+            if (event.key === 'Escape') {
+              setDraft(text)
+              setQuery('')
+              setOpen(false)
+              return
+            }
+            if (event.key === 'Enter') {
+              event.preventDefault()
+              if (filtered.length === 1) choose(filtered[0])
+              else if (exact) choose(exact)
+              else commitDraft()
+            }
+          }}
+          role="combobox"
+          aria-expanded={open}
+          aria-controls={`${listId}-list`}
+          aria-autocomplete="list"
+          aria-label={label}
+          placeholder={placeholder}
+          autoComplete="off"
+        />
+        <button
+          type="button"
+          className="cf-combo-toggle"
+          tabIndex={-1}
+          aria-label={open ? `Hide ${label} options` : `Show ${label} options`}
+          onMouseDown={(event) => event.preventDefault()}
+          onClick={() => {
+            if (open) {
+              setOpen(false)
+              inputRef.current?.blur()
+              return
+            }
+            setDraft(text)
+            setQuery('')
+            setOpen(true)
+            inputRef.current?.focus()
+          }}
+        >
+          <ChevronDown size={15} aria-hidden="true" />
+        </button>
+      </div>
+      {error && <p className="cf-combo-error" role="alert">{error}</p>}
+      {open && createPortal(
+        <div className="cf-popover" ref={popoverRef} style={panelStyle}>
+          <div className="cf-option-list" id={`${listId}-list`} role="listbox" aria-label={label}>
+            {filtered.length === 0 && !canAdd && <p className="cf-option-empty">No matching options.</p>}
+            {filtered.map((option) => {
+              const selected = option.toLowerCase() === draft.trim().toLowerCase()
+              return (
+                <button
+                  key={option}
+                  type="button"
+                  role="option"
+                  aria-selected={selected}
+                  className={selected ? 'cf-option selected' : 'cf-option'}
+                  onMouseDown={(event) => event.preventDefault()}
+                  onClick={() => choose(option)}
+                >
+                  <span>{option}</span>
+                  {selected && <Check size={14} aria-hidden="true" />}
+                </button>
+              )
+            })}
+          </div>
+          {canAdd && (
+            <button
+              type="button"
+              className="cf-add-option"
+              disabled={adding}
+              onMouseDown={(event) => event.preventDefault()}
+              onClick={commitDraft}
+            >
+              <Plus size={14} /> {adding ? 'Saving…' : `Add “${trimmed}”`}
+            </button>
+          )}
+        </div>,
+        document.body
       )}
     </div>
   )
