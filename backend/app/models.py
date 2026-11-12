@@ -88,8 +88,10 @@ class ClientCreatePayload(BaseModel):
     email: str = Field(default="", max_length=160)
     city: str = Field(default="", max_length=80)
     consent: bool = False
+    start_date: str = Field(default="", max_length=10)
+    end_date: str = Field(default="", max_length=10)
 
-    @field_validator("name", "phone", "email", "city")
+    @field_validator("name", "phone", "email", "city", "start_date", "end_date")
     @classmethod
     def strip_client_text(cls, value: str) -> str:
         return value.strip()
@@ -101,7 +103,14 @@ class ClientUpdatePayload(BaseModel):
     email: str | None = Field(default=None, max_length=160)
     city: str | None = Field(default=None, max_length=80)
     consent: bool | None = None
+    start_date: str | None = Field(default=None, max_length=10)
+    end_date: str | None = Field(default=None, max_length=10)
     data: dict[str, Any] | None = None
+
+    @field_validator("start_date", "end_date")
+    @classmethod
+    def strip_optional_date(cls, value: str | None) -> str | None:
+        return value.strip() if value is not None else None
 
 
 class ClientOptionPayload(BaseModel):

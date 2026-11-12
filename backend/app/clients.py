@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import datetime as dt
 import json
 import re
 import uuid
@@ -24,9 +25,26 @@ def _client_dict(row: Any) -> dict[str, Any]:
         "email": row["email"],
         "city": row["city"],
         "consent": bool(row["consent"]),
+        "start_date": row["start_date"],
+        "end_date": row["end_date"],
         "created_at": row["created_at"],
         "updated_at": row["updated_at"],
     }
+
+
+def _clean_date(value: Any, label: str) -> str:
+    text = str(value or "").strip()
+    if not text:
+        return ""
+    try:
+        return dt.date.fromisoformat(text).isoformat()
+    except ValueError as exc:
+        raise ValueError(f"{label} must use YYYY-MM-DD") from exc
+
+
+def _validate_dates(start_date: str, end_date: str) -> None:
+    if start_date and end_date and end_date < start_date:
+        raise ValueError("End date cannot be before the start date")
 
 
 def list_clients() -> list[dict[str, Any]]:
@@ -35,13 +53,36 @@ def list_clients() -> list[dict[str, Any]]:
     return [_client_dict(row) for row in rows]
 
 
-def create_client(name: str, phone: str, email: str, city: str, consent: bool) -> dict[str, Any]:
+def create_client(
+    name: str,
+    phone: str,
+    email: str,
+    city: str,
+    consent: bool,
+    start_date: str = "",
+    end_date: str = "",
+) -> dict[str, Any]:
     client_id = str(uuid.uuid4())
     now = _now()
+    start_date = _clean_date(start_date, "Start date")
+    end_date = _clean_date(end_date, "End date")
+    _validate_dates(start_date, end_date)
     with connect() as conn:
         conn.execute(
-            "INSERT INTO clients (id, name, phone, email, city, consent, data_json, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-            (client_id, name.strip(), phone.strip(), email.strip(), city.strip(), 1 if consent else 0, "{}", now, now),
+            "INSERT INTO clients (id, name, phone, email, city, consent, start_date, end_date, data_json, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            (
+                client_id,
+                name.strip(),
+                phone.strip(),
+                email.strip(),
+                city.strip(),
+                1 if consent else 0,
+                start_date,
+                end_date,
+                "{}",
+                now,
+                now,
+            ),
         )
     return get_client_bundle(client_id)  # type: ignore[return-value]
 
@@ -85,6 +126,17 @@ def get_client_bundle(client_id: str) -> dict[str, Any] | None:
     if not row:
         return None
     data = json.loads(row["data_json"] or "{}")
+    if isinstance(data, dict):
+        dietary = data.get("dietary")
+        if isinstance(dietary, dict):
+            legacy_water = dietary.pop("water_intake", None)
+            if legacy_water:
+                forms = data.get("forms")
+                if not isinstance(forms, dict):
+                    forms = {}
+                    data["forms"] = forms
+                if not forms.get("water_intake"):
+                    forms["water_intake"] = legacy_water
     return {
         "client": _client_dict(row),
         "tabs": [*CORE_TABS, *_custom_tabs(client_id)],
@@ -137,6 +189,12 @@ def update_client(client_id: str, payload: dict[str, Any]) -> dict[str, Any] | N
         if "consent" in payload and payload["consent"] is not None:
             updates.append("consent = ?")
             values.append(1 if payload["consent"] else 0)
+        if "start_date" in payload or "end_date" in payload:
+            start_date = _clean_date(payload.get("start_date", current["start_date"]), "Start date")
+            end_date = _clean_date(payload.get("end_date", current["end_date"]), "End date")
+            _validate_dates(start_date, end_date)
+            updates.extend(["start_date = ?", "end_date = ?"])
+            values.extend([start_date, end_date])
         if "data" in payload and payload["data"] is not None:
             if not isinstance(payload["data"], dict):
                 raise ValueError("data must be an object")

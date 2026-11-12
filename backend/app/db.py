@@ -91,6 +91,8 @@ def init_db() -> None:
               email TEXT NOT NULL DEFAULT '',
               city TEXT NOT NULL DEFAULT '',
               consent INTEGER NOT NULL DEFAULT 0,
+              start_date TEXT NOT NULL DEFAULT '',
+              end_date TEXT NOT NULL DEFAULT '',
               data_json TEXT NOT NULL DEFAULT '{}',
               created_at TEXT NOT NULL,
               updated_at TEXT NOT NULL
@@ -128,6 +130,10 @@ def init_db() -> None:
             );
             """
         )
+        columns = {row["name"] for row in conn.execute("PRAGMA table_info(clients)").fetchall()}
+        for column in ("start_date", "end_date"):
+            if column not in columns:
+                conn.execute(f"ALTER TABLE clients ADD COLUMN {column} TEXT NOT NULL DEFAULT ''")
 
 
 def record_intake(intake: dict[str, Any], triage: dict[str, Any], result_type: str, result: dict[str, Any]) -> str:

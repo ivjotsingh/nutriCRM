@@ -33,6 +33,24 @@ PORTION_HABITS = ["Small portions", "Moderate portions", "Large portions", "Vari
 EATING_OUT = ["Rarely", "1–2 times a week", "3–4 times a week", "Daily", "Multiple times a day"]
 SHOPPING = ["Weekly", "Fortnightly", "Monthly", "Daily", "Online", "Mixed"]
 COMFORT = ["Very comfortable", "Comfortable", "Neutral", "Not comfortable", "Cannot cook"]
+EXCESS_DEVIATION = [
+    "Sweets / desserts", "Fried food", "Salty snacks", "Large portions", "Late-night eating",
+    "Frequent snacking", "Alcohol", "Other",
+]
+START_DAY = ["Slowly and gradually", "In a rush", "After tea / coffee", "After a workout", "Varies", "Other"]
+WAKE_ACTIONS = [
+    "Tea / coffee within 15 min", "Breakfast within 30 min", "Breakfast after 1 hour",
+    "Exercise within 30 min", "Screen / phone within 15 min", "Medication on waking", "Nothing specific",
+]
+SCREEN_HOURS = ["Less than 2 hours", "2–4 hours", "4–6 hours", "6–8 hours", "More than 8 hours"]
+DAILY_ACTIVITY = ["Mostly sitting", "Light movement", "Walking", "Standing", "Physical labour", "Structured exercise"]
+ENERGY_LEVELS = ["Low", "Moderate", "High", "Varies"]
+TIMES_OF_DAY = ["Morning", "Afternoon", "Evening", "Night", "Varies"]
+DRAINED_TIMES = ["On waking", "Morning", "Afternoon", "Evening", "Night", "Varies"]
+BLOOD_CATEGORIES = [
+    "Complete Blood Count", "Lipid Profile", "Liver Function", "Kidney Function", "Thyroid",
+    "Diabetes", "Vitamins & Minerals", "Hormones", "Inflammatory Markers", "Other",
+]
 
 
 def field(
@@ -45,6 +63,7 @@ def field(
     span: int = 1,
     placeholder: str = "",
     help_text: str = "",
+    read_only: bool = False,
 ) -> dict[str, Any]:
     data: dict[str, Any] = {
         "id": field_id,
@@ -57,6 +76,8 @@ def field(
     }
     if options:
         data["options"] = options
+    if read_only:
+        data["read_only"] = True
     return data
 
 
@@ -119,6 +140,9 @@ BASIC_FIELDS = [
     field("pincode", "Pincode", placeholder="e.g. 400006"),
     field("occupation", "Occupation", span=2, placeholder="e.g. Student and business — finance"),
     field("sports", "Sports and training history", field_type="textarea", span=3, placeholder="Sports, timelines, current routine"),
+    section("program", "Program"),
+    field("start_date", "Program start date", field_type="date"),
+    field("end_date", "Program end date", field_type="date"),
     section("preferences", "Profile"),
     field("source", "Source / referral", field_type="select", options=SOURCES),
     field("notes", "Notes", field_type="textarea", span=3, placeholder="Anything useful for the first conversation"),
@@ -126,21 +150,67 @@ BASIC_FIELDS = [
 ]
 
 BCA_FIELDS = [
-    section("measurements", "Measurements", "All fields are optional. Blank values are not treated as zero."),
-    field("measurement_date", "Measurement date", field_type="date"),
+    section("measurement", "Measurement date", "The date these readings were taken."),
+    field("measurement_date", "Date of measurement", field_type="date"),
+    section("basic_info", "Basic info"),
+    field("height_ft", "Height (ft)", field_type="number", placeholder="e.g. 4"),
+    field("height_in", "Height (inch)", field_type="number", placeholder="e.g. 10"),
     field("height_cm", "Height (cm)", field_type="number", placeholder="e.g. 147.32"),
     field("weight_kg", "Weight (kg)", field_type="number", placeholder="e.g. 55.9"),
+    field("weight_lbs", "Weight (lbs)", field_type="number", placeholder="e.g. 123.24"),
+    field(
+        "bmi",
+        "BMI (kg/m²)",
+        field_type="number",
+        read_only=True,
+        placeholder="—",
+        help_text="Calculated live from height and weight.",
+    ),
+    section("body_info", "Body composition"),
     field("body_fat_pct", "Body fat (%)", field_type="number"),
+    field("fat_mass_kg", "Fat mass (kg)", field_type="number"),
     field("muscle_mass_kg", "Muscle mass (kg)", field_type="number"),
-    field("water_weight_kg", "Water weight (kg)", field_type="number"),
-    field("waist_cm", "Waist (cm)", field_type="number"),
-    field("waist_in", "Waist (inches)", field_type="number"),
-    field("hip_cm", "Hip (cm)", field_type="number"),
-    field("hip_in", "Hip (inches)", field_type="number"),
-    field("neck_cm", "Neck (cm)", field_type="number"),
-    field("neck_in", "Neck (inches)", field_type="number"),
-    field("biological_age", "Biological age", field_type="number"),
     field("visceral_fat", "Visceral fat index", field_type="number"),
+    field("resting_metabolism", "Resting metabolism (kcal)", field_type="number"),
+    field("biological_age", "Metabolic body age", field_type="number"),
+    field("total_subcut_fat_pct", "Total subcutaneous fat (%)", field_type="number"),
+    field("subcut_fat_trunk_pct", "Subcutaneous fat – trunk (%)", field_type="number"),
+    field("subcut_fat_arms_pct", "Subcutaneous fat – arms (%)", field_type="number"),
+    field("subcut_fat_legs_pct", "Subcutaneous fat – legs (%)", field_type="number"),
+    field("total_skeletal_muscle_pct", "Total skeletal muscle (%)", field_type="number"),
+    field("skeletal_muscle_trunk_pct", "Skeletal muscle – trunk (%)", field_type="number"),
+    field("skeletal_muscle_arms_pct", "Skeletal muscle – arms (%)", field_type="number"),
+    field("skeletal_muscle_legs_pct", "Skeletal muscle – legs (%)", field_type="number"),
+    field("water_weight_kg", "Water weight (kg)", field_type="number"),
+    field("bone_weight_kg", "Bone weight (kg)", field_type="number"),
+    field("fat_free_mass_kg", "Fat-free mass (kg)", field_type="number"),
+    section(
+        "measurements",
+        "Measurements",
+        "Waist-to-hip ratio (WHR) = waist circumference ÷ hip circumference, measured at the narrowest "
+        "part of the waist and the widest part of the hips using the same unit (cm or inches).",
+    ),
+    field("waist_in", "Waist (inches)", field_type="number"),
+    field("waist_cm", "Waist (cm)", field_type="number"),
+    field("hip_in", "Hip (inches)", field_type="number"),
+    field("hip_cm", "Hip (cm)", field_type="number"),
+    field("neck_in", "Neck (inches)", field_type="number"),
+    field("neck_cm", "Neck (cm)", field_type="number"),
+    field(
+        "waist_hip_ratio",
+        "Waist-to-hip ratio",
+        field_type="number",
+        read_only=True,
+        placeholder="—",
+        help_text="Calculated from waist and hip measurements.",
+    ),
+    field(
+        "body_shape_type",
+        "Body shape type",
+        field_type="select",
+        options=["Apple", "Pear", "Hourglass", "Rectangle", "Inverted triangle", "Athletic", "Other"],
+    ),
+    section("assessment_notes", "Assessment notes"),
     field("notes", "Assessment notes", field_type="textarea", span=3),
 ]
 
@@ -203,7 +273,6 @@ DIETARY_FIELDS = [
     field("intolerances", "Food intolerances / sensitivities", field_type="multiselect", options=["None", "Lactose", "Gluten", "Nuts", "Soy", "Other"]),
     field("lactose_intolerance", "Lactose intolerance", field_type="select", options=YES_NO_UNSURE),
     field("gluten_sensitivity", "Gluten sensitivity", field_type="select", options=YES_NO_UNSURE),
-    field("water_intake", "Water per day", field_type="select", options=WATER),
     field("meal_prep_help", "Household help for meals", placeholder="e.g. house help, Sep"),
     field("oils", "Oils used in meal prep", field_type="text", span=2, placeholder="e.g. ghee, rice bran, olive, mustard"),
     field("travel_plans", "Travel plans", field_type="textarea", span=2, placeholder="No, or destination and dates"),
@@ -288,16 +357,19 @@ FUV_FIELDS = [
 ]
 
 FORMS_FIELDS = [
-    section("eating", "Eating history and patterns"),
+    section("eating", "Food habits and behaviour", "The dietician intake form. Every field is optional."),
     field("consulted", "Consulted a nutritionist / dietician", field_type="select", options=YES_NO),
     field("eating_habits", "Eating habits", field_type="select", options=EATING_HABITS),
     field("tracking", "Track / monitor health habits", field_type="select", options=HEALTH_TRACKING),
     field("diet_plan", "Specific dietary plan or lifestyle", field_type="select", options=YES_NO),
     field("eating_patterns", "Eating patterns", field_type="select", options=EATING_PATTERNS),
-    field("emotional_eater", "Emotional eater / stress eating", field_type="select", options=YES_NO),
-    field("portion_habits", "Meal portion-size habits", field_type="select", options=PORTION_HABITS),
-    field("eating_out", "Eat outside home frequency", field_type="select", options=EATING_OUT),
-    field("health_impact_habits", "Habits impacting health", field_type="textarea", span=3),
+    field("emotional_eater", "Emotional eater / eat under stress", field_type="select", options=YES_NO),
+    field("portion_habits", "Habits around meal portion sizes", field_type="select", options=PORTION_HABITS),
+    field("eating_out", "Eat outside home (restaurants, takeout, fast food)", field_type="select", options=EATING_OUT),
+    field("excess_deviation", "Type of excess or deviation most often", field_type="multiselect", span=2, options=EXCESS_DEVIATION),
+    field("food_discomfort", "Foods causing discomfort or digestive issues", field_type="select", options=YES_NO),
+    field("health_impact_habits", "Habits impacting health (positive or negative)", field_type="textarea", span=3),
+    field("dietary_share", "Anything else about dietary habits or preferences", field_type="textarea", span=3),
     section("cravings_section", "Cravings and behaviours"),
     field("cravings", "Specific food cravings", field_type="multiselect", options=CRAVINGS),
     field("exercise", "Exercise / activity type", field_type="multiselect", options=EXERCISE),
@@ -306,15 +378,39 @@ FORMS_FIELDS = [
     field("vaping", "Vaping", field_type="select", options=HABITS),
     field("drugs", "Recreational / hard drugs", field_type="select", options=YES_NO),
     field("second_hand_smoke", "Second-hand smoke exposure", field_type="select", options=HABITS),
+    section("daily_rhythm", "Daily rhythm and energy"),
+    field("start_day", "How you usually start your day", field_type="select", options=START_DAY),
+    field("wake_actions", "How soon after waking you do the following", field_type="multiselect", span=2, options=WAKE_ACTIONS),
+    field("screen_hours", "Average screen time per day", field_type="select", options=SCREEN_HOURS),
+    field("daily_activity_time", "Typical daily activity", field_type="multiselect", options=DAILY_ACTIVITY),
+    field("energy_levels", "Overall energy levels through the day", field_type="select", options=ENERGY_LEVELS),
+    field("energetic_time", "When you feel most energetic", field_type="select", options=TIMES_OF_DAY),
+    field("drained_time", "When you typically feel drained or fatigued", field_type="select", options=DRAINED_TIMES),
+    field("midday_crash", "Mid-day crash / sleepiness after meals", field_type="textarea", span=3),
     section("hydration", "Hydration and household"),
+    field("water_intake", "Water per day", field_type="select", options=WATER),
     field("regular_drinks", "Regular drinks", field_type="multiselect", options=DRINKS),
     field("grocery_shopper", "Grocery shopper", field_type="select", options=["Self", "Partner", "Parent", "Household help", "Shared"]),
     field("menu_decider", "Menu decider", field_type="select", options=["Self", "Partner", "Parent", "Household help", "Shared"]),
     field("shopping_style", "Food shopping style", field_type="select", options=SHOPPING),
     field("meal_prep_comfort", "Meal preparation comfort", field_type="select", options=COMFORT),
     field("new_foods", "Open to trying new foods or recipes", field_type="select", options=YES_NO),
+    section(
+        "food_frequency_section",
+        "Weekly food frequency",
+        "Optional. Add each food or drink and how many times per week it is consumed (0 = never, 7 = daily).",
+    ),
+    repeatable(
+        "food_frequency",
+        "Food frequency",
+        [
+            column("food", "Food / drink", "text", placeholder="e.g. Tea", width=220),
+            column("times_per_week", "Times per week (0–7)", "number", width=150),
+            column("notes", "Notes", "text", width=260),
+        ],
+        add_label="Add food",
+    ),
 ]
-
 
 def system_block(slug: str, label: str, findings: list[str], help_text: str = "", extras: list[dict[str, Any]] | None = None) -> list[dict[str, Any]]:
     return [
@@ -413,13 +509,38 @@ HEADTOE_FIELDS += system_block("pregnancy", "Pregnancy / Lactation Related", [
     "Postpartum depression", "Postpartum anxiety", "Nutritional deficiencies",
 ])
 
+BLOOD_FIELDS = [
+    section("report", "Blood report", "Add the report date and lab, then each parameter with its value and reference range."),
+    field("report_date", "Report date", field_type="date"),
+    field("report_lab", "Lab name", placeholder="e.g. Pathology Lab"),
+    field("report_notes", "Report notes", field_type="textarea", span=3, placeholder="Fasting status, clinical context, or anything else"),
+    section("parameters_section", "Parameters", "Flag each value as Low, High, or Critical to surface it in the deranged summary."),
+    repeatable(
+        "parameters",
+        "Blood parameters",
+        [
+            column("category", "Category", "select", options=BLOOD_CATEGORIES, width=140),
+            column("test_name", "Test name", "text", placeholder="e.g. Haemoglobin", width=150),
+            column("value", "Value", "text", placeholder="e.g. 13.5", width=100),
+            column("unit", "Unit", "text", placeholder="g/dL", width=82),
+            column("reference_range", "Reference range", "text", placeholder="13.0–17.0", width=140),
+            column("flag", "Deranged", "select", options=["Normal", "Low", "High", "Critical"], width=110),
+            column("remarks", "Remarks", "text", width=140),
+        ],
+        add_label="Add parameter",
+    ),
+    section("interpretation", "Interpretation"),
+    field("clinician_notes", "Clinician notes", field_type="textarea", span=3),
+]
+
 CORE_TABS: list[dict[str, Any]] = [
     {"id": "basic", "label": "Basic Details", "description": "Identity, contact and consent.", "icon": "user", "fields": BASIC_FIELDS},
-    {"id": "bca", "label": "Body Assessment", "description": "Body composition and measurements.", "icon": "activity", "fields": BCA_FIELDS},
+    {"id": "bca", "label": "Body Assessment", "description": "Basic info, body composition, and circumference measurements.", "icon": "activity", "fields": BCA_FIELDS},
     {"id": "medical", "label": "Medical & Family History", "description": "Conditions, surgeries, family history and screening.", "icon": "heart", "fields": MEDICAL_FIELDS},
     {"id": "dietary", "label": "Dietary Routine", "description": "Food preferences, schedule, medications and supplements.", "icon": "utensils", "fields": DIETARY_FIELDS},
     {"id": "recall", "label": "24hr Recall", "description": "A repeatable log of meals and drinks.", "icon": "clock", "fields": RECALL_FIELDS},
     {"id": "fuv", "label": "FUV", "description": "Follow-up visit notes.", "icon": "file", "fields": FUV_FIELDS},
+    {"id": "blood", "label": "Blood Report", "description": "Blood parameters, reference ranges, and deranged markers.", "icon": "droplet", "fields": BLOOD_FIELDS},
     {"id": "forms", "label": "Forms", "description": "Food habits and behaviour questionnaire.", "icon": "clipboard", "fields": FORMS_FIELDS},
     {"id": "headtoe", "label": "Head-to-Toe", "description": "System-by-system screening with a Yes/No gate and multi-select findings.", "icon": "heart", "fields": HEADTOE_FIELDS},
 ]

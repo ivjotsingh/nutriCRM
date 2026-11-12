@@ -83,13 +83,18 @@ def list_clients() -> dict:
 
 @app.post("/api/clients")
 def create_client(payload: ClientCreatePayload) -> dict:
-    bundle = client_store.create_client(
-        name=payload.name,
-        phone=payload.phone,
-        email=payload.email,
-        city=payload.city,
-        consent=payload.consent,
-    )
+    try:
+        bundle = client_store.create_client(
+            name=payload.name,
+            phone=payload.phone,
+            email=payload.email,
+            city=payload.city,
+            consent=payload.consent,
+            start_date=payload.start_date,
+            end_date=payload.end_date,
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
     if not bundle:
         raise HTTPException(status_code=500, detail="Unable to create client")
     return bundle

@@ -20,6 +20,7 @@ export interface FieldDef {
   options?: string[]
   columns?: ColumnDef[]
   add_label?: string
+  read_only?: boolean
 }
 
 export interface TabDef {
@@ -38,6 +39,8 @@ export interface ClientRecord {
   email: string
   city: string
   consent: boolean
+  start_date: string
+  end_date: string
   created_at: string
   updated_at: string
 }

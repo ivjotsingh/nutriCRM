@@ -148,14 +148,20 @@ function App() {
 
   return (
     <div className="app-shell">
+      <a className="skip-link" href="#main-content">Skip to content</a>
       <header className="topbar">
         <button className="brand-button" onClick={goHome}>
-          <span className="brand-mark">N</span>
+          <span className="brand-mark" aria-hidden="true">N</span>
           <span>NutriAlign</span>
         </button>
-        <nav>
-          <button className="icon-button" aria-label="Clients" onClick={() => { window.location.hash = 'clients'; setRoute('clients') }} title="Client records">
-            <Users size={18} />
+        <nav aria-label="Primary">
+          <button
+            className={route === 'clients' ? 'topbar-nav active' : 'topbar-nav'}
+            aria-current={route === 'clients' ? 'page' : undefined}
+            onClick={() => { window.location.hash = 'clients'; setRoute('clients') }}
+            title="Client records"
+          >
+            <Users size={17} aria-hidden="true" />
             <span>Clients</span>
           </button>
         </nav>
@@ -1078,7 +1084,7 @@ function AdminDashboard({ onOpenClients }: { onOpenClients: () => void }) {
   }
 
   return (
-    <main className="admin-page">
+    <main className="admin-page" id="main-content" tabIndex={-1}>
       <section className="admin-hero">
         <div>
           <div className="eyebrow"><LayoutDashboard size={16} /> Local operator view</div>

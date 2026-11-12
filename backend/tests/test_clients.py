@@ -115,3 +115,45 @@ def test_custom_option_and_dynamic_tab(tmp_path, monkeypatch):
     fetched = client.get(f"/api/clients/{client_id}").json()
     assert any(item["id"] == custom_tab["id"] for item in fetched["tabs"])
     assert fetched["options"]["medical.conditions.disease"] == ["SIBO"]
+
+
+def test_client_program_dates_persist_and_can_be_updated(tmp_path, monkeypatch):
+    client = _client(tmp_path, monkeypatch)
+    created = client.post(
+        "/api/clients",
+        json={
+            "name": "Program Client",
+            "start_date": "2026-10-01",
+            "end_date": "2027-03-29",
+        },
+    )
+    assert created.status_code == 200
+    body = created.json()["client"]
+    assert body["start_date"] == "2026-10-01"
+    assert body["end_date"] == "2027-03-29"
+
+    client_id = body["id"]
+    updated = client.patch(
+        f"/api/clients/{client_id}",
+        json={"start_date": "2026-11-01", "end_date": "2026-11-30"},
+    )
+    assert updated.status_code == 200
+    assert updated.json()["client"]["start_date"] == "2026-11-01"
+    assert updated.json()["client"]["end_date"] == "2026-11-30"
+
+
+def test_client_program_dates_reject_invalid_ranges_and_formats(tmp_path, monkeypatch):
+    client = _client(tmp_path, monkeypatch)
+    reversed_range = client.post(
+        "/api/clients",
+        json={"name": "Reversed", "start_date": "2026-12-01", "end_date": "2026-11-01"},
+    )
+    assert reversed_range.status_code == 400
+    assert "before" in reversed_range.json()["detail"]
+
+    bad_format = client.post(
+        "/api/clients",
+        json={"name": "Bad format", "start_date": "01/10/2026"},
+    )
+    assert bad_format.status_code == 400
+    assert "YYYY-MM-DD" in bad_format.json()["detail"]

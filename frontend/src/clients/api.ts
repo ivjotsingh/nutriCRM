@@ -29,6 +29,8 @@ export function createClient(payload: {
   email: string
   city: string
   consent: boolean
+  start_date: string
+  end_date: string
 }): Promise<ClientBundle> {
   return request('/api/clients', { method: 'POST', body: JSON.stringify(payload) })
 }
@@ -45,6 +47,8 @@ export function updateClient(
     email: string
     city: string
     consent: boolean
+    start_date: string
+    end_date: string
     data: Record<string, unknown>
   }
 ): Promise<ClientBundle> {
