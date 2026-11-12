@@ -1138,6 +1138,8 @@ dd {
 
 .list-heading {
   margin-bottom: 12px;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .list-heading h2,
@@ -1146,9 +1148,57 @@ dd {
   margin-bottom: 0;
 }
 
-.list-heading span {
+.list-heading-copy {
+  display: grid;
+  gap: 2px;
+}
+
+.list-heading-copy > span {
   color: var(--muted);
   font-weight: 850;
+}
+
+.lead-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.lead-toolbar .toolbar-button {
+  min-height: 38px;
+  padding: 8px 11px;
+  font-size: 13px;
+  box-shadow: none;
+}
+
+.lead-toolbar .toolbar-button.active {
+  border-color: var(--teal);
+  background: var(--teal-soft);
+  color: var(--teal-dark);
+}
+
+.lead-search {
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.lead-search > svg {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  color: var(--muted);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.lead-search input {
+  min-height: 44px;
+  padding-left: 38px;
+}
+
+.lead-search input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .lead-row {

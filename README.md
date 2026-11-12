@@ -39,3 +39,8 @@ npm run typecheck
 npm run build
 ```
 
+
+## Client Records
+
+Open `http://127.0.0.1:5173/#clients` to add clients, fill the seven core tabs, add new list values inline, and create custom tabs.
+Every field is optional. Client data, custom list values, and custom tabs are stored in SQLite.

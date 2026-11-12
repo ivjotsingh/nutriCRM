@@ -16,8 +16,10 @@ import {
   Lock,
   MessageCircle,
   Phone,
+  Search,
   ShieldCheck,
   Target,
+  Users,
   Utensils
 } from 'lucide-react'
 import {
@@ -29,6 +31,7 @@ import {
   submitUpgradeIntent
 } from './api'
 import type { IntakePayload, LeadDetail, LeadListItem, LeadResponse, PlanDay, PlanResult, RiskBrief } from './types'
+import ClientsApp from './clients/ClientsApp'
 
 const goals = [
   ['weight_loss', 'Weight loss'],
@@ -121,20 +124,26 @@ const disclaimerItems = [
   'Your health and contact information may be stored locally in this prototype and used for follow-up. Production needs a full privacy notice, consent flow, retention policy, access controls, and breach process.'
 ]
 
+type AppRoute = 'admin' | 'clients'
+
+function readRoute(): AppRoute {
+  const hash = window.location.hash
+  if (hash === '#admin') return 'admin'
+  return 'clients'
+}
+
 function App() {
-  const [route, setRoute] = useState(window.location.hash === '#admin' ? 'admin' : 'app')
-  const [flowKey, setFlowKey] = useState(0)
+  const [route, setRoute] = useState<AppRoute>(readRoute)
 
   useEffect(() => {
-    const onHash = () => setRoute(window.location.hash === '#admin' ? 'admin' : 'app')
+    const onHash = () => setRoute(readRoute())
     window.addEventListener('hashchange', onHash)
     return () => window.removeEventListener('hashchange', onHash)
   }, [])
 
   function goHome() {
-    window.location.hash = ''
-    setRoute('app')
-    setFlowKey((current) => current + 1)
+    window.location.hash = 'clients'
+    setRoute('clients')
   }
 
   return (
@@ -145,13 +154,13 @@ function App() {
           <span>NutriAlign</span>
         </button>
         <nav>
-          <button className="icon-button" onClick={() => { window.location.hash = 'admin'; setRoute('admin') }} title="Admin dashboard">
-            <LayoutDashboard size={18} />
-            <span>Admin</span>
+          <button className="icon-button" aria-label="Clients" onClick={() => { window.location.hash = 'clients'; setRoute('clients') }} title="Client records">
+            <Users size={18} />
+            <span>Clients</span>
           </button>
         </nav>
       </header>
-      {route === 'admin' ? <AdminDashboard /> : <UserFlow key={flowKey} />}
+      {route === 'admin' ? <AdminDashboard onOpenClients={goHome} /> : <ClientsApp />}
     </div>
   )
 }
@@ -1022,11 +1031,13 @@ function UpgradePanel({ leadId, mode, compact = false }: { leadId: string; mode:
   )
 }
 
-function AdminDashboard() {
+function AdminDashboard({ onOpenClients }: { onOpenClients: () => void }) {
   const [leads, setLeads] = useState<LeadListItem[]>([])
   const [selectedId, setSelectedId] = useState('')
   const [detail, setDetail] = useState<LeadDetail | null>(null)
   const [error, setError] = useState('')
+  const [searchOpen, setSearchOpen] = useState(false)
+  const [query, setQuery] = useState('')
 
   useEffect(() => {
     listLeads()
@@ -1051,6 +1062,21 @@ function AdminDashboard() {
     return { total: leads.length, risk, upgrade, checkedIn }
   }, [leads])
 
+  const normalizedQuery = query.trim().toLowerCase()
+  const filteredLeads = useMemo(() => {
+    if (!normalizedQuery) return leads
+    return leads.filter((lead) =>
+      [lead.name, lead.phone, lead.city, lead.status, lead.triage_outcome, lead.id].some((value) =>
+        value.toLowerCase().includes(normalizedQuery)
+      )
+    )
+  }, [leads, normalizedQuery])
+
+  function toggleSearch() {
+    if (searchOpen) setQuery('')
+    setSearchOpen(!searchOpen)
+  }
+
   return (
     <main className="admin-page">
       <section className="admin-hero">
@@ -1072,11 +1098,53 @@ function AdminDashboard() {
       <section className="admin-grid">
         <div className="lead-list">
           <div className="list-heading">
-            <h2>Leads</h2>
-            <span>{leads.length} total</span>
+            <div className="list-heading-copy">
+              <h2>Leads</h2>
+              <span>{normalizedQuery ? `${filteredLeads.length} of ${leads.length} total` : `${leads.length} total`}</span>
+            </div>
+            <div className="lead-toolbar">
+              <button
+                className={searchOpen ? 'icon-button toolbar-button active' : 'icon-button toolbar-button'}
+                onClick={toggleSearch}
+                title={searchOpen ? 'Close lead search' : 'Search leads'}
+                aria-label={searchOpen ? 'Close lead search' : 'Search leads'}
+                aria-expanded={searchOpen}
+                aria-controls="lead-search-input"
+              >
+                <Search size={16} />
+                <span>Search</span>
+              </button>
+              <button className="primary-button toolbar-button" onClick={onOpenClients} title="Open client records">
+                <Users size={16} />
+                <span>Open clients</span>
+              </button>
+            </div>
           </div>
+          {searchOpen && (
+            <div className="lead-search">
+              <Search size={16} />
+              <input
+                id="lead-search-input"
+                type="search"
+                value={query}
+                placeholder="Search by name, phone, city, or status"
+                aria-label="Search leads by name, phone, city, or status"
+                autoFocus
+                onChange={(event) => setQuery(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Escape') {
+                    setQuery('')
+                    setSearchOpen(false)
+                  }
+                }}
+              />
+            </div>
+          )}
           {leads.length === 0 && <p className="empty-text">No leads yet.</p>}
-          {leads.map((lead) => (
+          {leads.length > 0 && filteredLeads.length === 0 && (
+            <p className="empty-text">No leads match “{query.trim()}”.</p>
+          )}
+          {filteredLeads.map((lead) => (
             <button key={lead.id} className={lead.id === selectedId ? 'lead-row active' : 'lead-row'} onClick={() => setSelectedId(lead.id)}>
               <span>
                 <strong>{lead.name}</strong>

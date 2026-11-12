@@ -83,6 +83,49 @@ def init_db() -> None:
               payload_json TEXT NOT NULL,
               created_at TEXT NOT NULL
             );
+
+            CREATE TABLE IF NOT EXISTS clients (
+              id TEXT PRIMARY KEY,
+              name TEXT NOT NULL,
+              phone TEXT NOT NULL,
+              email TEXT NOT NULL DEFAULT '',
+              city TEXT NOT NULL DEFAULT '',
+              consent INTEGER NOT NULL DEFAULT 0,
+              data_json TEXT NOT NULL DEFAULT '{}',
+              created_at TEXT NOT NULL,
+              updated_at TEXT NOT NULL
+            );
+
+            CREATE TABLE IF NOT EXISTS client_tabs (
+              id TEXT PRIMARY KEY,
+              client_id TEXT NOT NULL,
+              label TEXT NOT NULL,
+              description TEXT NOT NULL DEFAULT '',
+              fields_json TEXT NOT NULL,
+              position INTEGER NOT NULL DEFAULT 0,
+              archived INTEGER NOT NULL DEFAULT 0,
+              created_at TEXT NOT NULL,
+              FOREIGN KEY (client_id) REFERENCES clients(id)
+            );
+
+            CREATE TABLE IF NOT EXISTS client_options (
+              id TEXT PRIMARY KEY,
+              client_id TEXT NOT NULL,
+              category TEXT NOT NULL,
+              value TEXT NOT NULL,
+              created_at TEXT NOT NULL,
+              UNIQUE (client_id, category, value),
+              FOREIGN KEY (client_id) REFERENCES clients(id)
+            );
+
+            CREATE TABLE IF NOT EXISTS client_snapshots (
+              id TEXT PRIMARY KEY,
+              client_id TEXT NOT NULL,
+              kind TEXT NOT NULL,
+              data_json TEXT NOT NULL,
+              created_at TEXT NOT NULL,
+              FOREIGN KEY (client_id) REFERENCES clients(id)
+            );
             """
         )
 

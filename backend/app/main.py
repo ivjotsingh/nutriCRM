@@ -5,8 +5,18 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
+from app import clients as client_store
 from app import db
-from app.models import ApiLeadResponse, CheckInPayload, IntakePayload, UpgradeIntentPayload
+from app.models import (
+    ApiLeadResponse,
+    CheckInPayload,
+    ClientCreatePayload,
+    ClientOptionPayload,
+    ClientTabPayload,
+    ClientUpdatePayload,
+    IntakePayload,
+    UpgradeIntentPayload,
+)
 from app.planner import generate_plan
 from app.seed import case_examples, food_catalog, meal_templates, plan_format_examples, triage_rules
 from app.triage import build_risk_brief, evaluate_triage
@@ -64,6 +74,79 @@ def submit_intake(payload: IntakePayload) -> ApiLeadResponse:
         result_type=result_type,
         result=result,
     )
+
+
+@app.get("/api/clients")
+def list_clients() -> dict:
+    return {"clients": client_store.list_clients()}
+
+
+@app.post("/api/clients")
+def create_client(payload: ClientCreatePayload) -> dict:
+    bundle = client_store.create_client(
+        name=payload.name,
+        phone=payload.phone,
+        email=payload.email,
+        city=payload.city,
+        consent=payload.consent,
+    )
+    if not bundle:
+        raise HTTPException(status_code=500, detail="Unable to create client")
+    return bundle
+
+
+@app.get("/api/clients/{client_id}")
+def get_client(client_id: str) -> dict:
+    bundle = client_store.get_client_bundle(client_id)
+    if not bundle:
+        raise HTTPException(status_code=404, detail="Client not found")
+    return bundle
+
+
+@app.patch("/api/clients/{client_id}")
+def update_client(client_id: str, payload: ClientUpdatePayload) -> dict:
+    try:
+        bundle = client_store.update_client(client_id, payload.model_dump(exclude_unset=True))
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    if not bundle:
+        raise HTTPException(status_code=404, detail="Client not found")
+    return bundle
+
+
+@app.get("/api/clients/{client_id}/headtoe/history")
+def get_headtoe_history(client_id: str) -> dict:
+    history = client_store.headtoe_history(client_id)
+    if history is None:
+        raise HTTPException(status_code=404, detail="Client not found")
+    return {"history": history}
+
+
+@app.post("/api/clients/{client_id}/options")
+def add_client_option(client_id: str, payload: ClientOptionPayload) -> dict:
+    try:
+        options = client_store.add_option(client_id, payload.category, payload.value)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    if options is None:
+        raise HTTPException(status_code=404, detail="Client not found")
+    return {"options": options}
+
+
+@app.post("/api/clients/{client_id}/tabs")
+def create_client_tab(client_id: str, payload: ClientTabPayload) -> dict:
+    try:
+        tab = client_store.create_tab(
+            client_id,
+            payload.label,
+            payload.description,
+            [field.model_dump() for field in payload.fields],
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    if not tab:
+        raise HTTPException(status_code=404, detail="Client not found")
+    return {"tab": tab}
 
 
 @app.get("/api/leads")

@@ -80,3 +80,45 @@ class ApiLeadResponse(BaseModel):
     result_type: Literal["plan", "brief"]
     result: dict[str, Any]
 
+
+
+class ClientCreatePayload(BaseModel):
+    name: str = Field(default="", max_length=80)
+    phone: str = Field(default="", max_length=24)
+    email: str = Field(default="", max_length=160)
+    city: str = Field(default="", max_length=80)
+    consent: bool = False
+
+    @field_validator("name", "phone", "email", "city")
+    @classmethod
+    def strip_client_text(cls, value: str) -> str:
+        return value.strip()
+
+
+class ClientUpdatePayload(BaseModel):
+    name: str | None = Field(default=None, max_length=80)
+    phone: str | None = Field(default=None, max_length=24)
+    email: str | None = Field(default=None, max_length=160)
+    city: str | None = Field(default=None, max_length=80)
+    consent: bool | None = None
+    data: dict[str, Any] | None = None
+
+
+class ClientOptionPayload(BaseModel):
+    category: str = Field(min_length=1, max_length=120)
+    value: str = Field(min_length=1, max_length=80)
+
+
+class CustomTabFieldPayload(BaseModel):
+    label: str = Field(min_length=1, max_length=80)
+    type: str = Field(default="text")
+    options: list[str] = Field(default_factory=list)
+    span: int = 1
+    placeholder: str = Field(default="", max_length=120)
+    help: str = Field(default="", max_length=300)
+
+
+class ClientTabPayload(BaseModel):
+    label: str = Field(min_length=1, max_length=60)
+    description: str = Field(default="", max_length=200)
+    fields: list[CustomTabFieldPayload] = Field(min_length=1)
