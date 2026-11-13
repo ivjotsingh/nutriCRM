@@ -2,7 +2,8 @@ import { createRequire } from 'node:module'
 import fs from 'node:fs/promises'
 
 const require = createRequire(import.meta.url)
-const { chromium } = require('/Users/ivsingh/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright')
+const playwrightPath = process.env.PLAYWRIGHT_PATH ?? 'playwright'
+const { chromium } = require(playwrightPath)
 
 const outputDir = new URL('../tmp/verification/', import.meta.url)
 await fs.mkdir(outputDir, { recursive: true })
@@ -12,7 +13,7 @@ const riskName = `Priya Shah ${runId}`
 const mobileNormalName = `Meera Rao ${runId}`
 const mobileRiskName = `Kabir Khan ${runId}`
 
-const chromePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+const chromePath = process.env.CHROME_PATH ?? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
 const browser = await chromium.launch({ headless: true, executablePath: chromePath })
 const consoleMessages = []
 const apiFailures = []

@@ -628,10 +628,10 @@ table(
 
 h2("10.1  The test client")
 p(
-    "A fully-filled record drives the verification: Demo Client, 19, male, 80.1 kg, 180.3 cm, A+, non-vegetarian "
-    "with a lactose intolerance, tennis player training twice a day, a published strategy at 3,100 kcal and "
+    "A fully-filled synthetic record drives the verification: Demo Client, 22, male, 78.6 kg, 179.5 cm, non-vegetarian "
+    "with a lactose intolerance, a tennis player training twice a day, a published strategy at 3,100 kcal and "
     "1.6–1.8 g/kg, and a published 180-day plan built from the reference template with a lighter Monday target. "
-    "The script is scripts/seed_test_client.py; every tab of the record is populated."
+    "The script is scripts/seed_test_client.py; every tab of the record is populated, and no real client data is used."
 )
 
 page_break()

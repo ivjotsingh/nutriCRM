@@ -1,13 +1,51 @@
+# --- OS and editors ---------------------------------------------------------
 .DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# --- Python -----------------------------------------------------------------
 __pycache__/
 *.py[cod]
 .pytest_cache/
 .venv/
+venv/
+.uv-cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# --- Node / frontend build --------------------------------------------------
 node_modules/
 dist/
 frontend/dist/
-tmp/
-backend/nutrialign.db
-backend/*.db
 frontend/.vite/
-.uv-cache/
+.vite/
+playwright-report/
+test-results/
+*.tsbuildinfo
+
+# --- Local data, secrets, machine state ------------------------------------
+# The SQLite database holds real client records and health data. Never commit it.
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+secrets/
+credentials*.json
+
+# --- Working artefacts ------------------------------------------------------
+tmp/
+*.log
+
+# --- Documents that carry client data --------------------------------------
+# PRDs and sample exports that embed screenshots or exports of real client
+# records live here on the machine only, never in the repository.
+docs/private/

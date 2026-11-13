@@ -20,7 +20,7 @@ def _create(client: TestClient) -> dict:
     response = client.post(
         "/api/clients",
         json={
-            "name": "Aarti Mehta",
+            "name": "Test Client",
             "phone": "+91 90000 00000",
             "email": "test.client@example.com",
             "city": "Mumbai",
@@ -77,7 +77,7 @@ def test_client_profile_persists_optional_data(tmp_path, monkeypatch):
     response = client.patch(
         f"/api/clients/{client_id}",
         json={
-            "name": "Aarti Mehta",
+            "name": "Test Client",
             "phone": "+91 90000 00000",
             "email": "test.client@example.com",
             "city": "Mumbai",

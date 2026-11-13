@@ -21,7 +21,7 @@ def _create_client(client: TestClient, *, diet: str = "Non-vegetarian") -> str:
         "/api/clients",
         json={
             "name": "Demo Client",
-            "phone": "+91 9000000000",
+            "phone": "+91 90000 00000",
             "email": "demo@example.com",
             "city": "Mumbai",
             "consent": True,
@@ -32,8 +32,8 @@ def _create_client(client: TestClient, *, diet: str = "Non-vegetarian") -> str:
     assert response.status_code == 200
     client_id = response.json()["client"]["id"]
     data = {
-        "basic": {"dob": "2004-02-11", "gender": "Male", "blood_group": "A+", "diet_type": diet},
-        "bca": {"height_cm": 180.3, "weight_kg": 80.1, "body_fat_pct": 14.2},
+        "basic": {"dob": "2004-02-11", "gender": "Male", "blood_group": "O+", "diet_type": diet},
+        "bca": {"height_cm": 179.5, "weight_kg": 78.6, "body_fat_pct": 14.2},
         "dietary": {"food_preference": diet, "allergies": ["None"], "restrictions": ["No beef"]},
         "medical": {"primary_goal": "Maintenance", "activity_level": "Athlete"},
     }

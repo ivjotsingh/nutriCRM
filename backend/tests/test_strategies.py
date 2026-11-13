@@ -20,7 +20,7 @@ def _create_client(client: TestClient, *, consent: bool = True) -> str:
     response = client.post(
         "/api/clients",
         json={
-            "name": "Aarti Mehta",
+            "name": "Test Client",
             "phone": "+91 90000 00000",
             "email": "test.client@example.com",
             "city": "Mumbai",

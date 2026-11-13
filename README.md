@@ -45,7 +45,7 @@ Routes:
 - `#clients/{clientId}?tab=strategy` — strategy history
 - `#clients/{clientId}/strategy/{strategyId}` — Strategy Studio
 
-Strategy data lives in the `strategies` and `strategy_versions` SQLite tables. The full product specification is in [`docs/NutriAlign_Strategy_Creation_PRD_v1.0.docx`](docs/NutriAlign_Strategy_Creation_PRD_v1.0.docx).
+Strategy data lives in the `strategies` and `strategy_versions` SQLite tables. The strategy PRD contains screenshots of a client record, so it is kept locally in `docs/private/` (git-ignored) rather than in the repository.
 
 ## Diet Plans, Preview And PDF
 

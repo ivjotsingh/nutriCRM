@@ -1,4 +1,4 @@
-"""Seed a fully-filled test client with a published strategy and diet plan.
+"""Seed a fully-filled demo client (synthetic identity) with a published strategy and plan.
 
 Runs against the live API (default http://127.0.0.1:8000) so the browser sees the
 same records. Prints the ids and writes them to tmp/test_client.json.
@@ -20,12 +20,12 @@ def client_data() -> dict:
     return {
         "basic": {
             "name": "Demo Client",
-            "phone": "+91 9000000000",
+            "phone": "+91 90000 00000",
             "email": "demo@nutrialign.app",
             "city": "Mumbai",
             "gender": "Male",
             "dob": "2004-02-11",
-            "blood_group": "A+",
+            "blood_group": "O+",
             "marital_status": "Single",
             "address": "12 Marine Drive, Churchgate",
             "pincode": "400020",
@@ -41,9 +41,9 @@ def client_data() -> dict:
             "measurement_date": "2026-11-14",
             "height_ft": 5,
             "height_in": 11,
-            "height_cm": 180.3,
-            "weight_kg": 80.1,
-            "weight_lbs": 176.6,
+            "height_cm": 179.5,
+            "weight_kg": 78.6,
+            "weight_lbs": 173.3,
             "body_fat_pct": 14.2,
             "fat_mass_kg": 11.4,
             "muscle_mass_kg": 36.8,
@@ -137,7 +137,7 @@ def client_data() -> dict:
         },
         "fuv": {
             "visit_date": "2026-11-14",
-            "updates": "Started a new tournament block. Weight stable at 80 kg over the last eight weeks.",
+            "updates": "Started a new tournament block. Weight stable at 78.6 kg over the last eight weeks.",
             "positive_changes": "Consistent breakfast, better sleep routine on weekdays.",
             "areas_to_work": "Hydration on court, evening snack timing before the second session.",
             "suggestions": "Add electrolytes during the second session; keep dinner within 60 minutes of training.",
@@ -239,7 +239,7 @@ def main() -> None:
             "/api/clients",
             json={
                 "name": "Demo Client",
-                "phone": "+91 9000000000",
+                "phone": "+91 90000 00000",
                 "email": "demo@nutrialign.app",
                 "city": "Mumbai",
                 "consent": True,
@@ -257,11 +257,11 @@ def main() -> None:
         data = strategy["strategy"]["data"]
         data["body"].update(
             {
-                "height_cm": 180.3,
-                "weight_kg": 80.1,
+                "height_cm": 179.5,
+                "weight_kg": 78.6,
                 "body_fat_pct": 14.2,
-                "target_weight_kg": 80.0,
-                "age": 19,
+                "target_weight_kg": 78.5,
+                "age": 22,
                 "sex": "Male",
                 "activity_level": "Athlete",
                 "goal_mode": "maintenance",
