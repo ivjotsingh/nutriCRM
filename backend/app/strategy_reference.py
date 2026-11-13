@@ -1,4 +1,4 @@
-"""Reference data for the NutriAlign strategy studio.
+"""Reference data for the NutriAliment strategy studio.
 
 Every number the studio quotes is traceable to this module, so the UI, the
 published snapshot, and the PRD cannot drift apart. Values and behaviour:
@@ -491,7 +491,7 @@ FORMULA_NOTES: dict[str, str] = {
     "macro": "Macro grams = calories × ratio % ÷ 4 for carbohydrate and protein, ÷ 9 for fat. Grams are rounded down to whole numbers, matching the practice reference table.",
     "protein": "Protein target is a clinical guardrail in g/kg of target body weight. The ratio sets the planned protein; the guardrail checks whether the plan lands inside the selected range.",
     "ideal_weight": "Devine: 45.5 kg (women) or 50 kg (men) at 5 ft, plus 2.3 kg per inch above 5 ft. BMI 22: 22 × height (m)².",
-    "calorie_floor": "Very-low-calorie plans need clinical justification. NutriAlign warns below 1,200 kcal for women and 1,500 kcal for men, and blocks a deficit for children or pregnancy.",
+    "calorie_floor": "Very-low-calorie plans need clinical justification. NutriAliment warns below 1,200 kcal for women and 1,500 kcal for men, and blocks a deficit for children or pregnancy.",
 }
 
 RDA_EDITION = "ICMR-NIN 2020"

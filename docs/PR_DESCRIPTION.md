@@ -1,8 +1,8 @@
-# Build NutriAlign Lead Conversion Product
+# Build NutriAliment Lead Conversion Product
 
 ## Summary
 
-Built NutriAlign as an end-to-end local nutrition lead-conversion product:
+Built NutriAliment as an end-to-end local nutrition lead-conversion product:
 
 - Click-first intake flow with goal/lifestyle questions before medical suitability.
 - Deterministic health triage that prevents risk users from receiving AI diet plans.

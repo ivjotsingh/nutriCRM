@@ -132,7 +132,7 @@ class PlanDoc(BaseDocTemplate):
             topMargin=MARGIN_TOP,
             bottomMargin=MARGIN_BOTTOM,
             title=plan["meta"].get("title") or "Diet plan",
-            author=(plan.get("brand") or {}).get("name", "NutriAlign"),
+            author=(plan.get("brand") or {}).get("name", "NutriAliment"),
             subject=f"Nutrition plan for {client.get('name', 'client')}",
             **kwargs,
         )
@@ -150,7 +150,7 @@ class PlanDoc(BaseDocTemplate):
         canvas.rect(0, 0, PAGE_W, PAGE_H, stroke=0, fill=1)
 
         brand = self.brand
-        name = (brand.get("name") or "NutriAlign").upper()
+        name = (brand.get("name") or "NutriAliment").upper()
         canvas.setFillColor(ORANGE_DARK)
         canvas.setFont(FONT_BOLD, 17)
         canvas.drawCentredString(PAGE_W / 2, PAGE_H - 46, name)
@@ -171,14 +171,14 @@ class PlanDoc(BaseDocTemplate):
         canvas.setFont(FONT, 7.2)
         baseline = 34
         columns = [
-            (MARGIN_L, f"{brand.get('name', 'NutriAlign')}"),
+            (MARGIN_L, f"{brand.get('name', 'NutriAliment')}"),
             (MARGIN_L + 110, brand.get("email", "")),
             (MARGIN_L + 290, brand.get("phone", "")),
         ]
         for x, text in columns:
             if text:
                 canvas.drawString(x, baseline, str(text))
-        powered = f"Powered by {brand.get('powered_by', 'NutriAlign')}"
+        powered = f"Powered by {brand.get('powered_by', 'NutriAliment')}"
         canvas.drawRightString(PAGE_W - MARGIN_R, baseline, powered)
         canvas.setFillColor(FAINT)
         canvas.setFont(FONT, 6.8)

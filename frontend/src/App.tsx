@@ -152,7 +152,7 @@ function App() {
       <header className="topbar">
         <button className="brand-button" onClick={goHome}>
           <span className="brand-mark" aria-hidden="true">N</span>
-          <span>NutriAlign</span>
+          <span>NutriAliment</span>
         </button>
         <nav aria-label="Primary">
           <button
@@ -218,7 +218,7 @@ function UserFlow() {
         ...intake,
         optional_note: buildBehavioralNote(intake.optional_note, intentBalance, barrierBalance)
       })
-      localStorage.setItem('nutrialign:lastLeadId', result.lead_id)
+      localStorage.setItem('nutrialiment:lastLeadId', result.lead_id)
       await recordEvent('intake_submitted', result.lead_id, { result_type: result.result_type })
       setResponse(result)
       window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -775,7 +775,7 @@ function Toggle({ label, checked, onChange }: { label: string; checked: boolean;
 function PlanViewer({ leadId, plan, onRestart }: { leadId: string; plan: PlanResult; onRestart: () => void }) {
   const [dayIndex, setDayIndex] = useState(0)
   const activeDay = plan.days[dayIndex]
-  const shareText = encodeURIComponent(`My NutriAlign 7-day plan is ready. Lead: ${leadId}`)
+  const shareText = encodeURIComponent(`My NutriAliment 7-day plan is ready. Lead: ${leadId}`)
   const avgCalories = Math.round(plan.days.reduce((sum, day) => sum + day.total_calories, 0) / plan.days.length)
 
   function handlePrint() {

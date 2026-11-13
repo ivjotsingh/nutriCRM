@@ -14,7 +14,7 @@ def _now() -> str:
 
 
 def db_path() -> Path:
-    return Path(os.environ.get("NUTRIALIGN_DB", Path(__file__).resolve().parents[1] / "nutrialign.db"))
+    return Path(os.environ.get("NUTRIALIMENT_DB", Path(__file__).resolve().parents[1] / "nutrialiment.db"))
 
 
 def connect() -> sqlite3.Connection:

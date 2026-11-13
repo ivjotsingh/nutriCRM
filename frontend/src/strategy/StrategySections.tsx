@@ -422,7 +422,7 @@ export function TargetsSection({ data, detail, reference, derived, locked, updat
       <SectionHeader
         eyebrow="03 · Targets"
         title="Set the energy and protein guardrails"
-        lede="Measurements and BMR are prefilled. Choose how calories are calculated; NutriAlign keeps the formula, floor, and protein guardrail visible."
+        lede="Measurements and BMR are prefilled. Choose how calories are calculated; NutriAliment keeps the formula, floor, and protein guardrail visible."
         actions={
           <button type="button" className="secondary-button" onClick={onOpenFormula}>
             <Calculator size={15} /> How we calculate
@@ -975,7 +975,7 @@ export function SupportSection({ data, detail, reference, derived, locked, updat
       <SectionHeader
         eyebrow="06 · Supplements & medications"
         title="Close the pharmacology gap"
-        lede="Supplements and medicines are prefilled from the record. NutriAlign checks common nutrient interactions before the plan can be signed."
+        lede="Supplements and medicines are prefilled from the record. NutriAliment checks common nutrient interactions before the plan can be signed."
         actions={
           <button type="button" className="secondary-button" onClick={() => void onRefresh('support')} disabled={locked || refreshing === 'support'}>
             <RefreshCw size={15} className={refreshing === 'support' ? 'spin' : ''} /> Pull from record
@@ -1210,7 +1210,7 @@ export function ReviewSection({
             checked={Boolean(data.governance.reviewed_clinical)}
             onChange={(value) => update(['governance', 'reviewed_clinical'], value)}
             title="I reviewed the clinical context, labs, and food guardrails"
-            description="Conditions, medications, allergies, and deranged parameters are current as of this strategy. Recommended before publishing; enforced when NUTRIALIGN_REQUIRE_SIGNOFF is enabled."
+            description="Conditions, medications, allergies, and deranged parameters are current as of this strategy. Recommended before publishing; enforced when NUTRIALIMENT_REQUIRE_SIGNOFF is enabled."
             badge="Recommended"
             disabled={locked}
           />

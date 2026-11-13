@@ -262,7 +262,7 @@ export function RdaModal({
           <h2 id="rda-title">RDA data</h2>
           <p>
             ICMR-NIN 2020 recommended dietary allowances for energy and protein, by age, sex, body weight,
-            and activity. NutriAlign highlights the row that matches this client.
+            and activity. NutriAliment highlights the row that matches this client.
           </p>
         </div>
         <ModalClose onClose={onClose} />
@@ -614,7 +614,7 @@ export function PreviewModal({
 
       <div className="st-plan-doc">
         <header className="st-plan-head">
-          <div className="st-plan-brand"><span className="st-plan-mark">N</span><span>NutriAlign</span></div>
+          <div className="st-plan-brand"><span className="st-plan-mark">N</span><span>NutriAliment</span></div>
           <span className={`st-plan-status ${status}`}>{status === 'published' ? `Published v${detail.strategy.version}` : 'Draft preview'}</span>
           <h1>{data.meta.name || 'Nutrition strategy'}</h1>
           <p>{detail.client.name} · {data.meta.diet_type} · {data.meta.patient_type} · {data.meta.major_goal}</p>
@@ -710,7 +710,7 @@ export function PreviewModal({
 
         <footer className="st-plan-foot">
           <p>This plan is a clinical strategy, not medical advice. Follow the treating clinician's guidance and seek care for new or worsening symptoms.</p>
-          <span>{detail.client.name} · {formatShortDate(detail.strategy.updated_at)} · NutriAlign</span>
+          <span>{detail.client.name} · {formatShortDate(detail.strategy.updated_at)} · NutriAliment</span>
         </footer>
       </div>
       <div className="st-preview-foot">

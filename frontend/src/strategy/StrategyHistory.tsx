@@ -135,7 +135,7 @@ export default function StrategyHistory({
           <span className="st-empty-mark" aria-hidden="true"><Sparkles size={24} /></span>
           <h3>Build the plan from the record, not from scratch.</h3>
           <p>
-            NutriAlign prefills goals, conditions, blood markers, body composition, medications, and diet guardrails.
+            NutriAliment prefills goals, conditions, blood markers, body composition, medications, and diet guardrails.
             You set the targets and sign off the week.
           </p>
           <ul>

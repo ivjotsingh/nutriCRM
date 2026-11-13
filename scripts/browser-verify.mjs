@@ -87,7 +87,7 @@ async function submitNormalUser(page) {
 }
 
 async function submitRiskUser(page) {
-  await page.getByRole('button', { name: /NutriAlign/ }).click()
+  await page.getByRole('button', { name: /NutriAliment/ }).click()
   await page.getByLabel('Name').fill(riskName)
   await page.getByLabel('WhatsApp / phone').fill('8888888888')
   await page.getByLabel('City').fill('Delhi')
@@ -142,7 +142,7 @@ async function submitMobileNormalUser(page) {
 }
 
 async function submitMobileRiskUser(page) {
-  await page.getByRole('button', { name: /NutriAlign/ }).click()
+  await page.getByRole('button', { name: /NutriAliment/ }).click()
   await page.getByLabel('Name').fill(mobileRiskName)
   await page.getByLabel('WhatsApp / phone').fill('6666666666')
   await page.getByLabel('City').fill('Bengaluru')

@@ -21,7 +21,7 @@ def client_data() -> dict:
         "basic": {
             "name": "Demo Client",
             "phone": "+91 90000 00000",
-            "email": "demo@nutrialign.app",
+            "email": "demo@nutrialiment.app",
             "city": "Mumbai",
             "gender": "Male",
             "dob": "2004-02-11",
@@ -240,7 +240,7 @@ def main() -> None:
             json={
                 "name": "Demo Client",
                 "phone": "+91 90000 00000",
-                "email": "demo@nutrialign.app",
+                "email": "demo@nutrialiment.app",
                 "city": "Mumbai",
                 "consent": True,
                 "start_date": START,

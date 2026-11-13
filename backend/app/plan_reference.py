@@ -19,11 +19,11 @@ DAY_NAMES = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",
 DAY_SHORT = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
 DEFAULT_BRAND = {
-    "name": "NutriAlign",
+    "name": "NutriAliment",
     "tagline": "Personalised nutrition, planned with care",
-    "email": "support@nutrialign.app",
+    "email": "support@nutrialiment.app",
     "phone": "+91 90000 00000",
-    "powered_by": "NutriAlign",
+    "powered_by": "NutriAliment",
     "footer_note": "This plan is prepared for the named client and is not medical advice.",
 }
 
@@ -423,11 +423,11 @@ GUIDELINES: list[dict[str, Any]] = [
 ]
 
 DISCLAIMER = [
-    "We at NutriAlign wish to impart knowledge of nutrition. We provide holistic approaches for wellness and better living through a range of biochemical and dietary assessments and recommendations of appropriate supplements. The privacy of the client is of paramount importance and we protect it while collecting any information.",
-    "The nutrition plan is made in accordance with the blood test report results. NutriAlign cannot be held liable for any inaccuracy or issues of authenticity of the blood test reports or any document from a third party.",
-    "NutriAlign diet and supplement plans are not intended to diagnose, treat, prevent, mitigate or cure any medical condition or disease. In case of any such condition, it is recommended that you consult your physician before pursuing any course of treatment.",
-    "Utmost care has been taken to study the stated individual ingredients in each supplement and the best possible supplements have been identified for your benefit. However, NutriAlign gives no guarantee regarding the efficacy of the supplements as they are manufactured by third parties and not under our control.",
-    "NutriAlign and its team of dietitians shall not be held liable for adverse effects, if any, from the recommended foods and supplements advised in the nutrition plan.",
+    "We at NutriAliment wish to impart knowledge of nutrition. We provide holistic approaches for wellness and better living through a range of biochemical and dietary assessments and recommendations of appropriate supplements. The privacy of the client is of paramount importance and we protect it while collecting any information.",
+    "The nutrition plan is made in accordance with the blood test report results. NutriAliment cannot be held liable for any inaccuracy or issues of authenticity of the blood test reports or any document from a third party.",
+    "NutriAliment diet and supplement plans are not intended to diagnose, treat, prevent, mitigate or cure any medical condition or disease. In case of any such condition, it is recommended that you consult your physician before pursuing any course of treatment.",
+    "Utmost care has been taken to study the stated individual ingredients in each supplement and the best possible supplements have been identified for your benefit. However, NutriAliment gives no guarantee regarding the efficacy of the supplements as they are manufactured by third parties and not under our control.",
+    "NutriAliment and its team of dietitians shall not be held liable for adverse effects, if any, from the recommended foods and supplements advised in the nutrition plan.",
 ]
 
 

@@ -1,7 +1,7 @@
 [project]
-name = "nutrialign-api"
+name = "nutrialiment-api"
 version = "0.1.0"
-description = "FastAPI backend for the NutriAlign nutrition lead-conversion product"
+description = "FastAPI backend for the NutriAliment nutrition lead-conversion product"
 requires-python = ">=3.12"
 dependencies = [
   "fastapi[standard]>=0.128.0",

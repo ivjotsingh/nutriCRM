@@ -1,8 +1,8 @@
-# NutriAlign Implementation Plan
+# NutriAliment Implementation Plan
 
 ## Product Goals
 
-NutriAlign is a nutrition lead-conversion product for a real dietician/practice. It should create a premium free 7-day nutrition preview for low-risk users, route medically risky users to human review, capture lead intent, and give the dietician/admin enough context to follow up.
+NutriAliment is a nutrition lead-conversion product for a real dietician/practice. It should create a premium free 7-day nutrition preview for low-risk users, route medically risky users to human review, capture lead intent, and give the dietician/admin enough context to follow up.
 
 The product is not an autonomous medical dietician. It is an AI-assisted, rule-constrained funnel that uses approved historical nutrition-plan patterns.
 

@@ -1,2 +1,2 @@
-"""NutriAlign backend package."""
+"""NutriAliment backend package."""
 

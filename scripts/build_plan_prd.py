@@ -1,4 +1,4 @@
-"""Build the Plan Creation PRD (.docx) for NutriAlign."""
+"""Build the Plan Creation PRD (.docx) for NutriAliment."""
 
 from __future__ import annotations
 
@@ -14,7 +14,7 @@ from docx.oxml.ns import qn
 from docx.shared import Inches, Pt, RGBColor
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "docs" / "NutriAlign_Plan_Creation_PRD_v1.0.docx"
+OUT = ROOT / "docs" / "NutriAliment_Plan_Creation_PRD_v1.0.docx"
 
 TEAL = RGBColor(0x08, 0x74, 0x76)
 ORANGE = RGBColor(0xD9, 0x69, 0x2B)
@@ -194,7 +194,7 @@ p(
 doc.add_paragraph()
 callout(
     "The strategy says what the body needs. The plan says what the person eats on Monday at 10 a.m. "
-    "NutriAlign now closes that loop — the same seven-day discipline the practice already prints, with the "
+    "NutriAliment now closes that loop — the same seven-day discipline the practice already prints, with the "
     "maths, the guardrails and the sign-off attached."
 )
 
@@ -676,7 +676,7 @@ bullets(
 )
 
 callout(
-    "Plan Creation is the moment NutriAlign stops being a record system with a calculator and becomes the "
+    "Plan Creation is the moment NutriAliment stops being a record system with a calculator and becomes the "
     "surface a practice actually works in. The strategy is the judgement. The plan is the delivery. The PDF is "
     "the promise."
 )

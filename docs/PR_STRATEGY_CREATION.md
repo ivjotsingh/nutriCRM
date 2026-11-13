@@ -11,7 +11,7 @@ Adds a practitioner-facing Strategy Studio inside every client record. The studi
 - Added deterministic prefill from the client bundle: diet, goal, patient type, conditions, symptoms, deranged labs, height/weight/body fat, medications, supplements, and dates.
 - Added the calculation engine: BMI (Asian-Indian cut-offs), Katch-McArdle / Mifflin BMR, TDEE, Devine / BMI 22 ideal weight, thumb-rule / BMR / RDA calories, protein guardrails, seven-day macro allocation with floored grams and half-up calorie rounding.
 - Added the RDA reference dialog, formula explanation, macro day editor with copy-to all/weekdays/weekend, superfood library, supplement library, medication interaction rules, food guardrails, and a client-ready preview with print/PDF.
-- Added publish governance: readiness checks, conditional acknowledgements (low calorie, target BMI, paediatric, pregnancy, protein deviation, allergies, interactions), optional clinical sign-off, attestation, immutable version snapshot, archive of the previous published plan, and revision creation. `NUTRIALIGN_REQUIRE_SIGNOFF=1` makes sign-off + attestation mandatory.
+- Added publish governance: readiness checks, conditional acknowledgements (low calorie, target BMI, paediatric, pregnancy, protein deviation, allergies, interactions), optional clinical sign-off, attestation, immutable version snapshot, archive of the previous published plan, and revision creation. `NUTRIALIMENT_REQUIRE_SIGNOFF=1` makes sign-off + attestation mandatory.
 - Added a Strategy tab history with All / Draft / Published / Archived filter, current plan card, earlier versions, and delete-draft support.
 - Added 33 backend tests and extensive responsive/accessibility verification.
 

@@ -6,7 +6,7 @@ from fastapi.testclient import TestClient
 
 
 def _client(tmp_path, monkeypatch) -> TestClient:
-    monkeypatch.setenv("NUTRIALIGN_DB", str(tmp_path / "strategies.db"))
+    monkeypatch.setenv("NUTRIALIMENT_DB", str(tmp_path / "strategies.db"))
     from app import db
     from app import main
 
@@ -126,7 +126,7 @@ def test_patch_recalculates_week_and_supports_macro_overrides(tmp_path, monkeypa
 
 
 def test_publish_is_blocked_when_strict_signoff_is_enabled(tmp_path, monkeypatch):
-    monkeypatch.setenv("NUTRIALIGN_REQUIRE_SIGNOFF", "1")
+    monkeypatch.setenv("NUTRIALIMENT_REQUIRE_SIGNOFF", "1")
     client = _client(tmp_path, monkeypatch)
     client_id = _create_client(client)
     detail = _create_strategy(client, client_id)
@@ -246,7 +246,7 @@ def test_refresh_pulls_latest_clinical_record_without_touching_published(tmp_pat
 
 
 def test_publish_is_optional_by_default_without_signoff_or_attestation(tmp_path, monkeypatch):
-    monkeypatch.delenv("NUTRIALIGN_REQUIRE_SIGNOFF", raising=False)
+    monkeypatch.delenv("NUTRIALIMENT_REQUIRE_SIGNOFF", raising=False)
     client = _client(tmp_path, monkeypatch)
     client_id = _create_client(client)
     detail = _create_strategy(client, client_id)

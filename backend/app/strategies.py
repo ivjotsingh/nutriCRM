@@ -14,8 +14,8 @@ from .strategy_reference import REFERENCE
 
 
 def signoff_required() -> bool:
-    """Prototype default: sign-off is optional. Set NUTRIALIGN_REQUIRE_SIGNOFF=1 for strict mode."""
-    return os.environ.get("NUTRIALIGN_REQUIRE_SIGNOFF", "").strip().lower() in {"1", "true", "yes", "on"}
+    """Prototype default: sign-off is optional. Set NUTRIALIMENT_REQUIRE_SIGNOFF=1 for strict mode."""
+    return os.environ.get("NUTRIALIMENT_REQUIRE_SIGNOFF", "").strip().lower() in {"1", "true", "yes", "on"}
 
 
 class StrategyNotFound(Exception):

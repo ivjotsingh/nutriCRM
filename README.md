@@ -1,6 +1,6 @@
-# NutriAlign
+# NutriAliment
 
-NutriAlign is a local end-to-end nutrition lead-conversion product. It captures a click-first intake, routes risk users to a human dietician, generates a validated 7-day plan for low-risk users, captures check-ins and upgrade intent, and exposes an admin dashboard.
+NutriAliment is a local end-to-end nutrition lead-conversion product. It captures a click-first intake, routes risk users to a human dietician, generates a validated 7-day plan for low-risk users, captures check-ins and upgrade intent, and exposes an admin dashboard.
 
 ## Stack
 
@@ -37,7 +37,7 @@ Every field is optional. Client data, custom list values, and custom tabs are st
 
 Open a client record and choose **Strategy** (or the Strategy tab) to turn the clinical record into a signed nutrition strategy.
 
-The studio includes seven sections: Brief, Clinical context, Targets, Macro week, Food strategy, Supplements & medications, and Review & publish. It prefills conditions, labs, body composition, diet, medications, and supplements; calculates BMI, BMR/TDEE, ideal weight, calorie targets, and a seven-day macro plan; checks allergens and medication interactions; and requires readiness checks plus safety acknowledgements before publishing. Clinical sign-off is optional in the prototype and can be enforced with `NUTRIALIGN_REQUIRE_SIGNOFF=1`. Published versions are immutable and can be revised without losing the published copy.
+The studio includes seven sections: Brief, Clinical context, Targets, Macro week, Food strategy, Supplements & medications, and Review & publish. It prefills conditions, labs, body composition, diet, medications, and supplements; calculates BMI, BMR/TDEE, ideal weight, calorie targets, and a seven-day macro plan; checks allergens and medication interactions; and requires readiness checks plus safety acknowledgements before publishing. Clinical sign-off is optional in the prototype and can be enforced with `NUTRIALIMENT_REQUIRE_SIGNOFF=1`. Published versions are immutable and can be revised without losing the published copy.
 
 Routes:
 

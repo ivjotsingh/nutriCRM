@@ -6,7 +6,7 @@ from fastapi.testclient import TestClient
 
 
 def _client(tmp_path, monkeypatch) -> TestClient:
-    monkeypatch.setenv("NUTRIALIGN_DB", str(tmp_path / "plans.db"))
+    monkeypatch.setenv("NUTRIALIMENT_DB", str(tmp_path / "plans.db"))
     from app import db
     from app import main
 
